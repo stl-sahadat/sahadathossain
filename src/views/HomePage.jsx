@@ -122,7 +122,18 @@ export function HomePage({ onOpenContact, currentTime }) {
     const updateScrollMetrics = () => {
       const windowHeight = window.innerHeight;
 
-      // 1. Process Section Tracking (Sticky Scroll Progression)
+      // On mobile / tablet screens (<1024px), disable trapped sticky pin and reveal all cards cleanly
+      if (window.innerWidth < 1024) {
+        if (processBarRef.current) processBarRef.current.style.width = '100%';
+        setActivePhases((prev) => {
+          if (prev[0] && prev[1] && prev[2] && prev[3]) return prev;
+          return [true, true, true, true];
+        });
+        ticking = false;
+        return;
+      }
+
+      // 1. Process Section Tracking (Sticky Scroll Progression on Desktop)
       if (processRef.current) {
         const el = processRef.current;
         const rect = el.getBoundingClientRect();
@@ -521,9 +532,9 @@ export function HomePage({ onOpenContact, currentTime }) {
           SECTION 3: PROCESS (4 PHASES + SCROLL-DRIVEN PINNED REVEAL + METRIC BAR)
           Matches real_omnira_03_process.png (Sticky pinned scroll track)
           ======================================================== */}
-      <section id="process" ref={processRef} className="relative border-b border-white/[0.07] min-h-[280vh] sm:min-h-[320vh]">
-        {/* Sticky Pinned Viewport Container */}
-        <div className="sticky top-0 min-h-screen flex flex-col justify-center py-8 sm:py-12 z-10 overflow-visible">
+      <section id="process" ref={processRef} className="relative border-b border-white/[0.07] min-h-auto lg:min-h-[320vh]">
+        {/* Pinned Viewport Container on Desktop · Clean Normal Scroll on Mobile */}
+        <div className="relative lg:sticky lg:top-0 min-h-auto lg:min-h-screen flex flex-col justify-center py-8 sm:py-12 z-10 overflow-visible">
           <div className="w-full">
             {/* Section Header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
@@ -836,9 +847,9 @@ export function HomePage({ onOpenContact, currentTime }) {
           SECTION 5: SERVICES (ACCORDION + 3D ISOMETRIC GRAPHIC)
           Matches real_omnira_05_services.png (Sticky pinned scroll track)
           ======================================================== */}
-      <section id="services" ref={servicesRef} className="relative border-b border-white/[0.07] min-h-[280vh] sm:min-h-[320vh]">
-        {/* Sticky Pinned Viewport Container */}
-        <div className="sticky top-0 min-h-screen flex flex-col justify-center py-8 sm:py-12 z-10 overflow-visible">
+      <section id="services" ref={servicesRef} className="relative border-b border-white/[0.07] min-h-auto lg:min-h-[320vh]">
+        {/* Pinned Viewport Container on Desktop · Clean Normal Scroll on Mobile */}
+        <div className="relative lg:sticky lg:top-0 min-h-auto lg:min-h-screen flex flex-col justify-center py-8 sm:py-12 z-10 overflow-visible">
           <div className="w-full">
             {/* Section Header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">

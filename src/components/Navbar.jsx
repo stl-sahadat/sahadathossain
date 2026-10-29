@@ -93,10 +93,10 @@ export function Navbar({ onOpenContact }) {
         </nav>
 
         {/* Action Button: LET'S TALK with 4 Corner Reticle Marks */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <button
             onClick={onOpenContact ? onOpenContact : () => handleNavClick('/contact')}
-            className="group relative px-5 py-2.5 text-xs font-chakra font-medium tracking-[0.18em] uppercase border border-[#00F0FF]/60 text-[#00F0FF] hover:bg-[#00F0FF] hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.2)] cursor-pointer overflow-hidden"
+            className="group relative px-3 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-chakra font-medium tracking-[0.14em] sm:tracking-[0.18em] uppercase border border-[#00F0FF]/60 text-[#00F0FF] hover:bg-[#00F0FF] hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.2)] cursor-pointer overflow-hidden whitespace-nowrap"
           >
             <ButtonCornerMarks />
             <span className="relative z-10 font-bold">LET'S TALK</span>

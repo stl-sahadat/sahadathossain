@@ -463,16 +463,6 @@ export function ContactPage({ onOpenContact, currentTime }) {
               </a>
 
               <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 py-2.5 px-3 bg-[#0d0f17] border border-white/15 hover:border-[#00F0FF] rounded-xl text-neutral-300 hover:text-white flex items-center justify-center gap-2 transition-all text-xs font-chakra"
-              >
-                <GithubIcon className="w-3.5 h-3.5 text-neutral-200" />
-                <span>GITHUB</span>
-              </a>
-
-              <a
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"

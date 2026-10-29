@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { portfolioApiPlugin } from './vite-portfolio-api-plugin.js';
 
 export default defineConfig({
+  base: './',
   plugins: [react(), portfolioApiPlugin()],
   server: {
     port: 5173,

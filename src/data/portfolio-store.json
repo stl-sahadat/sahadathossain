@@ -14,8 +14,8 @@
     "phone": "+880 1944-576159",
     "whatsapp": "+880 1944-576159",
     "whatsappUrl": "https://wa.me/8801944576159",
-    "github": "https://github.com/stl-sahadat",
-    "githubDisplay": "github.com/stl-sahadat",
+    "github": "",
+    "githubDisplay": "",
     "linkedin": "https://www.linkedin.com/in/mdsahadatconnact/",
     "linkedinDisplay": "linkedin.com/in/mdsahadatconnact",
     "youtube": "https://www.youtube.com/@SahadatAutomation0",
@@ -268,7 +268,7 @@
       ],
       "img": "/assets/img/projects/portfolio-villa-live.png",
       "liveUrl": "https://stl-sahadat.github.io/my-portfolio/",
-      "githubUrl": "https://github.com/stl-sahadat/my-portfolio",
+      "githubUrl": null,
       "featured": true,
       "isPrivate": false,
       "stats": {
@@ -300,7 +300,7 @@
       ],
       "img": "/assets/img/projects/portfolio-sketch-live.png",
       "liveUrl": "https://stl-sahadat.github.io/practic-prottfolio/",
-      "githubUrl": "https://github.com/stl-sahadat/practic-prottfolio",
+      "githubUrl": null,
       "featured": true,
       "isPrivate": false,
       "stats": {
@@ -331,7 +331,7 @@
       ],
       "img": "/assets/img/projects/portfolio-enterprise-live.png",
       "liveUrl": "https://stl-sahadat.github.io/sahadat/",
-      "githubUrl": "https://github.com/stl-sahadat/sahadat",
+      "githubUrl": null,
       "featured": true,
       "isPrivate": false,
       "stats": {
@@ -364,7 +364,7 @@
       "img": "/assets/img/projects/morning-mug-live.png",
       "videoPreview": "https://stl-sahadat.github.io/morning-mug-coffee-house/videos/coffee-bg.mp4",
       "liveUrl": "https://stl-sahadat.github.io/morning-mug-coffee-house/index.html",
-      "githubUrl": "https://github.com/stl-sahadat/morning-mug-coffee-house",
+      "githubUrl": null,
       "featured": true,
       "isPrivate": false,
       "stats": {
@@ -488,8 +488,8 @@
         "Telegram Bot"
       ],
       "img": "/assets/img/projects/weather-bot-avatar.jpg",
-      "liveUrl": "https://github.com/stdrsahadat-bot/dhaka-transport-bot",
-      "githubUrl": "https://github.com/stdrsahadat-bot/dhaka-transport-bot",
+      "liveUrl": "",
+      "githubUrl": null,
       "featured": false,
       "isPrivate": false,
       "badge": "OPEN SOURCE BOT // GITHUB REPOSITORY",

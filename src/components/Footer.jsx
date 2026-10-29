@@ -98,16 +98,6 @@ export function Footer({ personalInfo: propPersonalInfo, currentTime, onOpenCont
                 </a>
 
                 <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-xs font-chakra text-neutral-200 hover:text-white transition-colors py-2 border-b border-white/10 group"
-                >
-                  <GithubIcon className="w-4 h-4 text-neutral-300 group-hover:text-white group-hover:scale-110 transition-all" />
-                  <span>{personalInfo.githubDisplay}</span>
-                </a>
-
-                <a
                   href={personalInfo.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"

@@ -47,7 +47,7 @@ export function TabProjects({ projects = [], onRequestSave }) {
     techInput: 'React.js, Node.js, Tailwind CSS',
     img: '/assets/img/projects/portfolio-villa-live.png',
     liveUrl: 'https://',
-    githubUrl: 'https://github.com/stl-sahadat/',
+    githubUrl: '',
     featured: false,
     isPrivate: false,
     stats: { latency: '<140ms', stack: 'Full-Stack' },
@@ -104,7 +104,7 @@ export function TabProjects({ projects = [], onRequestSave }) {
       techInput: 'React.js, Tailwind CSS',
       img: '/assets/img/projects/portfolio-villa-live.png',
       liveUrl: 'https://',
-      githubUrl: 'https://github.com/stl-sahadat/',
+      githubUrl: '',
       featured: currentlyFeaturedCount < 6, // default to true only if slots available
       isPrivate: false,
       stats: { stack: 'Next.js 15' },
@@ -636,7 +636,7 @@ export function TabProjects({ projects = [], onRequestSave }) {
                     type="url"
                     value={currentProject.githubUrl}
                     onChange={(e) => setCurrentProject({ ...currentProject, githubUrl: e.target.value })}
-                    placeholder="https://github.com/stl-sahadat/..."
+                    placeholder=""
                     className="w-full px-3 py-2 bg-[#05060a] border border-white/10 focus:border-[#00F0FF] rounded-lg text-xs text-white focus:outline-none font-mono"
                   />
                 </div>

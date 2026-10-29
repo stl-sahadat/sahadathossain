@@ -487,20 +487,6 @@ export function WorksPage({ onOpenContact, currentTime }) {
                     <span className="relative z-10">OPEN LIVE SYSTEM</span>
                     <ExternalLink className="w-4 h-4 relative z-10" />
                   </a>
-
-                  {selectedProject.githubUrl && (
-                    <a
-                      href={selectedProject.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-chakra font-bold text-xs uppercase tracking-widest border border-white/20 flex items-center gap-2 cursor-pointer overflow-hidden rounded-lg hover:border-white/40 transition-colors"
-                      title="Open GitHub Repository"
-                    >
-                      <ButtonCornerMarks />
-                      <GithubIcon className="w-4 h-4 relative z-10" />
-                      <span className="relative z-10">GITHUB</span>
-                    </a>
-                  )}
                 </>
               )}
             </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 /**
  * CyberCard: Authentic Framer Omnira Project & Feature Card.
@@ -120,56 +120,78 @@ export function TiltCard({
 
 /**
  * Hero3DCube: Authentic 4-sided 3D rotating prism cube matching Framer Omnira.
- * Discovered from Framer DOM:
- * translateZ(-22px) rotateX(${angle}deg) with cubic-bezier(0.76, 0, 0.24, 1)
+ * Discovered from Framer Omnira DOM:
+ * Perspective: 600px, translateZ(-22px) rotateX(${angle}deg)
+ * Smooth 0.65s cubic-bezier(0.76, 0, 0.24, 1) transition.
  * Monotonic rotation step ensures no rewind glitches or backwards spinning.
+ * Invisible back-face swapping guarantees 100% flawless support for arbitrary word lists without opacity toggling.
  */
 export function Hero3DCube({
-  words = ['MOBILE APPS', 'SAAS PLATFORMS', 'E-COMMERCE', 'REVERSE', 'ENGINEERING'],
-  interval = 2400,
+  words = ['MOBILE APPS', 'SAAS PLATFORMS', 'AI & AGENTS', 'E-COMMERCE'],
+  interval = 2600,
 }) {
+  const safeWords = useMemo(() => {
+    const list = Array.isArray(words) && words.length > 0 ? words : ['MOBILE APPS', 'SAAS PLATFORMS', 'AI & AGENTS', 'E-COMMERCE'];
+    return list;
+  }, [words]);
+
+  const N = safeWords.length;
   const [step, setStep] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // 4 physical faces with words initialized for the first 4 slots
+  const [faceWords, setFaceWords] = useState(() => [
+    safeWords[0],
+    safeWords[1 % N],
+    safeWords[2 % N],
+    safeWords[3 % N],
+  ]);
+
+  // Update faces when safeWords change
+  useEffect(() => {
+    const len = safeWords.length;
+    setFaceWords([
+      safeWords[0],
+      safeWords[1 % len],
+      safeWords[2 % len],
+      safeWords[3 % len],
+    ]);
+    setStep(0);
+  }, [safeWords]);
 
   useEffect(() => {
-    let transTimeout;
     const timer = setInterval(() => {
-      setIsTransitioning(true);
-      setStep((prev) => prev + 1);
-      transTimeout = setTimeout(() => {
-        setIsTransitioning(false);
-      }, 700);
+      setStep((prev) => {
+        const nextStep = prev + 1;
+        // The face that is now at the back (opposite side) is completely hidden.
+        // Update it with the word for its next front appearance at nextStep + 2
+        const backFace = (nextStep - 2 + 4) % 4;
+        const upcomingWord = safeWords[(nextStep + 2) % safeWords.length];
+        setFaceWords((curr) => {
+          if (curr[backFace] === upcomingWord) return curr;
+          const copy = [...curr];
+          copy[backFace] = upcomingWord;
+          return copy;
+        });
+        return nextStep;
+      });
     }, interval);
 
-    return () => {
-      clearInterval(timer);
-      if (transTimeout) clearTimeout(transTimeout);
-    };
-  }, [interval]);
+    return () => clearInterval(timer);
+  }, [interval, safeWords]);
 
-  const count = words.length;
-  // Framer Omnira rotation: rotateX(-90deg * step)
-  // Each step brings the next face up from below into view smoothly
-  const angle = step * -90;
-
-  // 4 physical prism faces (0deg, 90deg, 180deg, 270deg)
-  const currentFace = ((step % 4) + 4) % 4;
-  const incomingFace = (currentFace + 1) % 4;
-
-  // Dynamic word mapping supporting arbitrary number of words without glitching
-  const currentWord = words[((step % count) + count) % count];
-  const incomingWord = words[(((step + 1) % count) + count) % count];
+  const angle = -step * 90;
 
   // Use the longest word as invisible sizer to prevent horizontal layout shift
-  const sizerWord = words.reduce((a, b) => (a.length > b.length ? a : b), 'SAAS PLATFORMS');
+  const sizerWord = safeWords.reduce((a, b) => (a.length > b.length ? a : b), 'SAAS PLATFORMS');
 
   return (
     <span
       className="inline-grid align-baseline relative select-none"
       style={{
-        perspective: '800px',
+        perspective: '600px',
         perspectiveOrigin: '50% 50%',
         lineHeight: '1.05em',
+        whiteSpace: 'pre',
         transformStyle: 'preserve-3d',
       }}
     >
@@ -177,16 +199,17 @@ export function Hero3DCube({
       <span
         aria-hidden="true"
         className="invisible pointer-events-none col-start-1 row-start-1 font-orbitron font-extrabold uppercase whitespace-pre tracking-tight"
+        style={{ lineHeight: '1.05em' }}
       >
         {sizerWord}
       </span>
 
       {/* 3D Rotating Prism */}
       <span
-        className="col-start-1 row-start-1 relative inline-block w-full h-[1.05em] leading-[1.05em]"
+        className="col-start-1 row-start-1 relative inline-block w-full h-[1.12em] leading-[1.12em]"
         style={{
           transformStyle: 'preserve-3d',
-          transform: `translateZ(-0.52em) rotateX(${angle}deg)`,
+          transform: `translateZ(-0.55em) rotateX(${angle}deg)`,
           transformOrigin: 'center center',
           transition: 'transform 0.65s cubic-bezier(0.76, 0, 0.24, 1)',
           willChange: 'transform',
@@ -194,25 +217,18 @@ export function Hero3DCube({
       >
         {[0, 1, 2, 3].map((faceIdx) => {
           const faceRotation = faceIdx * 90;
-          const isCurrent = faceIdx === currentFace;
-          const isIncoming = isTransitioning && faceIdx === incomingFace;
-          const isVisible = isCurrent || isIncoming;
-          const displayWord = isCurrent ? currentWord : incomingWord;
-
           return (
             <span
               key={faceIdx}
-              className="absolute left-0 top-0 w-full h-[1.05em] leading-[1.05em] flex items-center justify-start bg-gradient-to-t from-[#0284C7] to-[#00F0FF] bg-clip-text text-transparent font-orbitron font-extrabold uppercase whitespace-pre tracking-tight"
+              className="absolute left-0 top-0 w-full h-[1.12em] leading-[1.12em] flex items-center justify-start bg-gradient-to-t from-[#0284C7] to-[#00F0FF] bg-clip-text text-transparent font-orbitron font-extrabold uppercase whitespace-pre tracking-tight select-none"
               style={{
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden',
-                transform: `rotateX(${faceRotation}deg) translateZ(0.52em)`,
+                transform: `rotateX(${faceRotation}deg) translateZ(0.55em)`,
                 transformOrigin: 'center center',
-                opacity: isVisible ? 1 : 0,
-                transition: 'opacity 0.25s ease-out',
               }}
             >
-              {displayWord}
+              {faceWords[faceIdx]}
             </span>
           );
         })}

@@ -25,7 +25,7 @@ export function TabHero({ personalInfo = {}, heroWords = [], onRequestSave }) {
     heroImage: personalInfo.heroImage || personalInfo.avatar || '/assets/img/sahadat-hero-transparent.png',
   });
 
-  const [words, setWords] = useState(heroWords.length ? [...heroWords] : ['MOBILE APPS', 'SAAS PLATFORMS', 'E-COMMERCE', 'REVERSE', 'ENGINEERING']);
+  const [words, setWords] = useState(heroWords.length ? [...heroWords] : ['MOBILE APPS', 'SAAS PLATFORMS', 'AI & AGENTS', 'E-COMMERCE']);
   const [newWord, setNewWord] = useState('');
 
   const handleChange = (field, value) => {

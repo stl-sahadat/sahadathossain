@@ -115,7 +115,7 @@ const getDefaultData = () => deepNormalizeAssets({
     ctaProcessText: 'EXPLORE PROCESS',
     ctaExploreAllProjectsText: 'EXPLORE ALL PROJECTS',
   },
-  heroWords: defaultPortfolioData.heroWords || ['MOBILE APPS', 'SAAS PLATFORMS', 'E-COMMERCE', 'REVERSE', 'ENGINEERING'],
+  heroWords: defaultPortfolioData.heroWords || ['MOBILE APPS', 'SAAS PLATFORMS', 'AI & AGENTS', 'E-COMMERCE'],
   atAGlance: defaultPortfolioData.atAGlance || [],
   marqueeItems: defaultPortfolioData.marqueeItems || [],
   impactMetrics: defaultPortfolioData.impactMetrics || [],

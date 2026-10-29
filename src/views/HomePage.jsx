@@ -314,7 +314,7 @@ export function HomePage({ onOpenContact, currentTime }) {
               <h1 className="font-orbitron font-bold text-2xl sm:text-4xl lg:text-[44px] xl:text-[50px] uppercase tracking-tight leading-[1.08] mb-6 text-white flex flex-col items-start max-w-lg">
                 <span>{personalInfo.heroHeading.split(' ')[0]}</span>
                 <span>{personalInfo.heroHeading.split(' ').slice(1).join(' ')}</span>
-                <div className="mt-1 sm:mt-2">
+                <div className="mt-2 sm:mt-3">
                   <Hero3DCube words={heroWords} />
                 </div>
               </h1>

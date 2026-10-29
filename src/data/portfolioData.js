@@ -57,9 +57,8 @@ export const personalInfo = {
 export const heroWords = [
   "MOBILE APPS",
   "SAAS PLATFORMS",
+  "AI & AGENTS",
   "E-COMMERCE",
-  "REVERSE",
-  "ENGINEERING"
 ];
 
 export const atAGlance = [

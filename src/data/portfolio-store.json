@@ -4,11 +4,11 @@
     "shortName": "Sahadat",
     "brandName": "STL",
     "logoText": "STL",
-    "title": "AI & Full-Stack Developer · Mobile Apps, SaaS & Systems",
-    "badge": "MD. SAHADAT HOSSAIN · AI & FULL-STACK DEVELOPER",
+    "title": "AI & Full-Stack Developer \u00b7 Mobile Apps, SaaS & Systems",
+    "badge": "MD. SAHADAT HOSSAIN \u00b7 AI & FULL-STACK DEVELOPER",
     "tagline": "Building production-ready Mobile Apps, Full-Stack SaaS, and E-Commerce platforms with AI velocity & 1+ year of design craft.",
-    "basedIn": "Barura, Cumilla, Chattogram, Bangladesh • Available Worldwide",
-    "location": "Dhaka, Bangladesh · UTC+6",
+    "basedIn": "Barura, Cumilla, Chattogram, Bangladesh \u2022 Available Worldwide",
+    "location": "Dhaka, Bangladesh \u00b7 UTC+6",
     "timezone": "Asia/Dhaka (GMT+6)",
     "email": "sahadat.info01@gmail.com",
     "phone": "+880 1944-576159",
@@ -31,10 +31,10 @@
     "heroHeading": "ARCHITECTING NEXT-GEN",
     "heroBio": "AI & Full-Stack Developer. I orchestrate autonomous AI tooling and 1+ year of visual craft to build production-grade Mobile Apps (iOS/Android), Full-Stack SaaS, High-Converting E-Commerce, and Reverse-Engineered systems at 10x velocity.",
     "aboutRole": "AI & FULL-STACK SYSTEMS DEVELOPER",
-    "aboutBio": "With 1+ year of design craft and full-stack engineering, I eliminate agency bloat. I design, reverse-engineer, and deploy complete digital ecosystems—from native mobile apps to scalable cloud backends—with 1:1 pixel precision.",
+    "aboutBio": "With 1+ year of design craft and full-stack engineering, I eliminate agency bloat. I design, reverse-engineer, and deploy complete digital ecosystems\u2014from native mobile apps to scalable cloud backends\u2014with 1:1 pixel precision.",
     "storyParagraph1": "I am Md. Sahadat Hossain, an AI Product Architect and Systems Engineer based in Bangladesh, partnering with founders and enterprise leaders worldwide. What began with 1+ year in visual and UI/UX design evolved into full-scale product architecture: building native mobile apps, distributed SaaS platforms, and reverse-engineering complex web targets.",
     "storyParagraph2": "The modern engineering paradigm has changed. By orchestrating cutting-edge AI architectures as my execution force multiplier, I provide the output of an entire product agency with the speed, agility, and uncompromising quality of a dedicated solo architect.",
-    "copyright": "© 2026 MD. SAHADAT HOSSAIN · STL TECH",
+    "copyright": "\u00a9 2026 MD. SAHADAT HOSSAIN \u00b7 STL TECH",
     "avatar": "/assets/img/sahadat-avatar.jpg",
     "portraitStudio": "/assets/img/sahadat-studio-portrait.jpg",
     "portraitAbout": "/assets/img/sahadat-about-new.jpg",
@@ -53,9 +53,8 @@
   "heroWords": [
     "MOBILE APPS",
     "SAAS PLATFORMS",
-    "E-COMMERCE",
-    "REVERSE",
-    "ENGINEERING"
+    "AI & AGENTS",
+    "E-COMMERCE"
   ],
   "atAGlance": [
     {
@@ -64,19 +63,19 @@
     },
     {
       "label": "Based in",
-      "value": "Barura, Cumilla, Bangladesh · Available Worldwide"
+      "value": "Barura, Cumilla, Bangladesh \u00b7 Available Worldwide"
     },
     {
       "label": "Focus",
-      "value": "Autonomous AI Agents · FastMCP · Full-Stack Web · Cloud Infra"
+      "value": "Autonomous AI Agents \u00b7 FastMCP \u00b7 Full-Stack Web \u00b7 Cloud Infra"
     },
     {
       "label": "Core stack",
-      "value": "Python · FastMCP · Next.js 15 · React 19 · Node.js · TypeScript"
+      "value": "Python \u00b7 FastMCP \u00b7 Next.js 15 \u00b7 React 19 \u00b7 Node.js \u00b7 TypeScript"
     },
     {
       "label": "Data & infra",
-      "value": "PostgreSQL · Redis · MongoDB · Docker · Linux VPS"
+      "value": "PostgreSQL \u00b7 Redis \u00b7 MongoDB \u00b7 Docker \u00b7 Linux VPS"
     },
     {
       "label": "Direct contact",
@@ -104,14 +103,14 @@
       "dark": false
     },
     {
-      "metric": "1.2s → 140ms",
+      "metric": "1.2s \u2192 140ms",
       "label": "API & WebSocket Latency",
       "desc": "Re-architected WebSocket connection pooling and Redis Pub/Sub backplane for instantaneous multi-user event broadcast.",
       "tag": "BACKEND & REDIS",
       "dark": true
     },
     {
-      "metric": "−42%",
+      "metric": "\u221242%",
       "label": "Database Query Overhead",
       "desc": "Restructured relational schemas, implemented compound indexes, and added read-through caching in high-traffic endpoints.",
       "tag": "DATABASE & SCALE",
@@ -165,28 +164,28 @@
   "processPhases": [
     {
       "phase": "01",
-      "phaseLabel": "PHASE 01 · GOALS & WIREFRAMING",
+      "phaseLabel": "PHASE 01 \u00b7 GOALS & WIREFRAMING",
       "title": "DISCOVER",
       "desc": "Analyze your product goals, target audience, layout references, and conversion objectives before designing or coding.",
       "subtext": "Goal discovery & structural wireframes"
     },
     {
       "phase": "02",
-      "phaseLabel": "PHASE 02 · FIGMA UI/UX & PROTOTYPING",
+      "phaseLabel": "PHASE 02 \u00b7 FIGMA UI/UX & PROTOTYPING",
       "title": "DESIGN",
       "desc": "Craft modern, high-fidelity UI/UX layouts in Figma using 1+ year of design craft, cohesive typography, and responsive design tokens.",
       "subtext": "Figma design system & interactive prototype"
     },
     {
       "phase": "03",
-      "phaseLabel": "PHASE 03 · FULL-STACK & AI VELOCITY",
+      "phaseLabel": "PHASE 03 \u00b7 FULL-STACK & AI VELOCITY",
       "title": "BUILD",
       "desc": "Translate approved designs into production-ready software, fluid micro-interactions, and scalable APIs with 10x AI execution velocity.",
       "subtext": "Production code & 10x velocity"
     },
     {
       "phase": "04",
-      "phaseLabel": "PHASE 04 · SPEED AUDIT & CLOUD DEPLOY",
+      "phaseLabel": "PHASE 04 \u00b7 SPEED AUDIT & CLOUD DEPLOY",
       "title": "LAUNCH",
       "desc": "Benchmark 95+ PageSpeed scores, audit 100% mobile responsiveness, connect custom domains, and launch your live digital product.",
       "subtext": "95+ PageSpeed audit & production launch"
@@ -439,7 +438,7 @@
     },
     {
       "id": "teacher-agent-bot",
-      "title": "As-Sunnah Training Center — Teacher Agent Bot",
+      "title": "As-Sunnah Training Center \u2014 Teacher Agent Bot",
       "category": "Multimodal Educational AI",
       "categoryFilter": "automations",
       "filters": [
@@ -505,7 +504,7 @@
     {
       "id": "yt-video-1",
       "youtubeId": "Bc_hhrzKqzY",
-      "title": "How AI Agents Are Changing the Future of Work! (AI দিয়ে আপনি কী করছেন?)",
+      "title": "How AI Agents Are Changing the Future of Work! (AI \u09a6\u09bf\u09df\u09c7 \u0986\u09aa\u09a8\u09bf \u0995\u09c0 \u0995\u09b0\u099b\u09c7\u09a8?)",
       "platform": "YouTube",
       "platformFilter": "youtube",
       "format": "widescreen",
@@ -513,7 +512,7 @@
       "url": "https://youtu.be/Bc_hhrzKqzY?si=0YLFSpee4iYyG3K1",
       "embedUrl": "https://www.youtube-nocookie.com/embed/Bc_hhrzKqzY?autoplay=1&rel=0",
       "thumb": "/assets/img/projects/yt-thumb-1.jpg",
-      "desc": "অটোনোমাস এআই এজেন্টের বাস্তব কর্মদক্ষতা এবং ভবিষ্যৎ কাজের বাজারে কীভাবে এআই ওয়ার্কফ্লো পুরো ইন্ডাস্ট্রিকে বদলে দিচ্ছে তার বিস্তারিত বিশ্লেষণ।",
+      "desc": "\u0985\u099f\u09cb\u09a8\u09cb\u09ae\u09be\u09b8 \u098f\u0986\u0987 \u098f\u099c\u09c7\u09a8\u09cd\u099f\u09c7\u09b0 \u09ac\u09be\u09b8\u09cd\u09a4\u09ac \u0995\u09b0\u09cd\u09ae\u09a6\u0995\u09cd\u09b7\u09a4\u09be \u098f\u09ac\u0982 \u09ad\u09ac\u09bf\u09b7\u09cd\u09af\u09ce \u0995\u09be\u099c\u09c7\u09b0 \u09ac\u09be\u099c\u09be\u09b0\u09c7 \u0995\u09c0\u09ad\u09be\u09ac\u09c7 \u098f\u0986\u0987 \u0993\u09df\u09be\u09b0\u09cd\u0995\u09ab\u09cd\u09b2\u09cb \u09aa\u09c1\u09b0\u09cb \u0987\u09a8\u09cd\u09a1\u09be\u09b8\u09cd\u099f\u09cd\u09b0\u09bf\u0995\u09c7 \u09ac\u09a6\u09b2\u09c7 \u09a6\u09bf\u099a\u09cd\u099b\u09c7 \u09a4\u09be\u09b0 \u09ac\u09bf\u09b8\u09cd\u09a4\u09be\u09b0\u09bf\u09a4 \u09ac\u09bf\u09b6\u09cd\u09b2\u09c7\u09b7\u09a3\u0964",
       "duration": "Full Video",
       "channel": "Sahadat Automation",
       "topics": [
@@ -526,7 +525,7 @@
     {
       "id": "yt-video-2",
       "youtubeId": "gU1VItZvIHs",
-      "title": "কোড লেখার যুগ শেষ! আসছে Autonomous AI Agents (Claude Opus 5.5 & JetBrains Air)",
+      "title": "\u0995\u09cb\u09a1 \u09b2\u09c7\u0996\u09be\u09b0 \u09af\u09c1\u0997 \u09b6\u09c7\u09b7! \u0986\u09b8\u099b\u09c7 Autonomous AI Agents (Claude Opus 5.5 & JetBrains Air)",
       "platform": "YouTube",
       "platformFilter": "youtube",
       "format": "widescreen",
@@ -534,7 +533,7 @@
       "url": "https://youtu.be/gU1VItZvIHs?si=A9QwZ5oNNvdvNqin",
       "embedUrl": "https://www.youtube-nocookie.com/embed/gU1VItZvIHs?autoplay=1&rel=0",
       "thumb": "/assets/img/projects/yt-thumb-2.jpg",
-      "desc": "প্রথাগত ম্যানুয়াল কোডিংয়ের ভবিষ্যৎ কী? Claude Opus 5.5 ও JetBrains Air এর মতো অটোনোমাস কোডিং এজেন্টদের উত্থান ও রিয়েল-ওয়ার্ল্ড সফটওয়্যার আর্কিটেকচার।",
+      "desc": "\u09aa\u09cd\u09b0\u09a5\u09be\u0997\u09a4 \u09ae\u09cd\u09af\u09be\u09a8\u09c1\u09af\u09bc\u09be\u09b2 \u0995\u09cb\u09a1\u09bf\u0982\u09df\u09c7\u09b0 \u09ad\u09ac\u09bf\u09b7\u09cd\u09af\u09ce \u0995\u09c0? Claude Opus 5.5 \u0993 JetBrains Air \u098f\u09b0 \u09ae\u09a4\u09cb \u0985\u099f\u09cb\u09a8\u09cb\u09ae\u09be\u09b8 \u0995\u09cb\u09a1\u09bf\u0982 \u098f\u099c\u09c7\u09a8\u09cd\u099f\u09a6\u09c7\u09b0 \u0989\u09a4\u09cd\u09a5\u09be\u09a8 \u0993 \u09b0\u09bf\u09df\u09c7\u09b2-\u0993\u09df\u09be\u09b0\u09cd\u09b2\u09cd\u09a1 \u09b8\u09ab\u099f\u0993\u09af\u09bc\u09cd\u09af\u09be\u09b0 \u0986\u09b0\u09cd\u0995\u09bf\u099f\u09c7\u0995\u099a\u09be\u09b0\u0964",
       "duration": "Deep Dive",
       "channel": "Sahadat Automation",
       "topics": [
@@ -547,7 +546,7 @@
     {
       "id": "yt-video-3",
       "youtubeId": "WesjmJ218sM",
-      "title": "ব্যবসা চালাবে এআই এজেন্ট?! Save 70% Operational Costs with AI Automation",
+      "title": "\u09ac\u09cd\u09af\u09ac\u09b8\u09be \u099a\u09be\u09b2\u09be\u09ac\u09c7 \u098f\u0986\u0987 \u098f\u099c\u09c7\u09a8\u09cd\u099f?! Save 70% Operational Costs with AI Automation",
       "platform": "YouTube",
       "platformFilter": "youtube",
       "format": "widescreen",
@@ -555,7 +554,7 @@
       "url": "https://youtu.be/WesjmJ218sM?si=l5MjrxZOhB7lNhTs",
       "embedUrl": "https://www.youtube-nocookie.com/embed/WesjmJ218sM?autoplay=1&rel=0",
       "thumb": "/assets/img/projects/yt-thumb-3.jpg",
-      "desc": "বিজনেস প্রসেস অটোমেশনের মাধ্যমে কোম্পানির ৭০% অপারেশনাল খরচ কমিয়ে কীভাবে ফুল্লি অটোমেটেড পাইপলাইন ও এজেন্ট তৈরি করবেন তার প্র্যাকটিক্যাল গাইড।",
+      "desc": "\u09ac\u09bf\u099c\u09a8\u09c7\u09b8 \u09aa\u09cd\u09b0\u09b8\u09c7\u09b8 \u0985\u099f\u09cb\u09ae\u09c7\u09b6\u09a8\u09c7\u09b0 \u09ae\u09be\u09a7\u09cd\u09af\u09ae\u09c7 \u0995\u09cb\u09ae\u09cd\u09aa\u09be\u09a8\u09bf\u09b0 \u09ed\u09e6% \u0985\u09aa\u09be\u09b0\u09c7\u09b6\u09a8\u09be\u09b2 \u0996\u09b0\u099a \u0995\u09ae\u09bf\u09df\u09c7 \u0995\u09c0\u09ad\u09be\u09ac\u09c7 \u09ab\u09c1\u09b2\u09cd\u09b2\u09bf \u0985\u099f\u09cb\u09ae\u09c7\u099f\u09c7\u09a1 \u09aa\u09be\u0987\u09aa\u09b2\u09be\u0987\u09a8 \u0993 \u098f\u099c\u09c7\u09a8\u09cd\u099f \u09a4\u09c8\u09b0\u09bf \u0995\u09b0\u09ac\u09c7\u09a8 \u09a4\u09be\u09b0 \u09aa\u09cd\u09b0\u09cd\u09af\u09be\u0995\u099f\u09bf\u0995\u09cd\u09af\u09be\u09b2 \u0997\u09be\u0987\u09a1\u0964",
       "duration": "System Case Study",
       "channel": "Sahadat Automation",
       "topics": [
@@ -568,7 +567,7 @@
     {
       "id": "yt-video-4",
       "youtubeId": "I8xxvMNzYl4",
-      "title": "সুপার AI কি বন্ধ হয়ে যাচ্ছে?! Global Alert on Rogue AI Agents 🚨",
+      "title": "\u09b8\u09c1\u09aa\u09be\u09b0 AI \u0995\u09bf \u09ac\u09a8\u09cd\u09a7 \u09b9\u09df\u09c7 \u09af\u09be\u099a\u09cd\u099b\u09c7?! Global Alert on Rogue AI Agents \ud83d\udea8",
       "platform": "YouTube",
       "platformFilter": "youtube",
       "format": "widescreen",
@@ -576,7 +575,7 @@
       "url": "https://youtu.be/I8xxvMNzYl4?si=vEBf61fUF5PpVCAO",
       "embedUrl": "https://www.youtube-nocookie.com/embed/I8xxvMNzYl4?autoplay=1&rel=0",
       "thumb": "/assets/img/projects/yt-thumb-4.jpg",
-      "desc": "আনকন্ট্রোল্ড বা রোগ এআই এজেন্ট নিয়ে বিশ্বব্যাপী গবেষকদের সতর্কতা এবং সেফগার্ডস ও সিকিউরিটি প্রোটোকলের বর্তমান বাস্তবতা।",
+      "desc": "\u0986\u09a8\u0995\u09a8\u09cd\u099f\u09cd\u09b0\u09cb\u09b2\u09cd\u09a1 \u09ac\u09be \u09b0\u09cb\u0997 \u098f\u0986\u0987 \u098f\u099c\u09c7\u09a8\u09cd\u099f \u09a8\u09bf\u09df\u09c7 \u09ac\u09bf\u09b6\u09cd\u09ac\u09ac\u09cd\u09af\u09be\u09aa\u09c0 \u0997\u09ac\u09c7\u09b7\u0995\u09a6\u09c7\u09b0 \u09b8\u09a4\u09b0\u09cd\u0995\u09a4\u09be \u098f\u09ac\u0982 \u09b8\u09c7\u09ab\u0997\u09be\u09b0\u09cd\u09a1\u09b8 \u0993 \u09b8\u09bf\u0995\u09bf\u0989\u09b0\u09bf\u099f\u09bf \u09aa\u09cd\u09b0\u09cb\u099f\u09cb\u0995\u09b2\u09c7\u09b0 \u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8 \u09ac\u09be\u09b8\u09cd\u09a4\u09ac\u09a4\u09be\u0964",
       "duration": "Tech Briefing",
       "channel": "Sahadat Automation",
       "topics": [
@@ -589,7 +588,7 @@
     {
       "id": "yt-video-5",
       "youtubeId": "844Sj-De6fo",
-      "title": "বাতিল হলো OpenAI GPT-6.1 Astra! মানুষের সাথে প্রতারণা করছে AI?! 😱",
+      "title": "\u09ac\u09be\u09a4\u09bf\u09b2 \u09b9\u09b2\u09cb OpenAI GPT-6.1 Astra! \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u09b8\u09be\u09a5\u09c7 \u09aa\u09cd\u09b0\u09a4\u09be\u09b0\u09a3\u09be \u0995\u09b0\u099b\u09c7 AI?! \ud83d\ude31",
       "platform": "YouTube",
       "platformFilter": "youtube",
       "format": "widescreen",
@@ -597,7 +596,7 @@
       "url": "https://youtu.be/844Sj-De6fo?si=2gGmkVNoZSQvkitf",
       "embedUrl": "https://www.youtube-nocookie.com/embed/844Sj-De6fo?autoplay=1&rel=0",
       "thumb": "/assets/img/projects/yt-thumb-5.jpg",
-      "desc": "OpenAI প্রজেক্টের ভেতরের খবর, GPT-6.1 Astra বাতিল হওয়ার পেছনের কারণ এবং ফ্রন্টিয়ার লার্জ ল্যাঙ্গুয়েজ মডেলগুলোর বর্তমান সীমাবদ্ধতা।",
+      "desc": "OpenAI \u09aa\u09cd\u09b0\u099c\u09c7\u0995\u09cd\u099f\u09c7\u09b0 \u09ad\u09c7\u09a4\u09b0\u09c7\u09b0 \u0996\u09ac\u09b0, GPT-6.1 Astra \u09ac\u09be\u09a4\u09bf\u09b2 \u09b9\u0993\u09df\u09be\u09b0 \u09aa\u09c7\u099b\u09a8\u09c7\u09b0 \u0995\u09be\u09b0\u09a3 \u098f\u09ac\u0982 \u09ab\u09cd\u09b0\u09a8\u09cd\u099f\u09bf\u09af\u09bc\u09be\u09b0 \u09b2\u09be\u09b0\u09cd\u099c \u09b2\u09cd\u09af\u09be\u0999\u09cd\u0997\u09c1\u09af\u09bc\u09c7\u099c \u09ae\u09a1\u09c7\u09b2\u0997\u09c1\u09b2\u09cb\u09b0 \u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8 \u09b8\u09c0\u09ae\u09be\u09ac\u09a6\u09cd\u09a7\u09a4\u09be\u0964",
       "duration": "Exclusive Breakdown",
       "channel": "Sahadat Automation",
       "topics": [
@@ -610,7 +609,7 @@
     {
       "id": "yt-video-6",
       "youtubeId": "Vfy6JawrDXk",
-      "title": "দ্য সাইলেন্ট টেকওভার: চোখের পলকে বদলে যাচ্ছে দুনিয়া! | The Silent AI Takeover 🎬",
+      "title": "\u09a6\u09cd\u09af \u09b8\u09be\u0987\u09b2\u09c7\u09a8\u09cd\u099f \u099f\u09c7\u0995\u0993\u09ad\u09be\u09b0: \u099a\u09cb\u0996\u09c7\u09b0 \u09aa\u09b2\u0995\u09c7 \u09ac\u09a6\u09b2\u09c7 \u09af\u09be\u099a\u09cd\u099b\u09c7 \u09a6\u09c1\u09a8\u09bf\u09df\u09be! | The Silent AI Takeover \ud83c\udfac",
       "platform": "YouTube",
       "platformFilter": "youtube",
       "format": "widescreen",
@@ -618,7 +617,7 @@
       "url": "https://youtu.be/Vfy6JawrDXk?si=8e4kf0oKemSCE6KH",
       "embedUrl": "https://www.youtube-nocookie.com/embed/Vfy6JawrDXk?autoplay=1&rel=0",
       "thumb": "/assets/img/projects/yt-thumb-6.jpg",
-      "desc": "সাইলেন্ট এআই টেকওভার কীভাবে চাকরি, সফটওয়্যার ক্রাফট এবং গ্লোবাল টেক ইকোনমিকে চোখের পলকে বদলে ফেলছে তার তথ্যভিত্তিক বিশ্লেষণ।",
+      "desc": "\u09b8\u09be\u0987\u09b2\u09c7\u09a8\u09cd\u099f \u098f\u0986\u0987 \u099f\u09c7\u0995\u0993\u09ad\u09be\u09b0 \u0995\u09c0\u09ad\u09be\u09ac\u09c7 \u099a\u09be\u0995\u09b0\u09bf, \u09b8\u09ab\u099f\u0993\u09df\u09cd\u09af\u09be\u09b0 \u0995\u09cd\u09b0\u09be\u09ab\u099f \u098f\u09ac\u0982 \u0997\u09cd\u09b2\u09cb\u09ac\u09be\u09b2 \u099f\u09c7\u0995 \u0987\u0995\u09cb\u09a8\u09ae\u09bf\u0995\u09c7 \u099a\u09cb\u0996\u09c7\u09b0 \u09aa\u09b2\u0995\u09c7 \u09ac\u09a6\u09b2\u09c7 \u09ab\u09c7\u09b2\u099b\u09c7 \u09a4\u09be\u09b0 \u09a4\u09a5\u09cd\u09af\u09ad\u09bf\u09a4\u09cd\u09a4\u09bf\u0995 \u09ac\u09bf\u09b6\u09cd\u09b2\u09c7\u09b7\u09a3\u0964",
       "duration": "Mini Documentary",
       "channel": "Sahadat Automation",
       "topics": [
@@ -631,7 +630,7 @@
     {
       "id": "yt-video-7",
       "youtubeId": "4gjpaVcKpiA",
-      "title": "Meta ও Google-এর গোপন চাল! কোডার এবং কর্পোরেটদের ভবিষ্যৎ শেষ?! | AI News 2026",
+      "title": "Meta \u0993 Google-\u098f\u09b0 \u0997\u09cb\u09aa\u09a8 \u099a\u09be\u09b2! \u0995\u09cb\u09a1\u09be\u09b0 \u098f\u09ac\u0982 \u0995\u09b0\u09cd\u09aa\u09cb\u09b0\u09c7\u099f\u09a6\u09c7\u09b0 \u09ad\u09ac\u09bf\u09b7\u09cd\u09af\u09ce \u09b6\u09c7\u09b7?! | AI News 2026",
       "platform": "YouTube",
       "platformFilter": "youtube",
       "format": "widescreen",
@@ -639,7 +638,7 @@
       "url": "https://youtu.be/4gjpaVcKpiA?si=MN4HPU1N64CbEVo2",
       "embedUrl": "https://www.youtube-nocookie.com/embed/4gjpaVcKpiA?autoplay=1&rel=0",
       "thumb": "/assets/img/projects/yt-thumb-7.jpg",
-      "desc": "মেটা এবং গুগলের ওপেন-সোর্স ও প্রোপ্রাইটারি মডেলগুলোর অভ্যন্তরীণ লড়াই এবং কোডার ও সফটওয়্যার ইঞ্জিনিয়ারদের আগামী দিনের নতুন রোল।",
+      "desc": "\u09ae\u09c7\u099f\u09be \u098f\u09ac\u0982 \u0997\u09c1\u0997\u09b2\u09c7\u09b0 \u0993\u09aa\u09c7\u09a8-\u09b8\u09cb\u09b0\u09cd\u09b8 \u0993 \u09aa\u09cd\u09b0\u09cb\u09aa\u09cd\u09b0\u09be\u0987\u099f\u09be\u09b0\u09bf \u09ae\u09a1\u09c7\u09b2\u0997\u09c1\u09b2\u09cb\u09b0 \u0985\u09ad\u09cd\u09af\u09a8\u09cd\u09a4\u09b0\u09c0\u09a3 \u09b2\u09dc\u09be\u0987 \u098f\u09ac\u0982 \u0995\u09cb\u09a1\u09be\u09b0 \u0993 \u09b8\u09ab\u099f\u0993\u09df\u09cd\u09af\u09be\u09b0 \u0987\u099e\u09cd\u099c\u09bf\u09a8\u09bf\u09df\u09be\u09b0\u09a6\u09c7\u09b0 \u0986\u0997\u09be\u09ae\u09c0 \u09a6\u09bf\u09a8\u09c7\u09b0 \u09a8\u09a4\u09c1\u09a8 \u09b0\u09cb\u09b2\u0964",
       "duration": "Strategic Analysis",
       "channel": "Sahadat Automation",
       "topics": [
@@ -652,7 +651,7 @@
     {
       "id": "fb-reel-1",
       "reelId": "1004104099386948",
-      "title": "HTTP 403 Forbidden বাদ! r.jina.ai মাত্র ১ সেকেন্ডে 10x Faster Dev",
+      "title": "HTTP 403 Forbidden \u09ac\u09be\u09a6! r.jina.ai \u09ae\u09be\u09a4\u09cd\u09b0 \u09e7 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7 10x Faster Dev",
       "platform": "Facebook",
       "platformFilter": "facebook",
       "format": "vertical",
@@ -660,7 +659,7 @@
       "url": "https://www.facebook.com/share/v/19GZMijZxY/",
       "embedUrl": "https://www.facebook.com/plugins/video.php?height=580&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1004104099386948&show_text=false&width=320&t=0",
       "thumb": "/assets/img/projects/fb-reel-1.png",
-      "desc": "Cloudflare বা HTTP 403 বট ব্লক বাইপাস করে মাত্র ১ সেকেন্ডে r.jina.ai দিয়ে ফ্রেশ ডেটা স্ক্র্যাপিং এবং ১০ গুণ দ্রুত AI ডেভেলপমেন্ট হ্যাক।",
+      "desc": "Cloudflare \u09ac\u09be HTTP 403 \u09ac\u099f \u09ac\u09cd\u09b2\u0995 \u09ac\u09be\u0987\u09aa\u09be\u09b8 \u0995\u09b0\u09c7 \u09ae\u09be\u09a4\u09cd\u09b0 \u09e7 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7 r.jina.ai \u09a6\u09bf\u09df\u09c7 \u09ab\u09cd\u09b0\u09c7\u09b6 \u09a1\u09c7\u099f\u09be \u09b8\u09cd\u0995\u09cd\u09b0\u09cd\u09af\u09be\u09aa\u09bf\u0982 \u098f\u09ac\u0982 \u09e7\u09e6 \u0997\u09c1\u09a3 \u09a6\u09cd\u09b0\u09c1\u09a4 AI \u09a1\u09c7\u09ad\u09c7\u09b2\u09aa\u09ae\u09c7\u09a8\u09cd\u099f \u09b9\u09cd\u09af\u09be\u0995\u0964",
       "duration": "Facebook Reel",
       "channel": "Md Sahadat Hossain",
       "topics": [
@@ -681,7 +680,7 @@
       "url": "https://www.facebook.com/share/v/1JZR88PgFS/",
       "embedUrl": "https://www.facebook.com/plugins/video.php?height=580&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2078081582844137&show_text=false&width=320&t=0",
       "thumb": "/assets/img/projects/fb-reel-2.png",
-      "desc": "মাসে $20 ChatGPT প্লাস সাবস্ক্রিপশন ছাড়াই Gemini 1.5 Pro-এর বিশাল ১০ লক্ষ কনটেক্সট টোকেন ফ্রিতে ব্যবহার করার সিক্রেট ডেভেলপার ওয়ার্কফ্লো।",
+      "desc": "\u09ae\u09be\u09b8\u09c7 $20 ChatGPT \u09aa\u09cd\u09b2\u09be\u09b8 \u09b8\u09be\u09ac\u09b8\u09cd\u0995\u09cd\u09b0\u09bf\u09aa\u09b6\u09a8 \u099b\u09be\u09dc\u09be\u0987 Gemini 1.5 Pro-\u098f\u09b0 \u09ac\u09bf\u09b6\u09be\u09b2 \u09e7\u09e6 \u09b2\u0995\u09cd\u09b7 \u0995\u09a8\u099f\u09c7\u0995\u09cd\u09b8\u099f \u099f\u09cb\u0995\u09c7\u09a8 \u09ab\u09cd\u09b0\u09bf\u09a4\u09c7 \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0 \u0995\u09b0\u09be\u09b0 \u09b8\u09bf\u0995\u09cd\u09b0\u09c7\u099f \u09a1\u09c7\u09ad\u09c7\u09b2\u09aa\u09be\u09b0 \u0993\u09df\u09be\u09b0\u09cd\u0995\u09ab\u09cd\u09b2\u09cb\u0964",
       "duration": "Facebook Reel",
       "channel": "Md Sahadat Hossain",
       "topics": [
@@ -694,7 +693,7 @@
     {
       "id": "fb-reel-3",
       "reelId": "1647332660047931",
-      "title": "এরর বাদ! মাত্র ১ সেকেন্ডে লেটেস্ট কোড (.cursorrules + CLAUDE.md)",
+      "title": "\u098f\u09b0\u09b0 \u09ac\u09be\u09a6! \u09ae\u09be\u09a4\u09cd\u09b0 \u09e7 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7 \u09b2\u09c7\u099f\u09c7\u09b8\u09cd\u099f \u0995\u09cb\u09a1 (.cursorrules + CLAUDE.md)",
       "platform": "Facebook",
       "platformFilter": "facebook",
       "format": "vertical",
@@ -702,7 +701,7 @@
       "url": "https://www.facebook.com/share/v/1KecXFc1HN/",
       "embedUrl": "https://www.facebook.com/plugins/video.php?height=580&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1647332660047931&show_text=false&width=320&t=0",
       "thumb": "/assets/img/projects/fb-reel-3.png",
-      "desc": "AI কে দিয়ে কোড লেখানোর সময় আউটডেটেড লাইব্রেরির এরর দূর করতে মাত্র ১ সেকেন্ডে .cursorrules ও CLAUDE.md সেটআপের সিক্রেট মেথডোলজি।",
+      "desc": "AI \u0995\u09c7 \u09a6\u09bf\u09df\u09c7 \u0995\u09cb\u09a1 \u09b2\u09c7\u0996\u09be\u09a8\u09cb\u09b0 \u09b8\u09ae\u09df \u0986\u0989\u099f\u09a1\u09c7\u099f\u09c7\u09a1 \u09b2\u09be\u0987\u09ac\u09cd\u09b0\u09c7\u09b0\u09bf\u09b0 \u098f\u09b0\u09b0 \u09a6\u09c2\u09b0 \u0995\u09b0\u09a4\u09c7 \u09ae\u09be\u09a4\u09cd\u09b0 \u09e7 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7 .cursorrules \u0993 CLAUDE.md \u09b8\u09c7\u099f\u0986\u09aa\u09c7\u09b0 \u09b8\u09bf\u0995\u09cd\u09b0\u09c7\u099f \u09ae\u09c7\u09a5\u09a1\u09cb\u09b2\u099c\u09bf\u0964",
       "duration": "Facebook Reel",
       "channel": "Md Sahadat Hossain",
       "topics": [
@@ -715,7 +714,7 @@
     {
       "id": "fb-reel-4",
       "reelId": "971568128833559",
-      "title": "GitHub কোড! gitingest.com + github.dev কোনো Install লাগবে না!",
+      "title": "GitHub \u0995\u09cb\u09a1! gitingest.com + github.dev \u0995\u09cb\u09a8\u09cb Install \u09b2\u09be\u0997\u09ac\u09c7 \u09a8\u09be!",
       "platform": "Facebook",
       "platformFilter": "facebook",
       "format": "vertical",
@@ -723,7 +722,7 @@
       "url": "https://www.facebook.com/share/v/1A22VvxrVW/",
       "embedUrl": "https://www.facebook.com/plugins/video.php?height=580&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F971568128833559&show_text=false&width=320&t=0",
       "thumb": "/assets/img/projects/fb-reel-4.png",
-      "desc": "গিটহাবের বিশাল যেকোনো রিপোজিটরি ক্লোন বা ইনস্টল না করেই সরাসরি ব্রাউজারে gitingest ও github.dev দিয়ে সেকেন্ডে টোকেন-অপ্টিমাইজড এনালাইসিস।",
+      "desc": "\u0997\u09bf\u099f\u09b9\u09be\u09ac\u09c7\u09b0 \u09ac\u09bf\u09b6\u09be\u09b2 \u09af\u09c7\u0995\u09cb\u09a8\u09cb \u09b0\u09bf\u09aa\u09cb\u099c\u09bf\u099f\u09b0\u09bf \u0995\u09cd\u09b2\u09cb\u09a8 \u09ac\u09be \u0987\u09a8\u09b8\u09cd\u099f\u09b2 \u09a8\u09be \u0995\u09b0\u09c7\u0987 \u09b8\u09b0\u09be\u09b8\u09b0\u09bf \u09ac\u09cd\u09b0\u09be\u0989\u099c\u09be\u09b0\u09c7 gitingest \u0993 github.dev \u09a6\u09bf\u09df\u09c7 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7 \u099f\u09cb\u0995\u09c7\u09a8-\u0985\u09aa\u09cd\u099f\u09bf\u09ae\u09be\u0987\u099c\u09a1 \u098f\u09a8\u09be\u09b2\u09be\u0987\u09b8\u09bf\u09b8\u0964",
       "duration": "Facebook Reel",
       "channel": "Md Sahadat Hossain",
       "topics": [
@@ -744,7 +743,7 @@
       "url": "https://www.facebook.com/share/v/1E3hU8kZTd/",
       "embedUrl": "https://www.facebook.com/plugins/video.php?height=580&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2134108777474093&show_text=false&width=320&t=0",
       "thumb": "/assets/img/projects/fb-reel-5.png",
-      "desc": "সাধারণ ভাইব কোডিংয়ের ফাঁদে পড়ে কোডবেস নষ্ট না করে একজন AI Architect কীভাবে ৩টি গোপন রুলস মেনে ক্লিন, মেইনটেইনেবল সফটওয়্যার আর্কিটেকচার তৈরি করে।",
+      "desc": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u09ad\u09be\u0987\u09ac \u0995\u09cb\u09a1\u09bf\u0982\u09df\u09c7\u09b0 \u09ab\u09be\u0981\u09a6\u09c7 \u09aa\u09dc\u09c7 \u0995\u09cb\u09a1\u09ac\u09c7\u09b8 \u09a8\u09b7\u09cd\u099f \u09a8\u09be \u0995\u09b0\u09c7 \u098f\u0995\u099c\u09a8 AI Architect \u0995\u09c0\u09ad\u09be\u09ac\u09c7 \u09e9\u099f\u09bf \u0997\u09cb\u09aa\u09a8 \u09b0\u09c1\u09b2\u09b8 \u09ae\u09c7\u09a8\u09c7 \u0995\u09cd\u09b2\u09bf\u09a8, \u09ae\u09c7\u0987\u09a8\u099f\u09c7\u0987\u09a8\u09c7\u09ac\u09b2 \u09b8\u09ab\u099f\u0993\u09df\u09cd\u09af\u09be\u09b0 \u0986\u09b0\u09cd\u0995\u09bf\u099f\u09c7\u0995\u099a\u09be\u09b0 \u09a4\u09c8\u09b0\u09bf \u0995\u09b0\u09c7\u0964",
       "duration": "Facebook Reel",
       "channel": "Md Sahadat Hossain",
       "topics": [
@@ -757,7 +756,7 @@
     {
       "id": "fb-reel-6",
       "reelId": "2281231462727555",
-      "title": "AI দিয়ে অ্যাপ নাকি DIGITAL TIME BOMB? CLAUDE.md প্রোটোকল",
+      "title": "AI \u09a6\u09bf\u09df\u09c7 \u0985\u09cd\u09af\u09be\u09aa \u09a8\u09be\u0995\u09bf DIGITAL TIME BOMB? CLAUDE.md \u09aa\u09cd\u09b0\u09cb\u099f\u09cb\u0995\u09b2",
       "platform": "Facebook",
       "platformFilter": "facebook",
       "format": "vertical",
@@ -765,7 +764,7 @@
       "url": "https://www.facebook.com/share/v/1DuPiVK3bK/",
       "embedUrl": "https://www.facebook.com/plugins/video.php?height=580&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2281231462727555&show_text=false&width=320&t=0",
       "thumb": "/assets/img/projects/fb-reel-6.png",
-      "desc": "প্রপার আর্কিটেকচার ও গার্ডরেল ছাড়া এআই দিয়ে তৈরি সফটওয়্যার কীভাবে বড় ডিজিটাল টাইম বোমায় পরিণত হয় এবং তার পরীক্ষিত ইঞ্জিনিয়ারিং সলিউশন।",
+      "desc": "\u09aa\u09cd\u09b0\u09aa\u09be\u09b0 \u0986\u09b0\u09cd\u0995\u09bf\u099f\u09c7\u0995\u099a\u09be\u09b0 \u0993 \u0997\u09be\u09b0\u09cd\u09a1\u09b0\u09c7\u09b2 \u099b\u09be\u09dc\u09be \u098f\u0986\u0987 \u09a6\u09bf\u09df\u09c7 \u09a4\u09c8\u09b0\u09bf \u09b8\u09ab\u099f\u0993\u09df\u09cd\u09af\u09be\u09b0 \u0995\u09c0\u09ad\u09be\u09ac\u09c7 \u09ac\u09dc \u09a1\u09bf\u099c\u09bf\u099f\u09be\u09b2 \u099f\u09be\u0987\u09ae \u09ac\u09cb\u09ae\u09be\u09df \u09aa\u09b0\u09bf\u09a3\u09a4 \u09b9\u09df \u098f\u09ac\u0982 \u09a4\u09be\u09b0 \u09aa\u09b0\u09c0\u0995\u09cd\u09b7\u09bf\u09a4 \u0987\u099e\u09cd\u099c\u09bf\u09a8\u09bf\u09df\u09be\u09b0\u09bf\u0982 \u09b8\u09b2\u09bf\u0989\u09b6\u09a8\u0964",
       "duration": "Facebook Reel",
       "channel": "Md Sahadat Hossain",
       "topics": [
@@ -986,67 +985,67 @@
       "name": "CLAUDE 3.7 SONNET",
       "provider": "ANTHROPIC",
       "badge": "HYBRID REASONING",
-      "symbol": "⚡"
+      "symbol": "\u26a1"
     },
     {
       "name": "GEMINI 2.5 PRO",
       "provider": "GOOGLE DEEPMIND",
       "badge": "2M CONTEXT",
-      "symbol": "✦"
+      "symbol": "\u2726"
     },
     {
       "name": "GPT-4O",
       "provider": "OPENAI",
       "badge": "OMNIMODAL",
-      "symbol": "◈"
+      "symbol": "\u25c8"
     },
     {
       "name": "DEEPSEEK R1",
       "provider": "DEEPSEEK",
       "badge": "REASONING ENGINE",
-      "symbol": "❖"
+      "symbol": "\u2756"
     },
     {
       "name": "CLAUDE 3.5 SONNET",
       "provider": "ANTHROPIC",
       "badge": "CODE SYNTHESIS",
-      "symbol": "⚡"
+      "symbol": "\u26a1"
     },
     {
       "name": "GEMINI 2.0 FLASH",
       "provider": "GOOGLE",
       "badge": "REAL-TIME AGENTS",
-      "symbol": "✦"
+      "symbol": "\u2726"
     },
     {
       "name": "O3-MINI",
       "provider": "OPENAI",
       "badge": "STEM REASONING",
-      "symbol": "◈"
+      "symbol": "\u25c8"
     },
     {
       "name": "FASTMCP SWARMS",
       "provider": "MCP PROTOCOL",
       "badge": "AUTONOMOUS TOOLS",
-      "symbol": "⚙"
+      "symbol": "\u2699"
     },
     {
       "name": "LLAMA 3.3 70B",
       "provider": "META AI",
       "badge": "OPEN WEIGHTS",
-      "symbol": "◈"
+      "symbol": "\u25c8"
     },
     {
       "name": "QWEN 2.5 CODER",
       "provider": "ALIBABA CLOUD",
       "badge": "CODE SPECIALIST",
-      "symbol": "❖"
+      "symbol": "\u2756"
     },
     {
       "name": "CURSOR & CLAUDE CODE",
       "provider": "AGENTIC CLI",
       "badge": "10X VELOCITY",
-      "symbol": "⚡"
+      "symbol": "\u26a1"
     }
   ],
   "clientLogos": [

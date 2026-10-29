@@ -308,10 +308,31 @@ export function AboutPage({ onOpenContact, currentTime }) {
     setTimeout(() => setTerminalEntered(false), 2200);
   };
 
-  const currentStackCategories =
-    techStackCategories && techStackCategories.length > 0
-      ? techStackCategories
-      : stackCategories;
+  const stackIconMap = {
+    Palette: <Palette className="w-4 h-4" />,
+    Code2: <Code2 className="w-4 h-4" />,
+    Play: <Play className="w-4 h-4" />,
+    Box: <Box className="w-4 h-4" />,
+  };
+
+  // Stack data across the 4 disciplines (fallback/default to Omnira 1:1 specification)
+  const currentStackCategories = React.useMemo(() => {
+    if (
+      Array.isArray(techStackCategories) &&
+      techStackCategories.length > 0 &&
+      techStackCategories[0]?.tools?.length > 0
+    ) {
+      return techStackCategories.map((cat, idx) => ({
+        ...cat,
+        icon: React.isValidElement(cat.icon)
+          ? cat.icon
+          : stackIconMap[cat.icon] || stackCategories[idx]?.icon || <Box className="w-4 h-4" />,
+      }));
+    }
+    return stackCategories;
+  }, [techStackCategories]);
+
+  const activeCategory = currentStackCategories[activeStackTab] || currentStackCategories[0];
 
   return (
     <div className="w-full">
@@ -1090,7 +1111,11 @@ export function AboutPage({ onOpenContact, currentTime }) {
           {/* Left Column: 4 Category Tabs */}
           <ScrollReveal direction="up" delay={0.15} className="lg:col-span-4 space-y-3">
             {currentStackCategories.map((cat, idx) => {
-              const isActive = activeStackTab === idx;
+              const isActive = (activeCategory?.id ? activeCategory.id === cat.id : activeStackTab === idx);
+              const categoryIcon = React.isValidElement(cat.icon)
+                ? cat.icon
+                : stackIconMap[cat.icon] || <Box className="w-4 h-4" />;
+
               return (
                 <div
                   key={cat.id || idx}
@@ -1109,10 +1134,10 @@ export function AboutPage({ onOpenContact, currentTime }) {
                           : 'bg-white/5 border-white/10 text-neutral-400'
                       }`}
                     >
-                      {cat.icon || <Box className="w-4 h-4" />}
+                      {categoryIcon}
                     </span>
                     <span className="font-orbitron font-bold text-sm uppercase tracking-wider">
-                      {cat.title}
+                      {cat.title || cat.category}
                     </span>
                   </div>
                   <span
@@ -1134,16 +1159,19 @@ export function AboutPage({ onOpenContact, currentTime }) {
                 {/* Header: Category Name + Index (e.g. 01 / 04) */}
                 <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/[0.08]">
                   <span className="text-xs font-orbitron font-bold text-[#00F0FF] tracking-widest uppercase">
-                    {currentStackCategories[activeStackTab]?.title}
+                    {activeCategory?.title || activeCategory?.category}
                   </span>
                   <span className="font-mono text-xs text-neutral-400">
-                    <span className="text-[#00F0FF] font-bold">0{activeStackTab + 1}</span> / 0{currentStackCategories.length}
+                    <span className="text-[#00F0FF] font-bold">
+                      0{(currentStackCategories.indexOf(activeCategory) >= 0 ? currentStackCategories.indexOf(activeCategory) : 0) + 1}
+                    </span>{' '}
+                    / 0{currentStackCategories.length}
                   </span>
                 </div>
 
                 {/* 2x2 Tool Cards Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
-                  {currentStackCategories[activeStackTab]?.tools?.map((tool, tIdx) => (
+                  {activeCategory?.tools?.map((tool, tIdx) => (
                     <div
                       key={tIdx}
                       className="p-5 rounded-xl bg-[#0c0d12] border border-[#242734] hover:border-[#00F0FF]/40 transition-all duration-300 flex flex-col justify-between group"

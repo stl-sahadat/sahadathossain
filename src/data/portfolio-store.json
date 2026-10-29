@@ -810,86 +810,111 @@
   ],
   "techStackCategories": [
     {
-      "category": "Languages",
-      "skills": [
-        "TypeScript",
-        "JavaScript (ES6+)",
-        "Python",
-        "PHP",
-        "SQL",
-        "HTML5 / CSS3"
+      "id": "design",
+      "title": "DESIGN",
+      "icon": "Palette",
+      "tools": [
+        {
+          "name": "FIGMA",
+          "desc": "Interface design and prototyping",
+          "symbol": "F"
+        },
+        {
+          "name": "PHOTOSHOP",
+          "desc": "Image editing and refinement",
+          "symbol": "P"
+        },
+        {
+          "name": "ILLUSTRATOR",
+          "desc": "Vector graphics and icons",
+          "symbol": "I"
+        },
+        {
+          "name": "DESIGN SYSTEMS",
+          "desc": "Design system examples and resources",
+          "symbol": "D"
+        }
       ]
     },
     {
-      "category": "Frontend & UI",
-      "skills": [
-        "React.js",
-        "Next.js 15 (App Router)",
-        "Tailwind CSS",
-        "Redux Toolkit",
-        "Zustand",
-        "Motion"
+      "id": "development",
+      "title": "DEVELOPMENT",
+      "icon": "Code2",
+      "tools": [
+        {
+          "name": "NEXT.JS / REACT",
+          "desc": "Full-stack architecture & client apps",
+          "symbol": "N"
+        },
+        {
+          "name: "NODE.JS / APIS",
+          "desc": "High-concurrency backend services",
+          "symbol": "JS"
+        },
+        {
+          "name": "POSTGRESQL / REDIS",
+          "desc": "High-speed database & cache caching",
+          "symbol": "DB"
+        },
+        {
+          "name": "DOCKER / DEVOPS",
+          "desc": "Containerized deployment & VPS infrastructure",
+          "symbol": "DK"
+        }
       ]
     },
     {
-      "category": "UI/UX Design",
-      "skills": [
-        "Figma Systems",
-        "Design Tokens",
-        "Micro-interactions",
-        "Responsive Wireframes",
-        "Neo-Brutalism"
+      "id": "motion",
+      "title": "MOTION",
+      "icon": "Play",
+      "tools": [
+        {
+          "name": "GSAP / FRAMER MOTION",
+          "desc": "Spring physics & scroll animations",
+          "symbol": "M"
+        },
+        {
+          "name": "LENIS SCROLL",
+          "desc": "Smooth momentum scrolling physics",
+          "symbol": "L"
+        },
+        {
+          "name": "TAILWIND CSS",
+          "desc": "Utility design tokens & animations",
+          "symbol": "TW"
+        },
+        {
+          "name": "SVG / CANVAS",
+          "desc": "Vector motion & dynamic rendering",
+          "symbol": "CV"
+        }
       ]
     },
     {
-      "category": "Backend & APIs",
-      "skills": [
-        "Node.js",
-        "Express.js",
-        "RESTful Architecture",
-        "WebSockets",
-        "JWT & OAuth",
-        "Redis Pub/Sub"
-      ]
-    },
-    {
-      "category": "Database & Cache",
-      "skills": [
-        "PostgreSQL",
-        "MongoDB",
-        "Redis",
-        "Prisma ORM",
-        "Mongoose",
-        "Compound Indexing"
-      ]
-    },
-    {
-      "category": "DevOps & Cloud",
-      "skills": [
-        "Docker",
-        "Linux (Ubuntu/Debian)",
-        "Nginx Reverse Proxy",
-        "CI/CD Pipelines",
-        "VPS Setup"
-      ]
-    },
-    {
-      "category": "Hosting & Infra",
-      "skills": [
-        "DigitalOcean VPS",
-        "Vercel",
-        "Cloudflare CDN",
-        "SSL / Let's Encrypt",
-        "PM2 Process Manager"
-      ]
-    },
-    {
-      "category": "Architecture",
-      "skills": [
-        "Modular Monoliths",
-        "Event-driven Systems",
-        "API Gateway Patterns",
-        "Security Hardening"
+      "id": "3d-visual",
+      "title": "3D / VISUAL",
+      "icon": "Box",
+      "tools": [
+        {
+          "name": "THREE.JS / WEBGL",
+          "desc": "Interactive 3D scenes & shaders",
+          "symbol": "3D"
+        },
+        {
+          "name": "SPLINE 3D",
+          "desc": "Interactive web 3D models & lighting",
+          "symbol": "S"
+        },
+        {
+          "name": "BLENDER",
+          "desc": "3D asset modeling & rendering",
+          "symbol": "B"
+        },
+        {
+          "name": "HALFTONE ENGINE",
+          "desc": "Dynamic dot-matrix canvas physics",
+          "symbol": "HT"
+        }
       ]
     }
   ],

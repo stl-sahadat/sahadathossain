@@ -261,9 +261,12 @@ export function PortfolioDataProvider({ children }) {
     injectDynamicThemeStyle(currentTheme);
   }, [currentTheme]);
 
-  // Sync with backend API on mount if available
+  // Sync with backend API on mount if available (skip on static GitHub Pages)
   useEffect(() => {
     let isCancelled = false;
+    const isStaticHost = typeof window !== 'undefined' && window.location.hostname.endsWith('github.io');
+    if (isStaticHost) return;
+
     const fetchRemoteData = async () => {
       try {
         const res = await fetch('/api/portfolio');

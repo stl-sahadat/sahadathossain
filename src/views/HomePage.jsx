@@ -729,7 +729,7 @@ export function HomePage({ onOpenContact, currentTime }) {
                   <div className="flex items-center gap-2 mb-10 sm:mb-14">
                     <span className="w-2 h-2 rounded-full bg-[#80B82C] animate-pulse" />
                     <span className="text-neutral-400 text-xs font-chakra tracking-widest uppercase">
-                      STATUS: <span className="text-[#80B82C] font-semibold">{personalInfo.aboutStatus}</span>
+                      STATUS: <span className="text-[#80B82C] font-semibold">{personalInfo.aboutStatus ? personalInfo.aboutStatus.replace(/^STATUS:\s*/i, '') : 'OPEN FOR GLOBAL CONTRACTS'}</span>
                     </span>
                   </div>
 

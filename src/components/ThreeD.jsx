@@ -232,7 +232,7 @@ export function ScrollReveal({
 }) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(
-    typeof window !== 'undefined' && window.location.search.includes('noload')
+    typeof window !== 'undefined' && (window.location.search.includes('noload') || window.innerWidth < 768)
   );
 
   useEffect(() => {

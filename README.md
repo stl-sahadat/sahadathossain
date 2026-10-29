@@ -74,14 +74,6 @@ npm run prisma:push
 
 ---
 
-## 🔐 Admin Access
-
-Navigate to `/admin` to access the Production Control Matrix:
-- **Default Username:** `admin`
-- **Default Password:** `sahadat2026`
-
----
-
 ## 📄 License & Rights
 
 Copyright © 2026 **Md. Sahadat Hossain**. All rights reserved.

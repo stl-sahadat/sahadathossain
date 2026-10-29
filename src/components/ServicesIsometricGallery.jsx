@@ -282,16 +282,19 @@ export function ServicesIsometricGallery({ activeIdx = 0, onSelect = () => {}, s
 
         {/* Bottom Interactive Telemetry Bar */}
         <div className="relative z-20 pt-3 border-t border-white/[0.08] flex items-center justify-between text-[11px] font-chakra text-neutral-400">
-          <div className="flex items-center gap-2">
-            <span className="font-orbitron font-bold text-[#00F0FF]">
+          <div className="flex items-center gap-2 min-w-0 flex-1 mr-3">
+            <span className="font-orbitron font-bold text-[#00F0FF] flex-shrink-0">
               {currentPlatform.num}
             </span>
-            <span className="uppercase tracking-wider text-neutral-300 font-semibold truncate max-w-[200px] sm:max-w-none">
+            <span
+              className="uppercase tracking-wider text-neutral-300 font-semibold truncate text-[10px] sm:text-[11px]"
+              title={currentPlatform.subtitle}
+            >
               {currentPlatform.subtitle}
             </span>
           </div>
 
-          <div className="font-mono text-[9px] text-neutral-500 hidden sm:block whitespace-nowrap pl-2">
+          <div className="font-mono text-[9px] text-neutral-500 hidden sm:block whitespace-nowrap flex-shrink-0">
             {currentPlatform.telemetry}
           </div>
         </div>

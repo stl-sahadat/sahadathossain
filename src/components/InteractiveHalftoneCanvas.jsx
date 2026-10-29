@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { resolveAssetUrl } from '../lib/assetHelper';
 
 /**
  * InteractiveHalftoneCanvas
@@ -51,9 +52,10 @@ export function InteractiveHalftoneCanvas({
 
   useEffect(() => {
     let isMounted = true;
+    const resolvedSrc = resolveAssetUrl(imageSrc || '/assets/img/sahadat-hero-transparent.png');
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    img.src = imageSrc;
+    img.src = resolvedSrc;
     imgRef.current = img;
 
     const canvas = canvasRef.current;

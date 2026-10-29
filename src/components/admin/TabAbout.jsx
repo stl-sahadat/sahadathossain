@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BookOpen, Check, Upload, RefreshCw, Layers, ShieldCheck, Sparkles } from 'lucide-react';
+import { resolveAssetUrl } from '../../lib/assetHelper';
 
 export function TabAbout({
   personalInfo = {},
@@ -137,11 +138,11 @@ export function TabAbout({
           <div className="md:col-span-4 flex flex-col items-center">
             <div className="w-44 h-52 rounded-xl border border-white/20 bg-black/50 p-2 overflow-hidden shadow-lg flex items-center justify-center">
               <img
-                src={formData.portraitAbout}
+                src={resolveAssetUrl(formData.portraitAbout)}
                 alt="About Portrait Preview"
                 className="w-full h-full object-cover rounded-lg filter contrast-110"
                 onError={(e) => {
-                  e.currentTarget.src = '/assets/img/sahadat-about-new.jpg';
+                  e.currentTarget.src = resolveAssetUrl('/assets/img/sahadat-about-new.jpg');
                 }}
               />
             </div>

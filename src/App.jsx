@@ -12,6 +12,7 @@ import { NotFoundPage } from './views/NotFoundPage';
 import { AdminPage } from './views/AdminPage';
 import { ContactModal } from './components/ContactModal';
 import { STLLogo } from './components/CyberIcons';
+import { getBasePrefix, resolveAssetUrl } from './lib/assetHelper';
 
 /**
  * ScrollToTop helper: scrolls window to top on every route transition
@@ -79,6 +80,14 @@ function MainPortfolioApp() {
 
   // Live Digital Clock (Asia/Dhaka GMT+6)
   const [currentTime, setCurrentTime] = useState('');
+
+  useEffect(() => {
+    // Set dynamic film grain overlay background
+    try {
+      const grainUrl = resolveAssetUrl('/assets/img/grain.jpg');
+      document.documentElement.style.setProperty('--film-grain-bg', `url("${grainUrl}")`);
+    } catch (e) {}
+  }, []);
 
   useEffect(() => {
     if (isAdminRoute) {
@@ -265,10 +274,7 @@ function MainPortfolioApp() {
 }
 
 export default function App() {
-  const resolvedBasename =
-    typeof window !== 'undefined' && window.location.pathname.startsWith('/my-portfolio-03')
-      ? '/my-portfolio-03'
-      : (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL && import.meta.env.BASE_URL !== './' ? import.meta.env.BASE_URL : '/');
+  const resolvedBasename = getBasePrefix() || '/';
 
   return (
     <PortfolioDataProvider>

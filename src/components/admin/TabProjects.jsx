@@ -18,6 +18,7 @@ import {
   Layers,
   HelpCircle,
 } from 'lucide-react';
+import { resolveAssetUrl } from '../../lib/assetHelper';
 
 export function TabProjects({ projects = [], onRequestSave }) {
   const [projectList, setProjectList] = useState(projects.length ? [...projects] : []);
@@ -308,11 +309,11 @@ export function TabProjects({ projects = [], onRequestSave }) {
                   </div>
                   <div className="w-full aspect-[16/10] rounded-md overflow-hidden bg-black/60 border border-white/10 mb-2">
                     <img
-                      src={proj.img}
+                      src={resolveAssetUrl(proj.img)}
                       alt={proj.title}
                       className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
                       onError={(e) => {
-                        e.currentTarget.src = '/assets/img/projects/portfolio-villa-live.png';
+                        e.currentTarget.src = resolveAssetUrl('/assets/img/projects/portfolio-villa-live.png');
                       }}
                     />
                   </div>
@@ -374,11 +375,11 @@ export function TabProjects({ projects = [], onRequestSave }) {
                 {/* Thumbnail */}
                 <div className="w-20 h-14 rounded-lg bg-black/60 border border-white/15 overflow-hidden flex-shrink-0 relative">
                   <img
-                    src={project.img}
+                    src={resolveAssetUrl(project.img)}
                     alt={project.title}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      e.currentTarget.src = '/assets/img/projects/portfolio-villa-live.png';
+                      e.currentTarget.src = resolveAssetUrl('/assets/img/projects/portfolio-villa-live.png');
                     }}
                   />
                   {project.featured && (

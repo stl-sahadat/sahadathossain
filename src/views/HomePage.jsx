@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { usePortfolioData } from '../context/PortfolioDataContext';
+import { resolveAssetUrl } from '../lib/assetHelper';
 import {
   OmniraLogo,
   DiscoverIcon,
@@ -380,15 +381,15 @@ export function HomePage({ onOpenContact, currentTime }) {
               <div className="relative w-full h-full flex items-center justify-center lg:justify-end overflow-hidden rounded-[40px]">
                 {/* Subtle base portrait underlay to guarantee 100% facial clarity and recognition */}
                 <img
-                  src={personalInfo.heroImage || personalInfo.avatar || "/assets/img/sahadat-hero-transparent.png"}
+                  src={resolveAssetUrl(personalInfo.heroImage || personalInfo.avatar || "/assets/img/sahadat-hero-transparent.png")}
                   alt={(personalInfo.name || "Md. Sahadat Hossain") + " Portrait"}
                   className="absolute inset-0 w-full h-full object-contain object-bottom pointer-events-none opacity-30 filter contrast-125 brightness-95"
                   onError={(e) => {
-                    e.currentTarget.src = "/assets/img/sahadat-hero-transparent.png";
+                    e.currentTarget.src = resolveAssetUrl("/assets/img/sahadat-hero-transparent.png");
                   }}
                 />
                 <InteractiveHalftoneCanvas
-                  imageSrc={personalInfo.heroImage || personalInfo.avatar || "/assets/img/sahadat-hero-transparent.png"}
+                  imageSrc={resolveAssetUrl(personalInfo.heroImage || personalInfo.avatar || "/assets/img/sahadat-hero-transparent.png")}
                   dotSpacing={3}
                   dotSize={1.15}
                   contrast={2.2}
@@ -458,7 +459,7 @@ export function HomePage({ onOpenContact, currentTime }) {
                   {/* Image Container with Chamfered Corners & Smooth Scale Zoom */}
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-black">
                     <img
-                      src={project.img}
+                      src={resolveAssetUrl(project.img)}
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.07] filter brightness-95 group-hover:brightness-105"
                     />
@@ -993,11 +994,11 @@ export function HomePage({ onOpenContact, currentTime }) {
                   <div className="pt-4 border-t border-white/5 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <img
-                        src={item.avatar || '/assets/img/sahadat-avatar.jpg'}
+                        src={resolveAssetUrl(item.avatar || '/assets/img/sahadat-avatar.jpg')}
                         alt={item.name}
                         className="w-8 h-8 rounded-full object-cover border border-white/20"
                         onError={(e) => {
-                          e.currentTarget.src = '/assets/img/sahadat-avatar.jpg';
+                          e.currentTarget.src = resolveAssetUrl('/assets/img/sahadat-avatar.jpg');
                         }}
                       />
                       <div>

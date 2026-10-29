@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { usePortfolioData } from '../context/PortfolioDataContext';
+import { resolveAssetUrl } from '../lib/assetHelper';
 import { CyberFrame } from '../components/CyberFrame';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
@@ -421,11 +422,11 @@ export function AboutPage({ onOpenContact, currentTime }) {
 
                 {/* Sahadat Vai's Second Portrait */}
                 <img
-                  src={personalInfo.portraitAbout || "/assets/img/sahadat-about-new.jpg"}
+                  src={resolveAssetUrl(personalInfo.portraitAbout || "/assets/img/sahadat-about-new.jpg")}
                   alt={(personalInfo.name || "Md. Sahadat Hossain") + " Portrait"}
                   className="w-full h-full object-cover object-top filter contrast-110 brightness-95 group-hover:scale-[1.04] transition-transform duration-700 ease-out"
                   onError={(e) => {
-                    e.currentTarget.src = "/assets/img/sahadat-about-new.jpg";
+                    e.currentTarget.src = resolveAssetUrl("/assets/img/sahadat-about-new.jpg");
                   }}
                 />
 

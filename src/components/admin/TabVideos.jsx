@@ -14,6 +14,7 @@ import {
   Tv,
   Smartphone,
 } from 'lucide-react';
+import { resolveAssetUrl } from '../../lib/assetHelper';
 
 export function TabVideos({ videoGallery = [], onRequestSave }) {
   const [videoList, setVideoList] = useState(videoGallery.length ? [...videoGallery] : []);
@@ -183,11 +184,11 @@ export function TabVideos({ videoGallery = [], onRequestSave }) {
                 }`}
               >
                 <img
-                  src={video.thumb}
+                  src={resolveAssetUrl(video.thumb)}
                   alt={video.title}
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    e.currentTarget.src = '/assets/img/projects/yt-thumb-1.jpg';
+                    e.currentTarget.src = resolveAssetUrl('/assets/img/projects/yt-thumb-1.jpg');
                   }}
                 />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">

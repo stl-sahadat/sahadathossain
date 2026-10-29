@@ -1,6 +1,7 @@
 'use client';
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import * as defaultPortfolioData from '../data/portfolioData';
+import { resolveAssetUrl, deepNormalizeAssets } from '../lib/assetHelper';
 
 export const THEME_PRESETS = [
   {
@@ -100,7 +101,7 @@ const defaultTestimonials = [
   },
 ];
 
-const getDefaultData = () => ({
+const getDefaultData = () => deepNormalizeAssets({
   personalInfo: {
     ...defaultPortfolioData.personalInfo,
     heroImage: defaultPortfolioData.personalInfo?.portraitHero || '/assets/img/sahadat-hero-transparent.png',
@@ -229,13 +230,13 @@ export function PortfolioDataProvider({ children }) {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
           const parsed = JSON.parse(stored);
-          return { ...getDefaultData(), ...parsed };
+          return deepNormalizeAssets({ ...getDefaultData(), ...parsed });
         }
       } catch (e) {
         console.error('Failed reading localStorage', e);
       }
     }
-    return getDefaultData();
+    return deepNormalizeAssets(getDefaultData());
   });
 
   const [authConfig, setAuthConfig] = useState(() => {
@@ -270,7 +271,7 @@ export function PortfolioDataProvider({ children }) {
           const remoteJson = await res.json();
           if (remoteJson && !remoteJson.empty && !isCancelled) {
             setData((prev) => {
-              const merged = { ...prev, ...remoteJson };
+              const merged = deepNormalizeAssets({ ...prev, ...remoteJson });
               try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
               } catch (e) {}
@@ -429,6 +430,7 @@ export function PortfolioDataProvider({ children }) {
     resetToDefaults,
     exportBackupJSON,
     importBackupJSON,
+    resolveAssetUrl,
   };
 
   return (

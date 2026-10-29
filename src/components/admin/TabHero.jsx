@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { User, Image as ImageIcon, Sparkles, Plus, Trash2, Check, RefreshCw, Upload } from 'lucide-react';
+import { resolveAssetUrl } from '../../lib/assetHelper';
 
 export function TabHero({ personalInfo = {}, heroWords = [], onRequestSave }) {
   const [formData, setFormData] = useState({
@@ -118,11 +119,11 @@ export function TabHero({ personalInfo = {}, heroWords = [], onRequestSave }) {
           <div className="md:col-span-4 flex flex-col items-center">
             <div className="w-44 h-44 rounded-2xl border-2 border-[#00F0FF]/50 bg-black/60 p-2 relative overflow-hidden shadow-[0_0_30px_rgba(0,240,255,0.2)] flex items-center justify-center">
               <img
-                src={formData.heroImage}
+                src={resolveAssetUrl(formData.heroImage)}
                 alt="Sahadat Vai Hero Preview"
                 className="w-full h-full object-contain object-bottom filter contrast-125"
                 onError={(e) => {
-                  e.currentTarget.src = '/assets/img/sahadat-hero-transparent.png';
+                  e.currentTarget.src = resolveAssetUrl('/assets/img/sahadat-hero-transparent.png');
                 }}
               />
               <span className="absolute bottom-2 left-2 right-2 py-0.5 bg-black/80 backdrop-blur-md rounded text-[9px] font-mono text-center text-[#00F0FF] uppercase border border-[#00F0FF]/30">

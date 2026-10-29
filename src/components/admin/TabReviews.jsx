@@ -12,6 +12,7 @@ import {
   ArrowDown,
   ShieldCheck,
 } from 'lucide-react';
+import { resolveAssetUrl } from '../../lib/assetHelper';
 
 export function TabReviews({ testimonials = [], onRequestSave }) {
   const [reviewsList, setReviewsList] = useState(
@@ -172,11 +173,11 @@ export function TabReviews({ testimonials = [], onRequestSave }) {
                 {/* Avatar */}
                 <div className="w-12 h-12 rounded-full border border-white/15 bg-black/60 overflow-hidden flex-shrink-0">
                   <img
-                    src={rev.avatar}
+                    src={resolveAssetUrl(rev.avatar)}
                     alt={rev.name}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      e.currentTarget.src = '/assets/img/sahadat-avatar.jpg';
+                      e.currentTarget.src = resolveAssetUrl('/assets/img/sahadat-avatar.jpg');
                     }}
                   />
                 </div>

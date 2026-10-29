@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { usePortfolioData } from '../context/PortfolioDataContext';
+import { resolveAssetUrl } from '../lib/assetHelper';
 import { CyberFrame } from '../components/CyberFrame';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
@@ -206,7 +207,7 @@ export function GalleryPage({ onOpenContact, currentTime }) {
                       <span className="absolute bottom-2 right-2 w-2.5 h-2.5 border-b-2 border-r-2 border-[#00F0FF] z-20 pointer-events-none" />
 
                       <img
-                        src={video.thumb}
+                        src={resolveAssetUrl(video.thumb)}
                         alt={video.title}
                         className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] filter brightness-95 group-hover:brightness-105"
                       />
@@ -313,7 +314,7 @@ export function GalleryPage({ onOpenContact, currentTime }) {
                       <span className="absolute bottom-1.5 right-1.5 w-2 h-2 border-b-2 border-r-2 border-[#00F0FF] z-20 pointer-events-none" />
 
                       <img
-                        src={video.thumb}
+                        src={resolveAssetUrl(video.thumb)}
                         alt={video.title}
                         className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] filter brightness-95 group-hover:brightness-105"
                       />

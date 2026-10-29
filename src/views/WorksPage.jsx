@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { usePortfolioData } from '../context/PortfolioDataContext';
+import { resolveAssetUrl } from '../lib/assetHelper';
 import { CyberFrame } from '../components/CyberFrame';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
@@ -155,8 +156,8 @@ export function WorksPage({ onOpenContact, currentTime }) {
 
                     {project.videoPreview ? (
                       <video
-                        src={project.videoPreview}
-                        poster={project.img}
+                        src={resolveAssetUrl(project.videoPreview)}
+                        poster={resolveAssetUrl(project.img)}
                         autoPlay
                         muted
                         loop
@@ -165,7 +166,7 @@ export function WorksPage({ onOpenContact, currentTime }) {
                       />
                     ) : (
                       <img
-                        src={project.img}
+                        src={resolveAssetUrl(project.img)}
                         alt={project.title}
                         className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05] filter brightness-100 group-hover:brightness-105"
                       />
@@ -325,8 +326,8 @@ export function WorksPage({ onOpenContact, currentTime }) {
 
                 {selectedProject.videoPreview ? (
                   <video
-                    src={selectedProject.videoPreview}
-                    poster={selectedProject.img}
+                    src={resolveAssetUrl(selectedProject.videoPreview)}
+                    poster={resolveAssetUrl(selectedProject.img)}
                     autoPlay
                     muted
                     loop
@@ -335,7 +336,7 @@ export function WorksPage({ onOpenContact, currentTime }) {
                   />
                 ) : (
                   <img
-                    src={selectedProject.img}
+                    src={resolveAssetUrl(selectedProject.img)}
                     alt={selectedProject.title}
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-[1.03] filter brightness-100"
                   />

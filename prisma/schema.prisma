@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model PortfolioStore {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  data      String   @db.LongText
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id              String   @id
+  title           String
+  category        String   @default("Full-Stack Web / SaaS")
+  categoryFilter  String   @default("websites")
+  domain          String   @default("PROJECT.STL")
+  tagline         String   @default("")
+  desc            String   @db.Text
+  howItWasBuilt   String   @default("") @db.Text
+  tech            String   @db.Text
+  img             String
+  liveUrl         String   @default("https://")
+  githubUrl       String   @default("https://github.com/stl-sahadat/")
+  featured        Boolean  @default(false)
+  isPrivate       Boolean  @default(false)
+  stats           String   @default("{}") @db.Text
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Video {
+  id              String   @id
+  youtubeId       String   @default("")
+  title           String
+  platform        String   @default("YouTube")
+  platformFilter  String   @default("youtube")
+  format          String   @default("widescreen")
+  badge           String   @default("AI & DEV")
+  url             String   @default("https://")
+  embedUrl        String   @default("https://")
+  thumb           String
+  desc            String   @default("") @db.Text
+  duration        String   @default("Full Video")
+  channel         String   @default("Sahadat Automation")
+  topics          String   @default("[]") @db.Text
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Review {
+  id        String   @id
+  name      String
+  role      String   @default("Client")
+  company   String   @default("")
+  avatar    String   @default("/assets/img/sahadat-avatar.jpg")
+  quote     String   @db.Text
+  rating    Int      @default(5)
+  project   String   @default("")
+  verified  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Faq {
+  id        String   @id
+  q         String   @db.Text
+  a         String   @db.Text
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AdminAuth {
+  id              String   @id @default("default-admin")
+  username        String   @unique @default("admin")
+  passwordHash    String   @default("sahadat2026")
+  maxAttempts     Int      @default(3)
+  lockoutSeconds  Int      @default(15)
+  updatedAt       DateTime @updatedAt
+}

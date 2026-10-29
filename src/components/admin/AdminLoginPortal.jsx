@@ -78,6 +78,57 @@ export function AdminLoginPortal({ authConfig, currentTheme, onAuthenticated }) 
 
     setIsSubmitting(true);
 
+    // Client-side authentication logic (used on static hosts like GitHub Pages or when backend is unavailable)
+    const performClientAuth = () => {
+      const expectedUser = (authConfig?.username || 'admin').toLowerCase();
+      const expectedPass = authConfig?.passwordHash || 'sahadat2026';
+
+      if (trimmedUser.toLowerCase() === expectedUser && trimmedPass === expectedPass) {
+        setFailedAttempts(0);
+        setErrorMessage('');
+        try {
+          localStorage.removeItem(LOCKOUT_KEY);
+          const sessionToken = 'stl_sec_' + Math.random().toString(36).substring(2) + Date.now();
+          sessionStorage.setItem('sahadat_admin_session_token', sessionToken);
+        } catch (err) {}
+        setIsSubmitting(false);
+        onAuthenticated();
+        return true;
+      } else {
+        const newCount = failedAttempts + 1;
+        setFailedAttempts(newCount);
+
+        if (newCount >= maxAttempts) {
+          const until = Date.now() + lockoutSeconds * 1000;
+          setLockoutUntil(until);
+          setCountdown(lockoutSeconds);
+          try {
+            localStorage.setItem(LOCKOUT_KEY, JSON.stringify({ count: newCount, until }));
+          } catch (err) {}
+          setErrorMessage(`SECURITY LOCKOUT ACTIVATED: 3 consecutive failed attempts. System locked for ${lockoutSeconds} seconds.`);
+        } else {
+          const remaining = maxAttempts - newCount;
+          try {
+            localStorage.setItem(LOCKOUT_KEY, JSON.stringify({ count: newCount, until: 0 }));
+          } catch (err) {}
+          setErrorMessage(`Invalid credentials. Security Warning: ${remaining} attempt${remaining > 1 ? 's' : ''} remaining before system lockdown.`);
+        }
+        setIsSubmitting(false);
+        return false;
+      }
+    };
+
+    // If static host (e.g. GitHub Pages or file: protocol), skip API and authenticate directly on client
+    const isStaticHost = typeof window !== 'undefined' && (
+      window.location.hostname.endsWith('github.io') ||
+      window.location.protocol === 'file:'
+    );
+
+    if (isStaticHost) {
+      performClientAuth();
+      return;
+    }
+
     try {
       // 1. Authenticate via Server API (Server-Side Brute-Force Rate Limiting)
       const res = await fetch('/api/auth/login', {
@@ -85,6 +136,12 @@ export function AdminLoginPortal({ authConfig, currentTheme, onAuthenticated }) 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: trimmedUser, password: trimmedPass }),
       });
+
+      // If backend API endpoint is not implemented (404/405), fallback to client auth
+      if (res.status === 404 || res.status === 405) {
+        performClientAuth();
+        return;
+      }
 
       if (res.status === 429) {
         const data = await res.json().catch(() => ({}));
@@ -140,42 +197,8 @@ export function AdminLoginPortal({ authConfig, currentTheme, onAuthenticated }) 
       }
     } catch (netErr) {
       // 2. Offline / Static fallback authentication
-      const expectedUser = authConfig?.username || 'admin';
-      const expectedPass = authConfig?.passwordHash || 'sahadat2026';
-
-      if (trimmedUser === expectedUser && trimmedPass === expectedPass) {
-        setFailedAttempts(0);
-        setErrorMessage('');
-        try {
-          localStorage.removeItem(LOCKOUT_KEY);
-          const sessionToken = 'stl_sec_' + Math.random().toString(36).substring(2) + Date.now();
-          sessionStorage.setItem('sahadat_admin_session_token', sessionToken);
-        } catch (err) {}
-        setIsSubmitting(false);
-        onAuthenticated();
-        return;
-      } else {
-        const newCount = failedAttempts + 1;
-        setFailedAttempts(newCount);
-
-        if (newCount >= maxAttempts) {
-          const until = Date.now() + lockoutSeconds * 1000;
-          setLockoutUntil(until);
-          setCountdown(lockoutSeconds);
-          try {
-            localStorage.setItem(LOCKOUT_KEY, JSON.stringify({ count: newCount, until }));
-          } catch (err) {}
-          setErrorMessage(`SECURITY LOCKOUT ACTIVATED: 3 consecutive failed attempts. System locked for ${lockoutSeconds} seconds.`);
-        } else {
-          const remaining = maxAttempts - newCount;
-          try {
-            localStorage.setItem(LOCKOUT_KEY, JSON.stringify({ count: newCount, until: 0 }));
-          } catch (err) {}
-          setErrorMessage(`Invalid credentials. Security Warning: ${remaining} attempt${remaining > 1 ? 's' : ''} remaining before system lockdown.`);
-        }
-      }
+      performClientAuth();
     }
-    setIsSubmitting(false);
   };
 
   return (

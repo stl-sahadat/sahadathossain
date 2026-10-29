@@ -265,9 +265,14 @@ function MainPortfolioApp() {
 }
 
 export default function App() {
+  const resolvedBasename =
+    typeof window !== 'undefined' && window.location.pathname.startsWith('/my-portfolio-03')
+      ? '/my-portfolio-03'
+      : (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL && import.meta.env.BASE_URL !== './' ? import.meta.env.BASE_URL : '/');
+
   return (
     <PortfolioDataProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={resolvedBasename}>
         <ScrollToTop />
         <MainPortfolioApp />
       </BrowserRouter>

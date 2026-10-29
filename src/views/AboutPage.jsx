@@ -403,7 +403,7 @@ export function AboutPage({ onOpenContact, currentTime }) {
 
             {/* Right Column: Sahadat Vai's Second Photo in Cyber Bracket Frame */}
             <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-2xl bg-[#090a0f] border border-[#242734] overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+              <div className="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] aspect-[4/4.8] sm:aspect-[4/5] rounded-2xl bg-[#090a0f] border border-[#242734] hover:border-[#00F0FF]/40 overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.8)] transition-all duration-500">
                 {/* 4 Cyber Corner Brackets */}
                 <span className="absolute top-3 left-3 w-3.5 h-3.5 border-t-2 border-l-2 border-[#00F0FF] z-20 pointer-events-none" />
                 <span className="absolute top-3 right-3 w-3.5 h-3.5 border-t-2 border-r-2 border-[#00F0FF] z-20 pointer-events-none" />
@@ -424,20 +424,20 @@ export function AboutPage({ onOpenContact, currentTime }) {
                 <img
                   src={resolveAssetUrl(personalInfo.portraitAbout || "/assets/img/sahadat-about-new.jpg")}
                   alt={(personalInfo.name || "Md. Sahadat Hossain") + " Portrait"}
-                  className="w-full h-full object-cover object-top filter contrast-110 brightness-95 group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover object-[center_12%] filter contrast-105 brightness-95 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                   onError={(e) => {
                     e.currentTarget.src = resolveAssetUrl("/assets/img/sahadat-about-new.jpg");
                   }}
                 />
 
                 {/* Gradient vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/25 pointer-events-none z-10" />
 
                 {/* Bottom Left Accent Golden Status Pill */}
                 <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2">
-                  <div className="w-14 h-1 bg-[#00F0FF] shadow-[0_0_12px_#00F0FF]" />
-                  <span className="text-[10px] font-mono text-[#00F0FF] uppercase tracking-widest bg-black/80 px-2 py-0.5 rounded border border-[#00F0FF]/30">
-                    ID: SH-01
+                  <div className="w-10 sm:w-14 h-1 bg-[#00F0FF] shadow-[0_0_12px_#00F0FF]" />
+                  <span className="text-[9px] sm:text-[10px] font-mono text-[#00F0FF] uppercase tracking-widest bg-black/85 backdrop-blur-md px-2.5 py-1 rounded border border-[#00F0FF]/30 font-semibold shadow-md">
+                    MD. SAHADAT HOSSAIN // ARCHITECT
                   </span>
                 </div>
               </div>
@@ -447,7 +447,7 @@ export function AboutPage({ onOpenContact, currentTime }) {
       </section>
 
       {/* ========================================================
-          SECTION 2: ABOUT ME ("BEHIND OMNIRA. THIS IS WHO I AM")
+          SECTION 2: ABOUT ME ("BEHIND THE CODE. THIS IS WHO I AM")
           Matches real_omnira_about_sec2
           ======================================================== */}
       <section id="about-story" className="py-14 sm:py-20 border-b border-white/[0.07]">
@@ -455,15 +455,20 @@ export function AboutPage({ onOpenContact, currentTime }) {
           {/* Left Column: Heading, Accent Line, 3 Bio Paragraphs & Signature */}
           <ScrollReveal direction="up" delay={0.1} className="lg:col-span-7 flex flex-col justify-between">
             <div>
-              <CornerBadge variant="white" className="mb-3">
-                ABOUT ME
+              <CornerBadge variant="cyan" className="mb-3 text-[10px] tracking-[0.2em]">
+                {personalInfo?.brandName || 'STL'} // IDENTITY & PHILOSOPHY
               </CornerBadge>
-              <h2 className="font-orbitron font-bold text-3xl sm:text-5xl uppercase tracking-tight text-white leading-tight mb-4">
-                BEHIND OMNIRA. <br />
-                THIS IS <span className="text-[#00F0FF]">WHO I AM</span>
+              <h2 className="font-orbitron font-bold text-2xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-white leading-tight mb-4">
+                BEHIND THE CODE. <br className="hidden sm:inline" />
+                THIS IS <span className="text-[#00F0FF] drop-shadow-[0_0_25px_rgba(0,240,255,0.45)]">WHO I AM</span>
               </h2>
 
-              <div className="w-20 h-[2px] bg-gradient-to-r from-[#00F0FF] to-[#38BDF8] mb-8" />
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-16 sm:w-24 h-[2px] bg-gradient-to-r from-[#00F0FF] to-transparent" />
+                <span className="text-[10px] sm:text-xs font-mono text-neutral-400 uppercase tracking-widest">
+                  AI PRODUCT ARCHITECT & FULL-STACK ENGINEER
+                </span>
+              </div>
 
               <div className="space-y-5 text-neutral-300 font-chakra text-sm sm:text-base leading-relaxed max-w-xl">
                 <p>

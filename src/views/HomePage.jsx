@@ -383,7 +383,7 @@ export function HomePage({ onOpenContact, currentTime }) {
                 <img
                   src={resolveAssetUrl(personalInfo.heroImage || personalInfo.avatar || "/assets/img/sahadat-hero-transparent.png")}
                   alt={(personalInfo.name || "Md. Sahadat Hossain") + " Portrait"}
-                  className="absolute inset-0 w-full h-full object-contain object-bottom pointer-events-none opacity-30 filter contrast-125 brightness-95"
+                  className="absolute inset-0 w-full h-full object-contain object-bottom translate-x-[20px] lg:translate-x-0 pointer-events-none opacity-30 filter contrast-125 brightness-95"
                   onError={(e) => {
                     e.currentTarget.src = resolveAssetUrl("/assets/img/sahadat-hero-transparent.png");
                   }}

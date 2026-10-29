@@ -91,23 +91,34 @@ export function InteractiveHalftoneCanvas({
 
       offCtx.clearRect(0, 0, width, height);
 
-      // Framer fit calculation (cover)
-      const imgAspect = img.naturalWidth / img.naturalHeight;
-      const containerAspect = width / height;
-      let drawW = width;
-      let drawH = height;
+      // Responsive alignment: on desktop (>= 1024px), preserve original Omnira cover framing untouched.
+      // On mobile (< 1024px), match the underlying image's contain scale and shift slightly right for perfect symmetry.
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+      let drawW, drawH, drawX, drawY;
 
-      if (imgAspect > containerAspect) {
-        drawW = height * imgAspect;
-        drawH = height;
+      if (isMobile) {
+        // Exact contain scale matching native object-contain
+        const scale = Math.min(width / img.naturalWidth, height / img.naturalHeight);
+        drawW = img.naturalWidth * scale;
+        drawH = img.naturalHeight * scale;
+        // Shift slightly right on mobile (+20px) as Sahadat vai requested
+        const mobileRightShift = 20;
+        drawX = (width - drawW) / 2 + mobileRightShift;
+        drawY = height - drawH; // exact bottom alignment matching object-bottom
       } else {
-        drawW = width;
-        drawH = width / imgAspect;
+        // Desktop: 100% original untouched framing
+        const imgAspect = img.naturalWidth / img.naturalHeight;
+        const containerAspect = width / height;
+        if (imgAspect > containerAspect) {
+          drawW = height * imgAspect;
+          drawH = height;
+        } else {
+          drawW = width;
+          drawH = width / imgAspect;
+        }
+        drawX = width / 2 - drawW / 2;
+        drawY = Math.max(0, height * 0.48 - drawH * 0.42);
       }
-
-      // Center & align the portrait figure with precision: head and shoulders clearly framed
-      const drawX = width / 2 - drawW / 2;
-      const drawY = Math.max(0, height * 0.48 - drawH * 0.42);
 
       offCtx.drawImage(img, drawX, drawY, drawW, drawH);
 

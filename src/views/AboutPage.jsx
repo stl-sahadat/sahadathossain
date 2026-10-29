@@ -34,6 +34,7 @@ import {
   Compass,
   Cpu,
   Sparkles,
+  Smartphone,
   ExternalLink,
 } from 'lucide-react';
 
@@ -88,113 +89,113 @@ export function AboutPage({ onOpenContact, currentTime }) {
   const [terminalEntered, setTerminalEntered] = useState(false);
   const [hoveredProcessStep, setHoveredProcessStep] = useState(null);
 
-  // Stack data across the 4 disciplines
+  // Stack data across the 4 core disciplines (AI & AGENTS, FULL-STACK & CLOUD, MOBILE APPS, UI/UX & 3D CRAFT)
   const stackCategories = [
     {
-      id: 'design',
-      title: 'DESIGN',
-      icon: <Palette className="w-4 h-4" />,
+      id: 'ai-agents',
+      title: 'AI & AGENTS',
+      icon: <Cpu className="w-4 h-4" />,
       tools: [
         {
-          name: 'FIGMA',
-          desc: 'Interface design and prototyping',
-          symbol: 'F',
+          name: 'FASTMCP / MCP PROTOCOL',
+          desc: 'Autonomous agent servers, tool-calling & swarms',
+          symbol: 'MC',
         },
         {
-          name: 'PHOTOSHOP',
-          desc: 'Image editing and refinement',
-          symbol: 'P',
+          name: 'PYTHON / PYDANTIC',
+          desc: 'AI orchestration, scraping & data pipelines',
+          symbol: 'PY',
         },
         {
-          name: 'ILLUSTRATOR',
-          desc: 'Vector graphics and icons',
-          symbol: 'I',
+          name: 'FRONTIER LLMS',
+          desc: 'Claude 3.7, Gemini 2.5 Pro & DeepSeek R1',
+          symbol: 'AI',
         },
         {
-          name: 'DESIGN SYSTEMS',
-          desc: 'Design system examples and resources',
-          symbol: 'D',
+          name: 'CURSOR & AGENTIC CLI',
+          desc: '10x execution velocity & multi-agent synthesis',
+          symbol: 'AG',
         },
       ],
     },
     {
-      id: 'development',
-      title: 'DEVELOPMENT',
+      id: 'fullstack-cloud',
+      title: 'FULL-STACK & CLOUD',
       icon: <Code2 className="w-4 h-4" />,
       tools: [
         {
-          name: 'NEXT.JS / REACT',
-          desc: 'Full-stack architecture & client apps',
-          symbol: 'N',
+          name: 'NEXT.JS 15 / REACT 19',
+          desc: 'Production App Router, SSR & Client Architecture',
+          symbol: 'NX',
         },
         {
-          name: 'NODE.JS / APIS',
-          desc: 'High-concurrency backend services',
-          symbol: 'JS',
+          name: 'NODE.JS / TYPESCRIPT',
+          desc: 'Sub-140ms high-concurrency REST & WebSocket APIs',
+          symbol: 'TS',
         },
         {
-          name: 'POSTGRESQL / REDIS',
-          desc: 'High-speed database & cache caching',
+          name: 'POSTGRESQL / PRISMA',
+          desc: 'Relational schemas, Supabase & database tuning',
           symbol: 'DB',
         },
         {
-          name: 'DOCKER / DEVOPS',
-          desc: 'Containerized deployment & VPS infrastructure',
+          name: 'DOCKER & LINUX VPS',
+          desc: 'Containerized deployment, Nginx & PM2 infrastructure',
           symbol: 'DK',
         },
       ],
     },
     {
-      id: 'motion',
-      title: 'MOTION',
-      icon: <Play className="w-4 h-4" />,
+      id: 'mobile-apps',
+      title: 'MOBILE APPS',
+      icon: <Smartphone className="w-4 h-4" />,
       tools: [
         {
-          name: 'GSAP / FRAMER MOTION',
-          desc: 'Spring physics & scroll animations',
-          symbol: 'M',
+          name: 'REACT NATIVE / EXPO',
+          desc: 'Fluid 60fps iOS & Android native mobile apps',
+          symbol: 'RN',
         },
         {
-          name: 'LENIS SCROLL',
-          desc: 'Smooth momentum scrolling physics',
-          symbol: 'L',
+          name: 'FLUTTER / DART',
+          desc: 'Cross-platform UI, native bridges & hardware integration',
+          symbol: 'FL',
         },
         {
-          name: 'TAILWIND CSS',
-          desc: 'Utility design tokens & animations',
-          symbol: 'TW',
+          name: 'SQLITE / OFFLINE-FIRST',
+          desc: 'Local database sync & persistent state management',
+          symbol: 'SQ',
         },
         {
-          name: 'SVG / CANVAS',
-          desc: 'Vector motion & dynamic rendering',
-          symbol: 'CV',
+          name: 'APP STORE & GOOGLE PLAY',
+          desc: 'End-to-end mobile release pipelines & CI/CD',
+          symbol: 'AP',
         },
       ],
     },
     {
-      id: '3d-visual',
-      title: '3D / VISUAL',
-      icon: <Box className="w-4 h-4" />,
+      id: 'ui-ux-3d',
+      title: 'UI/UX & 3D CRAFT',
+      icon: <Palette className="w-4 h-4" />,
       tools: [
         {
+          name: 'FIGMA DESIGN SYSTEMS',
+          desc: 'Responsive wireframes, components & design tokens',
+          symbol: 'FG',
+        },
+        {
           name: 'THREE.JS / WEBGL',
-          desc: 'Interactive 3D scenes & shaders',
+          desc: 'Interactive 3D WebGL scenes, villa tours & shaders',
           symbol: '3D',
         },
         {
-          name: 'SPLINE 3D',
-          desc: 'Interactive web 3D models & lighting',
-          symbol: 'S',
+          name: 'GSAP / FRAMER MOTION',
+          desc: 'Spring physics, micro-interactions & timeline animations',
+          symbol: 'MO',
         },
         {
-          name: 'BLENDER',
-          desc: '3D asset modeling & rendering',
-          symbol: 'B',
-        },
-        {
-          name: 'HALFTONE ENGINE',
-          desc: 'Dynamic dot-matrix canvas physics',
-          symbol: 'HT',
+          name: 'TAILWIND CSS',
+          desc: 'Utility design tokens, cyberpunk neo-brutalism & dark UI',
+          symbol: 'TW',
         },
       ],
     },
@@ -309,8 +310,10 @@ export function AboutPage({ onOpenContact, currentTime }) {
   };
 
   const stackIconMap = {
-    Palette: <Palette className="w-4 h-4" />,
+    Cpu: <Cpu className="w-4 h-4" />,
     Code2: <Code2 className="w-4 h-4" />,
+    Smartphone: <Smartphone className="w-4 h-4" />,
+    Palette: <Palette className="w-4 h-4" />,
     Play: <Play className="w-4 h-4" />,
     Box: <Box className="w-4 h-4" />,
   };
@@ -1102,7 +1105,7 @@ export function AboutPage({ onOpenContact, currentTime }) {
             </h2>
           </div>
           <p className="font-chakra text-sm sm:text-base text-neutral-400 max-w-md leading-relaxed md:text-right">
-            A focused stack of design, motion, and development tools used to build sharp, scalable and launch-ready digital experiences.
+            A high-impact arsenal of autonomous AI swarms, full-stack cloud architecture, mobile engineering, and pixel-perfect visual craft.
           </p>
         </ScrollReveal>
 

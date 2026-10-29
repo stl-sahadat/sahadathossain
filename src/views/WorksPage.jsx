@@ -6,7 +6,6 @@ import { CyberFrame } from '../components/CyberFrame';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { CornerBadge, ButtonCornerMarks } from '../components/CyberIcons';
-import { GithubIcon } from '../components/SocialIcons';
 import { CyberCard, ScrollReveal } from '../components/ThreeD';
 import {
   ExternalLink,
@@ -476,7 +475,7 @@ export function WorksPage({ onOpenContact, currentTime }) {
                   <ArrowRight className="w-4 h-4 relative z-10" />
                 </button>
               ) : (
-                /* Live Websites & Portfolios: Open Live System + GitHub (if available) */
+                /* Live Websites & Portfolios: Open Live System */
                 <>
                   <a
                     href={selectedProject.liveUrl}

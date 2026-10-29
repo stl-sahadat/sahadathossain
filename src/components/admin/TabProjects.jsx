@@ -624,14 +624,14 @@ export function TabProjects({ projects = [], onRequestSave }) {
                     type="url"
                     value={currentProject.liveUrl}
                     onChange={(e) => setCurrentProject({ ...currentProject, liveUrl: e.target.value })}
-                    placeholder="https://stl-sahadat.github.io/..."
+                    placeholder="https://example.com/..."
                     className="w-full px-3 py-2 bg-[#05060a] border border-white/10 focus:border-[#00F0FF] rounded-lg text-xs text-white focus:outline-none font-mono"
                   />
                 </div>
 
                 <div>
                   <label className="block text-[11px] font-mono text-neutral-300 uppercase tracking-widest mb-1">
-                    GITHUB REPO URL
+                    SOURCE / REPOSITORY URL
                   </label>
                   <input
                     type="url"

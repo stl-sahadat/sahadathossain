@@ -325,10 +325,10 @@ export function HomePage({ onOpenContact, currentTime }) {
               </p>
 
               {/* CTA Action Buttons: Clean idle state, sleek thin arrow slides in on hover matching Framer Omnira */}
-              <div className="flex flex-wrap items-center gap-4 mb-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-4 w-full sm:w-auto">
                 <button
                   onClick={handleViewWorksClick}
-                  className="group relative inline-flex items-center justify-center px-7 py-3.5 bg-[#00F0FF] hover:bg-[#38BDF8] text-black font-chakra font-bold text-xs tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_25px_rgba(0,240,255,0.35)] hover:shadow-[0_0_35px_rgba(0,240,255,0.65)] cursor-pointer overflow-hidden"
+                  className="group relative w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-[#00F0FF] hover:bg-[#38BDF8] text-black font-chakra font-bold text-xs tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_25px_rgba(0,240,255,0.35)] hover:shadow-[0_0_35px_rgba(0,240,255,0.65)] cursor-pointer overflow-hidden"
                 >
                   <ButtonCornerMarks />
                   <span className="relative z-10 select-none">
@@ -352,7 +352,7 @@ export function HomePage({ onOpenContact, currentTime }) {
 
                 <button
                   onClick={handleExploreProcessClick}
-                  className="group relative inline-flex items-center justify-center px-7 py-3.5 bg-transparent hover:bg-white/[0.06] text-white border border-white/20 hover:border-[#00F0FF]/70 font-chakra font-semibold text-xs tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer overflow-hidden"
+                  className="group relative w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-transparent hover:bg-white/[0.06] text-white border border-white/20 hover:border-[#00F0FF]/70 font-chakra font-semibold text-xs tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer overflow-hidden"
                 >
                   <ButtonCornerMarks />
                   <span className="relative z-10 transition-colors group-hover:text-[#00F0FF] select-none">

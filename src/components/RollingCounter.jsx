@@ -18,18 +18,18 @@ function RollingDigit({ digit, delay = 0, isRolling = false }) {
   const translateY = isRolling ? -(targetIndex * 5) : 0;
 
   return (
-    <span className="relative inline-block h-[1.12em] overflow-hidden leading-none select-none align-baseline">
+    <span className="relative inline-block h-[1.15em] overflow-hidden leading-none select-none align-baseline">
       <span
         className="flex flex-col will-change-transform"
         style={{
           transform: `translateY(${translateY}%)`,
-          transition: `transform 2.2s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+          transition: `transform 1.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
         }}
       >
         {numbers.map((n, idx) => (
           <span
             key={idx}
-            className="flex h-[1.12em] items-center justify-center font-orbitron font-extrabold"
+            className="flex h-[1.15em] items-center justify-center font-orbitron font-extrabold"
           >
             {n}
           </span>

@@ -140,7 +140,7 @@ export function TabContact({ personalInfo = {}, onRequestSave }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-[11px] font-mono text-neutral-300 uppercase tracking-widest mb-1.5">
-              GITHUB URL
+              PUBLIC CODE REPO URL
             </label>
             <input
               type="url"

@@ -96,7 +96,7 @@ export function Navbar({ onOpenContact }) {
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             onClick={onOpenContact ? onOpenContact : () => handleNavClick('/contact')}
-            className="group relative px-3 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-chakra font-medium tracking-[0.14em] sm:tracking-[0.18em] uppercase border border-[#00F0FF]/60 text-[#00F0FF] hover:bg-[#00F0FF] hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.2)] cursor-pointer overflow-hidden whitespace-nowrap"
+            className="hidden sm:block group relative px-4 sm:px-5 py-2 sm:py-2.5 text-xs font-chakra font-medium tracking-[0.18em] uppercase border border-[#00F0FF]/60 text-[#00F0FF] hover:bg-[#00F0FF] hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.2)] cursor-pointer overflow-hidden whitespace-nowrap"
           >
             <ButtonCornerMarks />
             <span className="relative z-10 font-bold">LET'S TALK</span>
@@ -136,6 +136,20 @@ export function Navbar({ onOpenContact }) {
               </button>
             );
           })}
+
+          {/* Action Button: LET'S TALK for Mobile Drawer */}
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              if (onOpenContact) onOpenContact();
+              else handleNavClick('/contact');
+            }}
+            className="group relative w-full py-3 bg-[#00F0FF] text-black font-chakra font-bold text-xs tracking-[0.2em] uppercase rounded-lg shadow-[0_0_15px_rgba(0,240,255,0.25)] flex items-center justify-center gap-2 my-1 cursor-pointer overflow-hidden"
+          >
+            <ButtonCornerMarks />
+            <span className="relative z-10">LET'S TALK</span>
+          </button>
+
           <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-neutral-400 font-mono">
             <span>DHAKA · AVAILABLE GLOBALLY</span>
             <span className="text-[#80B82C] font-semibold flex items-center gap-1.5">

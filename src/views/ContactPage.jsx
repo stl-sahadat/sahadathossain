@@ -4,7 +4,7 @@ import { CyberFrame } from '../components/CyberFrame';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { CornerBadge, ButtonCornerMarks } from '../components/CyberIcons';
-import { GithubIcon, LinkedinIcon } from '../components/SocialIcons';
+import { LinkedinIcon } from '../components/SocialIcons';
 import { CyberCard, ScrollReveal } from '../components/ThreeD';
 import {
   Mail,

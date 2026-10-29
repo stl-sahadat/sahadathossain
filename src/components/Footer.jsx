@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { CyberFrame } from './CyberFrame';
 import { CornerBadge, OmniraLogo, ButtonCornerMarks } from './CyberIcons';
 import { Mail, ArrowRight, MessageCircle } from 'lucide-react';
-import { GithubIcon, LinkedinIcon, WhatsAppIcon } from './SocialIcons';
+import { LinkedinIcon, WhatsAppIcon } from './SocialIcons';
 import { usePortfolioData } from '../context/PortfolioDataContext';
 
 export function Footer({ personalInfo: propPersonalInfo, currentTime, onOpenContact }) {

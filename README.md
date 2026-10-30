@@ -8,6 +8,8 @@
 
 Official architectural portfolio of **Md. Sahadat Hossain** (AI Product Architect & Software Engineer). Built with the iconic high-velocity **Framer Omnira Cyber Cyan** (`#00F0FF`) digital aesthetic, featuring interactive 3D platforms, an end-to-end synchronized Admin Matrix, and a resilient enterprise-grade hybrid backend.
 
+🌐 **Live Production Link:** [https://stl-sahadat.github.io/sahadathossain/](https://stl-sahadat.github.io/sahadathossain/)
+
 ---
 
 ## ⚡ Tech Stack Architecture

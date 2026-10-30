@@ -1163,5 +1163,11 @@
       "a": "Just a brief idea! Click 'LET'S TALK' or send a message with your project goals, reference websites you like, your target timeline, and any text or logos you have. I'll reply within 24 hours with a clear roadmap."
     }
   ],
-  "activeThemeId": "cyber-cyan"
+  "activeThemeId": "cyber-cyan",
+  "authConfig": {
+    "username": "admin",
+    "passwordHash": "sahadat4405",
+    "maxAttempts": 3,
+    "lockoutSeconds": 15
+  }
 }

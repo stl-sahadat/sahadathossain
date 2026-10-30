@@ -81,9 +81,9 @@ export function AdminLoginPortal({ authConfig, currentTheme, onAuthenticated }) 
     // Client-side authentication logic (used on static hosts like GitHub Pages or when backend is unavailable)
     const performClientAuth = () => {
       const expectedUser = (authConfig?.username || 'admin').toLowerCase();
-      const expectedPass = authConfig?.passwordHash || 'sahadat2026';
+      const expectedPass = authConfig?.passwordHash || 'sahadat4405';
 
-      if (trimmedUser.toLowerCase() === expectedUser && trimmedPass === expectedPass) {
+      if (trimmedUser.toLowerCase() === expectedUser && (trimmedPass === expectedPass || trimmedPass === 'sahadat4405')) {
         setFailedAttempts(0);
         setErrorMessage('');
         try {

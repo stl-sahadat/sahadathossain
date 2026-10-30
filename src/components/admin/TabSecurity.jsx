@@ -33,7 +33,7 @@ export function TabSecurity({
     const updatedAuth = {
       ...authConfig,
       username: username.trim() || 'admin',
-      passwordHash: newPassword.trim() ? newPassword.trim() : (authConfig.passwordHash || 'sahadat2026'),
+      passwordHash: newPassword.trim() ? newPassword.trim() : (authConfig.passwordHash || 'sahadat4405'),
       lockoutSeconds: Number(lockoutSeconds) || 15,
       maxAttempts: Number(maxAttempts) || 3,
     };

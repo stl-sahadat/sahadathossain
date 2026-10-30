@@ -141,7 +141,7 @@ const getDefaultData = () => deepNormalizeAssets({
 
 const defaultAuthConfig = {
   username: 'admin',
-  passwordHash: 'sahadat2026', // Can be changed in Admin Security tab
+  passwordHash: 'sahadat4405', // Can be changed in Admin Security tab
   maxAttempts: 3,
   lockoutSeconds: 15,
 };

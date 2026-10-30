@@ -34,15 +34,42 @@ export function CyberCursor() {
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [ripples, setRipples] = useState([]);
+  const [isAdminRoute, setIsAdminRoute] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.location.pathname.includes('/admin');
+  });
 
-  // Coordinates tracked via ref for 120fps direct GPU transform without React render churn
+  // Coordinates tracked via ref for direct 120fps GPU transform without React render churn
   const mousePos = useRef({ x: -200, y: -200 });
   const isHoveredRef = useRef(false);
   const isTextRef = useRef(false);
   const cursorRef = useRef(null);
 
+  // Sync route changes dynamically
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    const checkRoute = () => {
+      const onAdmin = window.location.pathname.includes('/admin');
+      setIsAdminRoute(onAdmin);
+    };
+    checkRoute();
+    window.addEventListener('popstate', checkRoute);
+    const interval = setInterval(checkRoute, 150);
+    return () => {
+      window.removeEventListener('popstate', checkRoute);
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Admin Route Mode: restore standard OS cursor so admin management is 100% natural & usable
+    if (isAdminRoute) {
+      setIsEnabled(false);
+      document.documentElement.classList.remove('cyber-cursor-active');
+      return;
+    }
 
     // Default OS cursor mode: unmount custom cursor and restore standard browser arrow
     if (activeCursorStyle === 'default') {
@@ -63,7 +90,7 @@ export function CyberCursor() {
       return;
     }
 
-    // Custom cyber cursor active: hide OS pointer
+    // Custom cyber cursor active: hide OS pointer on public portfolio pages
     setIsEnabled(true);
     document.documentElement.classList.add('cyber-cursor-active');
     document.documentElement.classList.remove('touch-device');
@@ -71,10 +98,10 @@ export function CyberCursor() {
     return () => {
       document.documentElement.classList.remove('cyber-cursor-active');
     };
-  }, [activeCursorStyle]);
+  }, [activeCursorStyle, isAdminRoute]);
 
   useEffect(() => {
-    if (!isEnabled || activeCursorStyle === 'default') return;
+    if (!isEnabled || activeCursorStyle === 'default' || isAdminRoute) return;
 
     const INTERACTIVE_SELECTOR = [
       'a',
@@ -101,11 +128,12 @@ export function CyberCursor() {
 
     const updatePosition = () => {
       if (cursorRef.current) {
-        if (activeCursorStyle === 'futuristic-arrow') {
+        const isTextInput = isTextRef.current;
+        if (!isTextInput && activeCursorStyle === 'futuristic-arrow') {
           // Arrow hotspot is at the tip: (0, 0)
           cursorRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0)`;
         } else {
-          // Center hotspot
+          // Center hotspot for dots, reticles, prisms, rings, brackets, and text I-beam
           cursorRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) translate(-50%, -50%)`;
         }
       }
@@ -117,7 +145,7 @@ export function CyberCursor() {
         return;
       }
 
-      if (!document.documentElement.classList.contains('cyber-cursor-active')) {
+      if (!isAdminRoute && !document.documentElement.classList.contains('cyber-cursor-active')) {
         document.documentElement.classList.add('cyber-cursor-active');
         document.documentElement.classList.remove('touch-device');
       }
@@ -217,9 +245,9 @@ export function CyberCursor() {
       window.removeEventListener('blur', handleWindowBlur);
       window.removeEventListener('focus', handleWindowFocus);
     };
-  }, [isEnabled, activeCursorStyle]);
+  }, [isEnabled, activeCursorStyle, isAdminRoute]);
 
-  if (!isEnabled || activeCursorStyle === 'default') {
+  if (!isEnabled || activeCursorStyle === 'default' || isAdminRoute) {
     return null;
   }
 
@@ -369,7 +397,7 @@ export function CyberCursor() {
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="block"
+                  className="block -translate-x-[2px] -translate-y-[2px]"
                 >
                   <polygon
                     points="2,2 21,9.5 13.5,13.5 9.5,21"
@@ -449,6 +477,44 @@ export function CyberCursor() {
                     backgroundColor: isHovered ? '#FFFFFF' : themeHex,
                     boxShadow: `0 0 4px ${themeHex}`,
                   }}
+                />
+              </div>
+            )}
+
+            {/* Style 6: Tactical HUD Brackets */}
+            {activeCursorStyle === 'tactical-brackets' && (
+              <div
+                className="relative flex items-center justify-center transition-all duration-150 ease-out"
+                style={{
+                  transform: isClicking
+                    ? 'scale(0.75)'
+                    : isHovered
+                    ? 'scale(1.35) rotate(90deg)'
+                    : 'scale(1) rotate(0deg)',
+                }}
+              >
+                <div
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{
+                    backgroundColor: isHovered ? '#FFFFFF' : themeHex,
+                    boxShadow: `0 0 8px ${themeHex}`,
+                  }}
+                />
+                <span
+                  className="absolute -top-2.5 -left-2.5 w-1.5 h-1.5 border-t-[1.5px] border-l-[1.5px] transition-colors duration-150"
+                  style={{ borderColor: themeHex }}
+                />
+                <span
+                  className="absolute -top-2.5 -right-2.5 w-1.5 h-1.5 border-t-[1.5px] border-r-[1.5px] transition-colors duration-150"
+                  style={{ borderColor: themeHex }}
+                />
+                <span
+                  className="absolute -bottom-2.5 -left-2.5 w-1.5 h-1.5 border-b-[1.5px] border-l-[1.5px] transition-colors duration-150"
+                  style={{ borderColor: themeHex }}
+                />
+                <span
+                  className="absolute -bottom-2.5 -right-2.5 w-1.5 h-1.5 border-b-[1.5px] border-r-[1.5px] transition-colors duration-150"
+                  style={{ borderColor: themeHex }}
                 />
               </div>
             )}

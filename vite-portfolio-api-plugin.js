@@ -39,15 +39,20 @@ export function portfolioApiPlugin() {
 
   const getAuthConfig = () => {
     const store = readStoreData();
-    if (store && store.authConfig) {
-      return store.authConfig;
+    const config = (store && store.authConfig) ? { ...store.authConfig } : {};
+    if (!config.passwordHash) {
+      config.passwordHash = 'sahadat4405';
     }
-    return {
-      username: 'admin',
-      passwordHash: 'sahadat4405',
-      maxAttempts: 3,
-      lockoutSeconds: 15,
-    };
+    if (!config.username) {
+      config.username = 'admin';
+    }
+    if (!config.maxAttempts) {
+      config.maxAttempts = 3;
+    }
+    if (!config.lockoutSeconds) {
+      config.lockoutSeconds = 15;
+    }
+    return config;
   };
 
   const handleMiddleware = (req, res, next) => {

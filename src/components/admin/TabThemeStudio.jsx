@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Palette, Check, Sparkles, Eye, MousePointer, Crosshair, Target, CircleDot, Zap } from 'lucide-react';
 import { THEME_PRESETS, CURSOR_STYLES } from '../../context/PortfolioDataContext';
 
@@ -11,6 +11,19 @@ export function TabThemeStudio({
 }) {
   const [selectedThemeId, setSelectedThemeId] = useState(currentTheme?.id || 'cyber-cyan');
   const [selectedCursorStyle, setSelectedCursorStyle] = useState(activeCursorStyle || 'cyber-dot');
+
+  // Synchronize state when external portfolio data loads or updates
+  useEffect(() => {
+    if (activeCursorStyle) {
+      setSelectedCursorStyle(activeCursorStyle);
+    }
+  }, [activeCursorStyle]);
+
+  useEffect(() => {
+    if (currentTheme?.id) {
+      setSelectedThemeId(currentTheme.id);
+    }
+  }, [currentTheme?.id]);
 
   const handleApplyPreset = (themeId) => {
     setSelectedThemeId(themeId);
@@ -231,6 +244,7 @@ export function TabThemeStudio({
                         {cursor.iconType === 'arrow' && <Zap className="w-4 h-4 text-[#00F0FF]" style={{ color: accentColor }} />}
                         {cursor.iconType === 'diamond' && <Sparkles className="w-4 h-4 text-[#00F0FF]" style={{ color: accentColor }} />}
                         {cursor.iconType === 'ring' && <Target className="w-4 h-4 text-[#00F0FF]" style={{ color: accentColor }} />}
+                        {cursor.iconType === 'brackets' && <Crosshair className="w-4 h-4 text-[#00F0FF]" style={{ color: accentColor }} />}
                       </div>
 
                       <div>
@@ -408,6 +422,25 @@ export function TabThemeStudio({
                         </span>
                       </div>
                     )}
+
+                    {/* Preview 7: Tactical HUD Brackets */}
+                    {cursor.id === 'tactical-brackets' && (
+                      <div className="relative z-10 flex flex-col items-center gap-2">
+                        <div className="relative w-8 h-8 flex items-center justify-center transition-transform group-hover/box:rotate-90 duration-300">
+                          <div
+                            className="w-1.5 h-1.5 rounded-full"
+                            style={{ backgroundColor: accentColor, boxShadow: `0 0 8px ${accentColor}` }}
+                          />
+                          <span className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2" style={{ borderColor: accentColor }} />
+                          <span className="absolute -top-1 -right-1 w-2 h-2 border-t-2 border-r-2" style={{ borderColor: accentColor }} />
+                          <span className="absolute -bottom-1 -left-1 w-2 h-2 border-b-2 border-l-2" style={{ borderColor: accentColor }} />
+                          <span className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2" style={{ borderColor: accentColor }} />
+                        </div>
+                        <span className="text-[10px] font-mono" style={{ color: accentColor }}>
+                          ৪-কোণার সাই-ফাই টার্গেট লক
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -437,6 +470,56 @@ export function TabThemeStudio({
               </div>
             );
           })}
+        </div>
+
+        {/* Interactive Cursor Test Playground */}
+        <div className="p-6 rounded-2xl bg-[#07090e] border border-white/10 space-y-3 relative overflow-hidden">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#00F0FF]" style={{ color: accentColor }} />
+              <h4 className="font-orbitron font-bold text-xs uppercase tracking-wider text-white">
+                LIVE INTERACTIVE CURSOR PLAYGROUND // লাইভ কার্সর টেস্টিং প্যাড
+              </h4>
+            </div>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-neutral-400">
+              ACTIVE SELECTION: <span className="font-bold uppercase" style={{ color: accentColor }}>{selectedCursorStyle}</span>
+            </span>
+          </div>
+
+          <p className="font-chakra text-xs text-neutral-400">
+            নিচে আপনার নির্বাচিত কার্সরের ইন্টারঅ্যাক্টিভ আচরণ পরীক্ষা করুন। বাটন ও ইনপুটে হোভার করলে সাইবার কার্সরের স্কেলিং ও অ্যানিমেশন সরাসরি দেখতে পাবেন।
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+            <div
+              className="p-4 rounded-xl bg-black/50 border border-white/10 hover:border-white/30 transition-all flex flex-col items-center justify-center text-center gap-2 group cursor-pointer"
+            >
+              <span className="text-xs font-chakra font-bold text-white group-hover:text-[#00F0FF] transition-colors" style={{ color: undefined }}>
+                Hover Me // বাটন টেস্ট
+              </span>
+              <span className="text-[10px] font-mono text-neutral-500">Scale + Glow Expand</span>
+            </div>
+
+            <div
+              className="p-4 rounded-xl bg-black/50 border border-white/10 hover:border-white/30 transition-all flex flex-col items-center justify-center text-center gap-2 group cursor-pointer"
+            >
+              <span className="text-xs font-chakra font-bold text-white">
+                Click Me // ক্লিক টেস্ট
+              </span>
+              <span className="text-[10px] font-mono text-neutral-500">Tactile Recoil & Ripple</span>
+            </div>
+
+            <div
+              className="p-4 rounded-xl bg-black/50 border border-white/10 flex flex-col items-center justify-center text-center gap-1.5"
+            >
+              <input
+                type="text"
+                placeholder="Type here // টেক্সট টেস্ট..."
+                className="w-full px-3 py-1.5 rounded-lg bg-black/70 border border-white/10 text-xs font-chakra text-white focus:outline-none focus:border-[#00F0FF] placeholder:text-neutral-600 text-center"
+              />
+              <span className="text-[9px] font-mono text-neutral-500">Cyber I-Beam Active</span>
+            </div>
+          </div>
         </div>
       </div>
 

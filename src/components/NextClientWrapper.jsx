@@ -135,7 +135,6 @@ export function NextClientWrapper({ children }) {
   if (isAdminRoute) {
     return (
       <div className="relative min-h-screen bg-[#000000] text-white selection:bg-[#00F0FF] selection:text-black font-chakra antialiased">
-        <CyberCursor />
         {childrenWithProps}
       </div>
     );

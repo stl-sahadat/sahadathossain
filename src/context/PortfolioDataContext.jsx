@@ -110,6 +110,14 @@ export const CURSOR_STYLES = [
     iconType: 'ring',
     badge: 'PRECISION',
   },
+  {
+    id: 'tactical-brackets',
+    name: 'Tactical HUD Brackets',
+    bengaliName: 'ট্যাকটিক্যাল সাইবার ব্র্যাকেট',
+    description: '৪-কোণার সাই-ফাই টার্গেটিং কর্নার ও নিয়ন কেন্দ্রবিন্দু। হোভারে নিখুঁত লক-অন।',
+    iconType: 'brackets',
+    badge: 'TARGET LOCK',
+  },
 ];
 
 const STORAGE_KEY = 'sahadat_portfolio_master_v3';
@@ -367,10 +375,17 @@ export function PortfolioDataProvider({ children }) {
     if (sessionToken) {
       headers['Authorization'] = `Bearer ${sessionToken}`;
     }
+    const payload = { ...newData };
+    if (!payload.authConfig) {
+      try {
+        const storedAuth = typeof window !== 'undefined' ? localStorage.getItem(AUTH_KEY) : null;
+        if (storedAuth) payload.authConfig = JSON.parse(storedAuth);
+      } catch (e) {}
+    }
     fetch('/api/portfolio', {
       method: 'POST',
       headers,
-      body: JSON.stringify(newData),
+      body: JSON.stringify(payload),
     }).catch(() => {
       // API call failed or running in static mode, local storage is active
     });

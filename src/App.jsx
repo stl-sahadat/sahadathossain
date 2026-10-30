@@ -279,9 +279,9 @@ export default function App() {
 
   return (
     <PortfolioDataProvider>
-      <CyberCursor />
       <BrowserRouter basename={resolvedBasename}>
         <ScrollToTop />
+        <CyberCursor />
         <MainPortfolioApp />
       </BrowserRouter>
     </PortfolioDataProvider>

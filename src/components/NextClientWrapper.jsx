@@ -5,6 +5,7 @@ import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import { usePortfolioData } from '../context/PortfolioDataContext';
 import { ContactModal } from './ContactModal';
+import { CyberCursor } from './CyberCursor';
 import { STLLogo } from './CyberIcons';
 
 export function NextClientWrapper({ children }) {
@@ -134,6 +135,7 @@ export function NextClientWrapper({ children }) {
   if (isAdminRoute) {
     return (
       <div className="relative min-h-screen bg-[#000000] text-white selection:bg-[#00F0FF] selection:text-black font-chakra antialiased">
+        <CyberCursor />
         {childrenWithProps}
       </div>
     );
@@ -141,6 +143,7 @@ export function NextClientWrapper({ children }) {
 
   return (
     <div className="relative min-h-screen bg-[#000000] text-white selection:bg-[#00F0FF] selection:text-black font-chakra antialiased overflow-x-clip">
+      <CyberCursor />
       {/* 0. PRELOADER SCREEN */}
       <div
         className={`fixed inset-0 z-50 bg-[#000000] flex flex-col items-center justify-center transition-opacity duration-500 ${

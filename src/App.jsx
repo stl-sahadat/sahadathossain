@@ -11,6 +11,7 @@ import { ContactPage } from './views/ContactPage';
 import { NotFoundPage } from './views/NotFoundPage';
 import { AdminPage } from './views/AdminPage';
 import { ContactModal } from './components/ContactModal';
+import { CyberCursor } from './components/CyberCursor';
 import { STLLogo } from './components/CyberIcons';
 import { getBasePrefix, resolveAssetUrl } from './lib/assetHelper';
 
@@ -278,6 +279,7 @@ export default function App() {
 
   return (
     <PortfolioDataProvider>
+      <CyberCursor />
       <BrowserRouter basename={resolvedBasename}>
         <ScrollToTop />
         <MainPortfolioApp />

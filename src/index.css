@@ -243,3 +243,100 @@ html.lenis, html.lenis body {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
+
+/* ========================================================
+   CUSTOM CYBER CURSOR & OS POINTER ELIMINATION (DESKTOP)
+   Completely hides OS mouse pointer on fine pointer / desktop devices
+   ======================================================== */
+.cyber-cursor-active,
+.cyber-cursor-active *,
+.cyber-cursor-active *::before,
+.cyber-cursor-active *::after {
+  cursor: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html:not(.touch-device),
+  html:not(.touch-device) *,
+  html:not(.touch-device) *::before,
+  html:not(.touch-device) *::after {
+    cursor: none !important;
+  }
+}
+
+/* Sonar Ripple Ping Animation */
+@keyframes sonar-ping {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0.95;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.8);
+    opacity: 0;
+  }
+}
+
+.animate-sonar-ping {
+  animation: sonar-ping 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+/* ========================================================
+   COMPLEMENTARY MICRO-INTERACTION ANIMATIONS
+   GPU-accelerated, high-performance button & card polish
+   ======================================================== */
+
+/* Cyber Buttons: Smooth lift on hover, tactile snap on active click */
+button,
+.btn-chamfer,
+.btn-pro-chamfer,
+[role="button"] {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              color 0.2s ease;
+  will-change: transform;
+}
+
+button:hover,
+.btn-chamfer:hover,
+.btn-pro-chamfer:hover,
+[role="button"]:hover {
+  transform: translateY(-1.5px);
+}
+
+button:active,
+.btn-chamfer:active,
+.btn-pro-chamfer:active,
+[role="button"]:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Cyber Cards: Magnetic hover elevation & neon edge pulse */
+.cyber-card {
+  will-change: transform;
+}
+
+.cyber-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 240, 255, 0.7);
+  box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.25), 0 0 20px rgba(0, 240, 255, 0.15);
+}
+
+/* Shimmer pulse effect for hero & primary action buttons */
+.cyber-glow-pulse {
+  animation: cyber-glow-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes cyber-glow-pulse {
+  0% {
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.65), 0 0 50px rgba(0, 240, 255, 0.2);
+  }
+}
+

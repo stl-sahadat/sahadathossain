@@ -46,6 +46,7 @@ import { CyberCard, Hero3DCube, ScrollReveal } from '../components/ThreeD';
 import { InteractiveHalftoneCanvas } from '../components/InteractiveHalftoneCanvas';
 import { HeroScrollProgress } from '../components/HeroScrollProgress';
 import { ServicesIsometricGallery } from '../components/ServicesIsometricGallery';
+import { ProjectDetailModal } from '../components/ProjectDetailModal';
 import {
   ChevronDown,
   Plus,
@@ -81,6 +82,9 @@ export function HomePage({ onOpenContact, currentTime }) {
 
   // Active rotating hero word
   const [currentWordIdx, setCurrentWordIdx] = useState(0);
+
+  // Selected project for modal spec view
+  const [selectedProject, setSelectedProject] = useState(null);
 
   // Process section scroll-driven reveal and progress line tracking
   const processRef = useRef(null);
@@ -455,7 +459,10 @@ export function HomePage({ onOpenContact, currentTime }) {
           {featuredProjects.map((project, idx) => (
             <ScrollReveal key={project.id} delay={idx * 0.08} className="h-full">
               <CyberCard className="h-full rounded-xl">
-                <div className="group bg-[#0b0c10] border border-[#242734] hover:border-[#00F0FF]/60 rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,240,255,0.14)] flex flex-col justify-between h-full cursor-pointer">
+                <div
+                  onClick={() => setSelectedProject(project)}
+                  className="group bg-[#0b0c10] border border-[#242734] hover:border-[#00F0FF]/60 rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,240,255,0.14)] flex flex-col justify-between h-full cursor-pointer"
+                >
                   {/* Image Container with Chamfered Corners & Smooth Scale Zoom */}
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-black">
                     <img
@@ -475,6 +482,7 @@ export function HomePage({ onOpenContact, currentTime }) {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                         className="absolute top-3 right-3 bg-black/80 backdrop-blur-sm group-hover:bg-[#00F0FF] group-hover:text-black border border-white/10 group-hover:border-[#00F0FF] px-2.5 py-1 rounded text-[10px] font-chakra font-bold tracking-wider text-white transition-all flex items-center gap-1.5 z-10"
                       >
                         <span>{project.domain}</span>
@@ -505,21 +513,27 @@ export function HomePage({ onOpenContact, currentTime }) {
                       </p>
                     </div>
 
-                    {/* Tech Chips */}
-                    <div className="pt-3 border-t border-white/5 flex flex-wrap items-center gap-1.5">
-                      {project.tech.slice(0, 3).map((t, tIdx) => (
-                        <span
-                          key={tIdx}
-                          className="px-2 py-0.5 bg-white/5 rounded text-[10px] font-chakra text-neutral-400 border border-white/5"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                      {project.tech.length > 3 && (
-                        <span className="text-[10px] font-chakra text-neutral-500">
-                          +{project.tech.length - 3} more
-                        </span>
-                      )}
+                    {/* Tech Chips & Specs Trigger */}
+                    <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-2">
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        {project.tech.slice(0, 3).map((t, tIdx) => (
+                          <span
+                            key={tIdx}
+                            className="px-2 py-0.5 bg-white/5 rounded text-[10px] font-chakra text-neutral-400 border border-white/5"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                        {project.tech.length > 3 && (
+                          <span className="text-[10px] font-chakra text-neutral-500">
+                            +{project.tech.length - 3} more
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[10px] font-chakra text-[#00F0FF] font-semibold uppercase tracking-wider opacity-80 group-hover:opacity-100 transition-opacity flex items-center gap-1 flex-shrink-0">
+                        <span>SPECS</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -1368,6 +1382,17 @@ export function HomePage({ onOpenContact, currentTime }) {
           </div>
         </div>
       </section>
+
+      {/* ========================================================
+          PROJECT ARCHITECTURE & DETAIL SPECIFICATION MODAL
+          ======================================================== */}
+      {selectedProject && (
+        <ProjectDetailModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+          onOpenContact={onOpenContact}
+        />
+      )}
 
       {/* ========================================================
           SECTION 9: CONTACT & FOOTER (MONOLITHIC CYBER CARD)

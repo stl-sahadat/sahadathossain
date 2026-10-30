@@ -7,6 +7,7 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { CornerBadge, ButtonCornerMarks } from '../components/CyberIcons';
 import { CyberCard, ScrollReveal } from '../components/ThreeD';
+import { ProjectDetailModal } from '../components/ProjectDetailModal';
 import {
   ExternalLink,
   Code,
@@ -289,209 +290,15 @@ export function WorksPage({ onOpenContact, currentTime }) {
           Prominently displays the project image at the top,
           followed by comprehensive engineering information below.
           ======================================================== */}
+      {/* ========================================================
+          PROJECT ARCHITECTURE & DETAIL HIGHLIGHT MODAL
+          ======================================================== */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fadeIn">
-          <div className="bg-[#0b0e18] border border-[#00F0FF]/40 rounded-2xl max-w-3xl w-full relative shadow-[0_0_80px_rgba(0,240,255,0.25)] my-6 overflow-hidden flex flex-col max-h-[92vh]">
-            
-            {/* Top Modal Navigation Bar */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#070912]/80 backdrop-blur-md z-30">
-              <div className="flex items-center gap-2.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#00F0FF] shadow-[0_0_10px_#00F0FF] animate-pulse" />
-                <span className="font-orbitron font-bold text-xs uppercase tracking-widest text-white">
-                  SYSTEM SPECIFICATION // {selectedProject.category}
-                </span>
-              </div>
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="text-neutral-300 hover:text-white transition-colors p-1.5 rounded-lg bg-white/10 border border-white/15 cursor-pointer hover:border-[#00F0FF]"
-                aria-label="Close Modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Scrollable Content Container */}
-            <div className="overflow-y-auto flex-grow p-6 sm:p-8 space-y-6">
-              
-              {/* ========================================================
-                  PROMINENT HIGHLIGHTED IMAGE SECTION (ছবিটা সামনে হাইলাইট হয়ে উপরে চলে আসবে)
-                  ======================================================== */}
-              <div className="relative aspect-video sm:aspect-[16/9] w-full rounded-xl overflow-hidden bg-black/90 border border-[#00F0FF]/50 shadow-[0_0_40px_rgba(0,240,255,0.2)] group/img">
-                {/* 4 Cyber Reticle Corner Marks */}
-                <span className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#00F0FF] z-20 pointer-events-none" />
-                <span className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#00F0FF] z-20 pointer-events-none" />
-                <span className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-[#00F0FF] z-20 pointer-events-none" />
-                <span className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-[#00F0FF] z-20 pointer-events-none" />
-
-                {selectedProject.videoPreview ? (
-                  <video
-                    src={resolveAssetUrl(selectedProject.videoPreview)}
-                    poster={resolveAssetUrl(selectedProject.img)}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-[1.03]"
-                  />
-                ) : (
-                  <img
-                    src={resolveAssetUrl(selectedProject.img)}
-                    alt={selectedProject.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-[1.03] filter brightness-100"
-                  />
-                )}
-
-                {/* Floating Category Pill on Image */}
-                <div className="absolute top-4 left-4 bg-black/90 backdrop-blur-md border border-[#00F0FF]/60 px-3 py-1 rounded text-xs font-chakra font-bold tracking-wider text-[#00F0FF] uppercase z-20 shadow-xl">
-                  {selectedProject.category}
-                </div>
-
-                {/* Floating Status Pill on Image */}
-                <div className="absolute top-4 right-4 bg-black/90 backdrop-blur-md border border-white/20 px-3 py-1 rounded text-xs font-mono z-20 shadow-xl flex items-center gap-2">
-                  {selectedProject.isPrivate ? (
-                    <>
-                      <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
-                      <span className="text-[#00F0FF] font-semibold">PROTECTED ARCHITECTURE</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="w-2 h-2 rounded-full bg-[#80B82C] animate-pulse" />
-                      <span className="text-neutral-200">{selectedProject.domain}</span>
-                    </>
-                  )}
-                </div>
-
-                {/* Subtle Cinematic Vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e18] via-transparent to-transparent opacity-60 pointer-events-none" />
-              </div>
-
-              {/* Title & Tagline */}
-              <div>
-                <h2 className="font-orbitron font-extrabold text-2xl sm:text-3xl text-white uppercase mb-2">
-                  {selectedProject.title}
-                </h2>
-                <p className="font-chakra text-sm sm:text-base text-[#38BDF8] font-semibold">
-                  {selectedProject.tagline}
-                </p>
-              </div>
-
-              {/* Project Description */}
-              <p className="font-chakra text-xs sm:text-sm text-neutral-300 leading-relaxed">
-                {selectedProject.desc}
-              </p>
-
-              {/* ========================================================
-                  HOW IT WAS BUILT SECTION (কিভাবে এটা তৈরি করা হয়েছে)
-                  ======================================================== */}
-              {selectedProject.howItWasBuilt && (
-                <div className="bg-[#070912] border border-white/10 rounded-xl p-5 sm:p-6 shadow-inner">
-                  <div className="text-xs font-orbitron font-bold text-[#00F0FF] uppercase tracking-widest mb-3 flex items-center gap-2">
-                    <Cpu className="w-4 h-4 text-[#00F0FF]" />
-                    <span>HOW THIS SYSTEM WAS BUILT // ARCHITECTURAL PROCESS</span>
-                  </div>
-                  <p className="font-chakra text-xs sm:text-sm text-neutral-200 leading-relaxed">
-                    {selectedProject.howItWasBuilt}
-                  </p>
-                </div>
-              )}
-
-              {/* Private Automation Security Box */}
-              {selectedProject.isPrivate && (
-                <div className="p-4 rounded-xl bg-[#00F0FF]/[0.05] border border-[#00F0FF]/30 flex items-start gap-3">
-                  <Lock className="w-5 h-5 text-[#00F0FF] flex-shrink-0 mt-0.5" />
-                  <div className="text-xs font-chakra text-neutral-300 leading-relaxed">
-                    <span className="text-[#00F0FF] font-bold block mb-1 uppercase tracking-wider">
-                      PROPRIETARY PIPELINE // DATA ACCESS RESTRICTED
-                    </span>
-                    This automation engine operates on private infrastructure. In compliance with client NDA and security protocols, internal database credentials, live customer queues, and source code repositories are restricted from public access.
-                  </div>
-                </div>
-              )}
-
-              {/* ASCII Architecture Topology */}
-              {selectedProject.asciiArchitecture && (
-                <div>
-                  <div className="text-[11px] font-orbitron font-bold text-neutral-300 uppercase tracking-widest mb-2 flex items-center gap-2">
-                    <Terminal className="w-3.5 h-3.5 text-[#00F0FF]" />
-                    <span>SYSTEM TOPOLOGY & DATA FLOW</span>
-                  </div>
-                  <pre className="bg-[#05070d] border border-[#00F0FF]/30 rounded-xl p-4 text-[11px] font-mono text-[#00F0FF] overflow-x-auto leading-relaxed shadow-inner">
-                    {selectedProject.asciiArchitecture}
-                  </pre>
-                </div>
-              )}
-
-              {/* Telemetry Stats */}
-              {selectedProject.stats && (
-                <div>
-                  <div className="text-[11px] font-orbitron font-bold text-neutral-300 uppercase tracking-widest mb-2 flex items-center gap-2">
-                    <Activity className="w-3.5 h-3.5 text-[#00F0FF]" />
-                    <span>PERFORMANCE & OPERATIONAL METRICS</span>
-                  </div>
-                  <div className="grid grid-cols-3 gap-3 p-4 bg-white/[0.04] rounded-xl border border-white/10 text-center">
-                    {Object.entries(selectedProject.stats).map(([k, v]) => (
-                      <div key={k}>
-                        <div className="font-orbitron font-extrabold text-sm sm:text-base text-white">{v}</div>
-                        <div className="font-chakra text-[10px] text-neutral-400 font-semibold uppercase tracking-wider mt-0.5">
-                          {k}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Technology Matrix */}
-              <div>
-                <div className="text-[11px] font-orbitron font-bold text-neutral-300 uppercase tracking-widest mb-2.5">
-                  TECHNOLOGY MATRIX & PROTOCOLS
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.tech.map((t, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 bg-white/[0.08] border border-white/15 rounded-md text-xs font-chakra text-neutral-200"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Bottom Actions Footer */}
-            <div className="p-6 border-t border-white/10 bg-[#070912]/90 backdrop-blur-md flex items-center gap-4 z-30">
-              {selectedProject.isPrivate ? (
-                /* Private Automations: Only Inquire Action, No External Code / Data Link */
-                <button
-                  onClick={() => {
-                    setSelectedProject(null);
-                    if (onOpenContact) onOpenContact();
-                  }}
-                  className="group relative w-full py-3.5 bg-[#00F0FF] hover:bg-[#38BDF8] text-black font-chakra font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,240,255,0.4)] cursor-pointer overflow-hidden rounded-lg"
-                >
-                  <ButtonCornerMarks />
-                  <span className="relative z-10">INQUIRE SIMILAR AUTOMATION PIPELINE</span>
-                  <ArrowRight className="w-4 h-4 relative z-10" />
-                </button>
-              ) : (
-                /* Live Websites & Portfolios: Open Live System */
-                <>
-                  <a
-                    href={selectedProject.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative flex-1 py-3.5 bg-[#00F0FF] hover:bg-[#38BDF8] text-black font-chakra font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,240,255,0.4)] cursor-pointer overflow-hidden rounded-lg"
-                  >
-                    <ButtonCornerMarks />
-                    <span className="relative z-10">OPEN LIVE SYSTEM</span>
-                    <ExternalLink className="w-4 h-4 relative z-10" />
-                  </a>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
+        <ProjectDetailModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+          onOpenContact={onOpenContact}
+        />
       )}
 
       {/* Footer */}

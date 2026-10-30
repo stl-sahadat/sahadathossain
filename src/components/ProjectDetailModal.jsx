@@ -172,6 +172,14 @@ export function ProjectDetailModal({ project, onClose, onOpenContact }) {
                 )}
               </div>
 
+              {/* Permanent Bottom Right Cyber Badge for Touch / Mobile & Desktop */}
+              {project.liveUrl && (
+                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#00F0FF] text-black font-chakra font-extrabold text-[10px] sm:text-xs tracking-wider uppercase shadow-[0_0_20px_rgba(0,240,255,0.7)] group-hover/thumb:scale-105 transition-all">
+                  <span>VISIT LIVE SYSTEM</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </div>
+              )}
+
               {/* Interactive Hover Overlay: CLICK TO VISIT LIVE SYSTEM */}
               {project.liveUrl && (
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/thumb:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-center z-20 backdrop-blur-[2px]">
@@ -194,18 +202,36 @@ export function ProjectDetailModal({ project, onClose, onOpenContact }) {
               TITLE & TAGLINE
               ======================================================== */}
           <div>
-            <div className="flex flex-wrap items-center gap-2 mb-2">
-              <span className="px-2.5 py-0.5 rounded text-[10px] font-mono tracking-wider bg-[#00F0FF]/10 text-[#00F0FF] border border-[#00F0FF]/30">
-                {project.domain || 'SYSTEM.STL'}
-              </span>
-              {project.isPrivate ? (
-                <span className="px-2.5 py-0.5 rounded text-[10px] font-mono tracking-wider bg-amber-500/10 text-amber-300 border border-amber-500/30">
-                  PRIVATE PIPELINE
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="px-2.5 py-0.5 rounded text-[10px] font-mono tracking-wider bg-[#00F0FF]/10 text-[#00F0FF] border border-[#00F0FF]/30">
+                  {project.domain || 'SYSTEM.STL'}
                 </span>
-              ) : (
-                <span className="px-2.5 py-0.5 rounded text-[10px] font-mono tracking-wider bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
-                  LIVE SYSTEM
-                </span>
+                {project.liveUrl ? (
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono tracking-wider bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>LIVE SYSTEM</span>
+                  </span>
+                ) : (
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono tracking-wider bg-amber-500/10 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                    <span>PROTECTED PIPELINE</span>
+                  </span>
+                )}
+              </div>
+
+              {project.liveUrl && (
+                <button
+                  onClick={handleOpenLiveUrl}
+                  className="inline-flex items-center gap-1.5 text-xs font-chakra font-bold text-[#00F0FF] hover:text-white transition-colors cursor-pointer group/quick"
+                  title="সরাসরি লাইভ সিস্টেমে প্রবেশ করুন"
+                >
+                  <Globe className="w-3.5 h-3.5 text-[#00F0FF]" />
+                  <span className="underline underline-offset-4 decoration-[#00F0FF]/50 group-hover/quick:decoration-[#00F0FF]">
+                    VISIT LIVE SYSTEM
+                  </span>
+                  <ExternalLink className="w-3 h-3 transition-transform group-hover/quick:translate-x-0.5 group-hover/quick:-translate-y-0.5" />
+                </button>
               )}
             </div>
 

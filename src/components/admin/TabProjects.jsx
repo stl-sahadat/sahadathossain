@@ -604,11 +604,37 @@ export function TabProjects({ projects = [], onRequestSave }) {
 
               <div>
                 <label className="block text-[11px] font-mono text-neutral-300 uppercase tracking-widest mb-1">
-                  HOW IT WAS BUILT (MODAL BREAKDOWN)
+                  WHAT IT DOES (কোনটা কী কাজ করে)
                 </label>
                 <textarea
                   rows={3}
-                  value={currentProject.howItWasBuilt}
+                  value={currentProject.whatItDoes || ''}
+                  onChange={(e) => setCurrentProject({ ...currentProject, whatItDoes: e.target.value })}
+                  placeholder="Key features and capabilities..."
+                  className="w-full px-3 py-2 bg-[#05060a] border border-white/10 focus:border-[#00F0FF] rounded-lg text-xs text-white focus:outline-none leading-relaxed font-chakra"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-mono text-neutral-300 uppercase tracking-widest mb-1">
+                  WHY IT WAS BUILT (কী জন্য বানানো হয়েছে)
+                </label>
+                <textarea
+                  rows={2}
+                  value={currentProject.whyItWasBuilt || ''}
+                  onChange={(e) => setCurrentProject({ ...currentProject, whyItWasBuilt: e.target.value })}
+                  placeholder="Core motivation, business problems solved..."
+                  className="w-full px-3 py-2 bg-[#05060a] border border-white/10 focus:border-[#00F0FF] rounded-lg text-xs text-white focus:outline-none leading-relaxed font-chakra"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-mono text-neutral-300 uppercase tracking-widest mb-1">
+                  HOW IT WAS BUILT (কীভাবে বানানো হয়েছে)
+                </label>
+                <textarea
+                  rows={3}
+                  value={currentProject.howItWasBuilt || ''}
                   onChange={(e) => setCurrentProject({ ...currentProject, howItWasBuilt: e.target.value })}
                   placeholder="Architecture details, shaders, state management, latency benchmarks..."
                   className="w-full px-3 py-2 bg-[#05060a] border border-white/10 focus:border-[#00F0FF] rounded-lg text-xs text-white focus:outline-none leading-relaxed font-chakra"

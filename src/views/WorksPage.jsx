@@ -178,12 +178,7 @@ export function WorksPage({ onOpenContact, currentTime }) {
                     </div>
 
                     {/* Top Right: Live Domain Link OR Secure Pipeline Badge */}
-                    {project.isPrivate ? (
-                      <div className="absolute top-2.5 right-2.5 bg-black/90 backdrop-blur-md border border-[#00F0FF]/40 px-2 py-0.5 rounded text-[9px] font-mono text-[#00F0FF] tracking-wider z-10 shadow-lg flex items-center gap-1.5 select-none">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF] animate-pulse" />
-                        <span>SECURE</span>
-                      </div>
-                    ) : (
+                    {project.liveUrl ? (
                       <a
                         href={project.liveUrl}
                         target="_blank"
@@ -195,6 +190,11 @@ export function WorksPage({ onOpenContact, currentTime }) {
                         <span>{project.domain}</span>
                         <ExternalLink className="w-2.5 h-2.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                       </a>
+                    ) : (
+                      <div className="absolute top-2.5 right-2.5 bg-black/90 backdrop-blur-md border border-[#00F0FF]/40 px-2 py-0.5 rounded text-[9px] font-mono text-[#00F0FF] tracking-wider z-10 shadow-lg flex items-center gap-1.5 select-none">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF] animate-pulse" />
+                        <span>{project.isPrivate ? 'SECURE' : 'INTERNAL'}</span>
+                      </div>
                     )}
 
                     {/* Gradient Vignette */}
@@ -234,7 +234,7 @@ export function WorksPage({ onOpenContact, currentTime }) {
 
                     {/* Action Buttons Row */}
                     <div className="pt-3 border-t border-white/10">
-                      {project.isPrivate ? (
+                      {!project.liveUrl ? (
                         /* Automations: Safe Architecture Button with No External Data Link */
                         <button
                           onClick={(e) => {

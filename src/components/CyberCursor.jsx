@@ -4,15 +4,15 @@ import React, { useEffect, useRef, useState } from 'react';
  * CyberCursor: Authentic High-Precision Sci-Fi Reticle & Dot Cursor
  * 
  * Features:
- * 1. Zero-latency instant central dot pinned directly to clientX/clientY.
+ * 1. Zero-latency instant central dot pinned directly to clientX/clientY with subpixel centering.
  * 2. Butter-smooth trailing HUD reticle ring with liquid damping lerp physics (120fps capable).
- * 3. 4-corner HUD reticle targeting brackets that expand/lock onto interactive elements.
+ * 3. 4-corner HUD reticle targeting brackets + rotating dashed radar ring that smoothly locks on.
  * 4. Micro-interactions:
- *    - Hover: Reticle expands, illuminates in cyber cyan (#00F0FF), corner brackets lock-on.
- *    - Text: Morphs into a sleek cyber I-beam bracket capsule.
- *    - Click / Mousedown: Dot snaps in, reticle recoils, emits a radar sonar ripple wave.
- * 5. Touch & Mobile Safe: Automatically disabled on touch screens / coarse pointer devices.
- * 6. Edge guard: Cleanly fades out when cursor leaves browser window.
+ *    - Hover: Reticle expands, illuminates in cyber cyan (#00F0FF), corner brackets lock-on with inner radar ring.
+ *    - Text: Morphs into a sleek cyber I-beam capsule with precision vertical guide needle.
+ *    - Click / Mousedown: Tactile recoil, central flash, emits radar sonar ripple wave from exact center.
+ * 5. Touch & Hybrid Safe: Automatically hidden on touch taps; self-healing on mouse movement.
+ * 6. Edge & Blur Guard: Cleanly fades out when cursor leaves browser window or window loses focus.
  */
 export function CyberCursor() {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -28,15 +28,18 @@ export function CyberCursor() {
   const hasInitialized = useRef(false);
   const animFrameId = useRef(null);
 
+  // Cached state refs to prevent redundant React re-renders during mouse movement
+  const isHoveredRef = useRef(false);
+  const isTextRef = useRef(false);
+
   // DOM node direct references for 60-120 FPS GPU transforms
   const dotRef = useRef(null);
   const ringRef = useRef(null);
 
   useEffect(() => {
-    // Touch & Coarse Pointer Guard
     if (typeof window === 'undefined') return;
 
-    // Detect if the device is exclusively touch (coarse pointer and no fine pointer)
+    // Detect if device is exclusively a coarse touch screen (e.g. mobile phone without mouse)
     const hasCoarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
     const hasFine = window.matchMedia && (window.matchMedia('(pointer: fine)').matches || window.matchMedia('(any-pointer: fine)').matches);
     const isTouchOnly = hasCoarse && !hasFine;
@@ -53,18 +56,7 @@ export function CyberCursor() {
     document.documentElement.classList.add('cyber-cursor-active');
     document.documentElement.classList.remove('touch-device');
 
-    const onTouchStart = () => {
-      // If user actively taps screen on a mobile/hybrid screen, disable custom cursor
-      setIsVisible(false);
-      setIsEnabled(false);
-      document.documentElement.classList.remove('cyber-cursor-active');
-      document.documentElement.classList.add('touch-device');
-    };
-
-    window.addEventListener('touchstart', onTouchStart, { passive: true });
-
     return () => {
-      window.removeEventListener('touchstart', onTouchStart);
       document.documentElement.classList.remove('cyber-cursor-active');
     };
   }, []);
@@ -93,10 +85,9 @@ export function CyberCursor() {
       'summary',
     ].join(', ');
 
-    const TEXT_SELECTOR = 'input[type="text"], input[type="email"], input[type="search"], input[type="tel"], input[type="password"], textarea, [contenteditable="true"]';
+    const TEXT_SELECTOR = 'input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"]), textarea, [contenteditable="true"]';
 
-    const handleMouseMove = (e) => {
-      const { clientX, clientY } = e;
+    const updateCoordinates = (clientX, clientY) => {
       mousePos.current.x = clientX;
       mousePos.current.y = clientY;
 
@@ -105,28 +96,50 @@ export function CyberCursor() {
         followerPos.current.y = clientY;
         hasInitialized.current = true;
       }
+    };
 
+    const handlePointerMove = (e) => {
+      // Touch guard: if pointer event is from a touch screen tap, ignore custom cursor
+      if (e.pointerType === 'touch') {
+        setIsVisible(false);
+        return;
+      }
+
+      // Restore active classes if on hybrid screen
+      if (!document.documentElement.classList.contains('cyber-cursor-active')) {
+        document.documentElement.classList.add('cyber-cursor-active');
+        document.documentElement.classList.remove('touch-device');
+      }
+
+      updateCoordinates(e.clientX, e.clientY);
       setIsVisible(true);
 
       // Check hovered element
       const target = e.target;
       if (target && target.closest) {
         const textEl = target.closest(TEXT_SELECTOR);
-        if (textEl) {
-          setIsText(true);
-          setIsHovered(true);
-        } else {
-          setIsText(false);
-          const interactiveEl = target.closest(INTERACTIVE_SELECTOR);
-          setIsHovered(!!interactiveEl);
+        const isCurrentlyText = !!textEl;
+        const isCurrentlyHovered = isCurrentlyText || !!target.closest(INTERACTIVE_SELECTOR);
+
+        if (isTextRef.current !== isCurrentlyText) {
+          isTextRef.current = isCurrentlyText;
+          setIsText(isCurrentlyText);
+        }
+        if (isHoveredRef.current !== isCurrentlyHovered) {
+          isHoveredRef.current = isCurrentlyHovered;
+          setIsHovered(isCurrentlyHovered);
         }
       }
     };
 
-    const handleMouseDown = (e) => {
+    const handlePointerDown = (e) => {
+      if (e.pointerType === 'touch') return;
+
+      updateCoordinates(e.clientX, e.clientY);
+      setIsVisible(true);
       setIsClicking(true);
 
-      // Spawn Sonar Ripple Ping
+      // Spawn Sonar Ripple Ping at exact click coordinate
       const rippleId = Date.now() + Math.random();
       const newRipple = {
         id: rippleId,
@@ -141,7 +154,7 @@ export function CyberCursor() {
       }, 550);
     };
 
-    const handleMouseUp = () => {
+    const handlePointerUp = () => {
       setIsClicking(false);
     };
 
@@ -149,42 +162,66 @@ export function CyberCursor() {
       setIsVisible(false);
     };
 
-    const handleMouseEnter = () => {
+    const handleMouseEnter = (e) => {
+      if (e && e.clientX !== undefined) {
+        updateCoordinates(e.clientX, e.clientY);
+      }
       setIsVisible(true);
     };
 
-    // Physics Animation Loop: Direct GPU transform updates
+    const handleTouchStart = () => {
+      setIsVisible(false);
+      document.documentElement.classList.remove('cyber-cursor-active');
+      document.documentElement.classList.add('touch-device');
+    };
+
+    const handleWindowBlur = () => {
+      setIsVisible(false);
+    };
+
+    const handleWindowFocus = () => {
+      setIsVisible(true);
+    };
+
+    // Physics Animation Loop: Direct GPU transform updates with subpixel center alignment
     const LERP_FACTOR = 0.18;
     const renderLoop = () => {
       // Lerp follower ring coordinates towards mouse
       followerPos.current.x += (mousePos.current.x - followerPos.current.x) * LERP_FACTOR;
       followerPos.current.y += (mousePos.current.y - followerPos.current.y) * LERP_FACTOR;
 
+      // translate(-50%, -50%) ensures the dot and ring centers match coordinates exactly
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0)`;
+        dotRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) translate(-50%, -50%)`;
       }
 
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${followerPos.current.x}px, ${followerPos.current.y}px, 0)`;
+        ringRef.current.style.transform = `translate3d(${followerPos.current.x}px, ${followerPos.current.y}px, 0) translate(-50%, -50%)`;
       }
 
       animFrameId.current = requestAnimationFrame(renderLoop);
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('mousedown', handleMouseDown, { passive: true });
-    window.addEventListener('mouseup', handleMouseUp, { passive: true });
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    window.addEventListener('pointerdown', handlePointerDown, { passive: true });
+    window.addEventListener('pointerup', handlePointerUp, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
+    window.addEventListener('blur', handleWindowBlur);
+    window.addEventListener('focus', handleWindowFocus);
 
     animFrameId.current = requestAnimationFrame(renderLoop);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerdown', handlePointerDown);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
+      window.removeEventListener('blur', handleWindowBlur);
+      window.removeEventListener('focus', handleWindowFocus);
       if (animFrameId.current) {
         cancelAnimationFrame(animFrameId.current);
       }
@@ -196,7 +233,7 @@ export function CyberCursor() {
   return (
     <div
       data-testid="cyber-cursor-root"
-      className={`cyber-cursor-container fixed inset-0 pointer-events-none z-[999999] overflow-hidden transition-opacity duration-300 ${
+      className={`cyber-cursor-container fixed inset-0 pointer-events-none z-[999999] overflow-hidden transition-opacity duration-200 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       aria-hidden="true"
@@ -207,7 +244,7 @@ export function CyberCursor() {
       {ripples.map((ripple) => (
         <div
           key={ripple.id}
-          className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full border border-[#00F0FF] animate-sonar-ping"
+          className="absolute pointer-events-none rounded-full border border-[#00F0FF] animate-sonar-ping"
           style={{
             left: `${ripple.x}px`,
             top: `${ripple.y}px`,
@@ -223,26 +260,39 @@ export function CyberCursor() {
       <div
         ref={ringRef}
         data-testid="cyber-cursor-follower"
-        className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none will-change-transform"
-        style={{
-          transition:
-            'width 0.22s cubic-bezier(0.16, 1, 0.3, 1), height 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-radius 0.2s ease',
-        }}
+        className="absolute top-0 left-0 pointer-events-none will-change-transform flex items-center justify-center"
       >
         <div
           className={`relative flex items-center justify-center transition-all duration-200 ease-out ${
             isText
-              ? 'w-2 h-7 rounded-sm border-x border-[#00F0FF] bg-[#00F0FF]/10 shadow-[0_0_10px_rgba(0,240,255,0.6)]'
+              ? 'w-2.5 h-7 rounded-sm border-x border-[#00F0FF] bg-[#00F0FF]/15 shadow-[0_0_12px_rgba(0,240,255,0.6)]'
               : isHovered
-              ? 'w-14 h-14 rounded-full border-[1.5px] border-[#00F0FF] bg-[#00F0FF]/[0.08] shadow-[0_0_20px_rgba(0,240,255,0.45),inset_0_0_12px_rgba(0,240,255,0.15)] scale-100'
+              ? 'w-14 h-14 rounded-full border-[1.5px] border-[#00F0FF] bg-[#00F0FF]/[0.08] shadow-[0_0_22px_rgba(0,240,255,0.5),inset_0_0_12px_rgba(0,240,255,0.2)] scale-100'
               : isClicking
-              ? 'w-8 h-8 rounded-full border-[1.5px] border-[#00F0FF] bg-[#00F0FF]/20 shadow-[0_0_15px_rgba(0,240,255,0.6)] scale-90'
-              : 'w-10 h-10 rounded-full border-[1.2px] border-[#00F0FF]/50 bg-transparent shadow-[0_0_8px_rgba(0,240,255,0.2)]'
+              ? 'w-8 h-8 rounded-full border-[1.5px] border-[#00F0FF] bg-[#00F0FF]/25 shadow-[0_0_15px_rgba(0,240,255,0.7)] scale-90'
+              : 'w-10 h-10 rounded-full border-[1.2px] border-[#00F0FF]/50 bg-transparent shadow-[0_0_8px_rgba(0,240,255,0.25)]'
           }`}
         >
-          {/* Futuristic HUD Targeting Crosshair Tick Marks (Shown when not in text mode) */}
+          {/* Text Mode Caps */}
+          {isText && (
+            <>
+              <span className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-2 h-0.5 bg-[#00F0FF] shadow-[0_0_4px_#00F0FF]" />
+              <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-2 h-0.5 bg-[#00F0FF] shadow-[0_0_4px_#00F0FF]" />
+            </>
+          )}
+
+          {/* Futuristic HUD Targeting Crosshairs & Rotating Radar Ring (Shown when not in text mode) */}
           {!isText && (
             <>
+              {/* Inner Rotating Dashed Radar Ring when Target Locked / Hovered */}
+              <div
+                className={`absolute inset-1 rounded-full border border-dashed border-[#00F0FF]/40 animate-spin transition-opacity duration-300 pointer-events-none ${
+                  isHovered ? 'opacity-100' : 'opacity-0'
+                }`}
+                style={{ animationDuration: '6s' }}
+              />
+
+              {/* 4 Precision Crosshair Ticks */}
               {/* Top Tick */}
               <span
                 className={`absolute -top-1 left-1/2 -translate-x-1/2 w-0.5 h-1.5 transition-colors duration-200 ${
@@ -268,15 +318,17 @@ export function CyberCursor() {
                 }`}
               />
 
-              {/* 4 Diagonal Sci-Fi Corner Brackets when locked on / hovered */}
-              {isHovered && (
-                <>
-                  <span className="absolute -top-1 -left-1 w-1.5 h-1.5 border-t border-l border-[#00F0FF]" />
-                  <span className="absolute -top-1 -right-1 w-1.5 h-1.5 border-t border-r border-[#00F0FF]" />
-                  <span className="absolute -bottom-1 -left-1 w-1.5 h-1.5 border-b border-l border-[#00F0FF]" />
-                  <span className="absolute -bottom-1 -right-1 w-1.5 h-1.5 border-b border-r border-[#00F0FF]" />
-                </>
-              )}
+              {/* 4 Diagonal Sci-Fi Corner Brackets with fluid micro-scale lock-on */}
+              <div
+                className={`absolute inset-0 pointer-events-none transition-all duration-200 ease-out ${
+                  isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+                }`}
+              >
+                <span className="absolute -top-1.5 -left-1.5 w-2 h-2 border-t-2 border-l-2 border-[#00F0FF] shadow-[0_0_6px_#00F0FF]" />
+                <span className="absolute -top-1.5 -right-1.5 w-2 h-2 border-t-2 border-r-2 border-[#00F0FF] shadow-[0_0_6px_#00F0FF]" />
+                <span className="absolute -bottom-1.5 -left-1.5 w-2 h-2 border-b-2 border-l-2 border-[#00F0FF] shadow-[0_0_6px_#00F0FF]" />
+                <span className="absolute -bottom-1.5 -right-1.5 w-2 h-2 border-b-2 border-r-2 border-[#00F0FF] shadow-[0_0_6px_#00F0FF]" />
+              </div>
             </>
           )}
         </div>
@@ -288,15 +340,17 @@ export function CyberCursor() {
       <div
         ref={dotRef}
         data-testid="cyber-cursor-dot"
-        className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none will-change-transform"
+        className="absolute top-0 left-0 pointer-events-none will-change-transform flex items-center justify-center"
       >
         <div
-          className={`rounded-full transition-transform duration-150 ease-out ${
-            isClicking
-              ? 'w-1.5 h-1.5 bg-white scale-75 shadow-[0_0_12px_#00F0FF,0_0_24px_#00F0FF]'
+          className={`transition-all duration-150 ease-out ${
+            isText
+              ? 'w-0.5 h-3.5 bg-white shadow-[0_0_6px_#00F0FF]'
+              : isClicking
+              ? 'w-1.5 h-1.5 rounded-full bg-white scale-75 shadow-[0_0_12px_#00F0FF,0_0_24px_#00F0FF]'
               : isHovered
-              ? 'w-2 h-2 bg-[#00F0FF] scale-125 shadow-[0_0_10px_#00F0FF,0_0_20px_rgba(0,240,255,0.9)]'
-              : 'w-2 h-2 bg-[#00F0FF] scale-100 shadow-[0_0_8px_#00F0FF,0_0_16px_rgba(0,240,255,0.7)]'
+              ? 'w-2.5 h-2.5 rounded-full bg-[#00F0FF] scale-125 shadow-[0_0_12px_#00F0FF,0_0_24px_rgba(0,240,255,0.9)]'
+              : 'w-2 h-2 rounded-full bg-[#00F0FF] scale-100 shadow-[0_0_8px_#00F0FF,0_0_16px_rgba(0,240,255,0.7)]'
           }`}
         />
       </div>

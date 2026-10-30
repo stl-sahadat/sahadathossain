@@ -35,6 +35,8 @@ export function AdminPage() {
     timeline,
     currentTheme,
     authConfig,
+    activeCursorStyle,
+    setCursorStyle,
     updateSection,
     updateMultipleSections,
     setTheme,
@@ -285,6 +287,8 @@ export function AdminPage() {
             <TabThemeStudio
               currentTheme={currentTheme}
               onSelectTheme={setTheme}
+              activeCursorStyle={activeCursorStyle}
+              onSelectCursorStyle={setCursorStyle}
               onRequestSave={handleRequestSave}
             />
           )}

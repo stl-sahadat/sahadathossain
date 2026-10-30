@@ -1005,3 +1005,5 @@ export const faqs = [
     a: "Just a brief idea! Click 'LET'S TALK' or send a message with your project goals, reference websites you like, your target timeline, and any text or logos you have. I'll reply within 24 hours with a clear roadmap.",
   },
 ];
+
+export const activeCursorStyle = 'cyber-dot';

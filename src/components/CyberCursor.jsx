@@ -1,20 +1,33 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { usePortfolioData } from '../context/PortfolioDataContext';
 
 /**
- * CyberCursor: Authentic High-Precision Sci-Fi Reticle & Dot Cursor
+ * CyberCursor: Top-Tier Cybernetic Cursor System
  * 
  * Features:
- * 1. Zero-latency instant central dot pinned directly to clientX/clientY with subpixel centering.
- * 2. Butter-smooth trailing HUD reticle ring with liquid damping lerp physics (120fps capable).
- * 3. 4-corner HUD reticle targeting brackets + rotating dashed radar ring that smoothly locks on.
- * 4. Micro-interactions:
- *    - Hover: Reticle expands, illuminates in cyber cyan (#00F0FF), corner brackets lock-on with inner radar ring.
- *    - Text: Morphs into a sleek cyber I-beam capsule with precision vertical guide needle.
- *    - Click / Mousedown: Tactile recoil, central flash, emits radar sonar ripple wave from exact center.
- * 5. Touch & Hybrid Safe: Automatically hidden on touch taps; self-healing on mouse movement.
- * 6. Edge & Blur Guard: Cleanly fades out when cursor leaves browser window or window loses focus.
+ * 1. Pinned directly to mouse coordinates with zero-latency instant tracking.
+ * 2. Outer bulky trailing circle removed as requested by Sahadat vai.
+ * 3. 5-6 selectable cursor styles (Default OS Pointer + 5 High-Tech Cyber Cursors).
+ * 4. 100% reactive to active color theme (Cyber Cyan, Neon Gold, Crimson Red, Matrix Green, Violet Purple).
+ * 5. Micro-interactions:
+ *    - Interactive hover: expands with radiant cyber glow.
+ *    - Text hover: morphs into precision cyber I-beam.
+ *    - Click / Mousedown: tactile snappy recoil + sonar ripple wave.
+ * 6. Default OS mode: completely disables custom cursor and reveals native OS arrow.
+ * 7. Mobile / Touch Guard: automatically disabled on touch-only devices.
  */
 export function CyberCursor() {
+  const portfolioData = usePortfolioData();
+  const activeCursorStyle = portfolioData?.activeCursorStyle || 'cyber-dot';
+  const currentTheme = portfolioData?.currentTheme || {
+    hex: '#00F0FF',
+    rgb: '0, 240, 255',
+    glow: 'rgba(0, 240, 255, 0.45)',
+  };
+
+  const themeHex = currentTheme.hex || '#00F0FF';
+  const themeGlow = currentTheme.glow || 'rgba(0, 240, 255, 0.45)';
+
   const [isEnabled, setIsEnabled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isText, setIsText] = useState(false);
@@ -22,24 +35,23 @@ export function CyberCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [ripples, setRipples] = useState([]);
 
-  // High-frequency coordinates tracked in refs to prevent React render-cycle thrashing
+  // Coordinates tracked via ref for 120fps direct GPU transform without React render churn
   const mousePos = useRef({ x: -200, y: -200 });
-  const followerPos = useRef({ x: -200, y: -200 });
-  const hasInitialized = useRef(false);
-  const animFrameId = useRef(null);
-
-  // Cached state refs to prevent redundant React re-renders during mouse movement
   const isHoveredRef = useRef(false);
   const isTextRef = useRef(false);
-
-  // DOM node direct references for 60-120 FPS GPU transforms
-  const dotRef = useRef(null);
-  const ringRef = useRef(null);
+  const cursorRef = useRef(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Detect if device is exclusively a coarse touch screen (e.g. mobile phone without mouse)
+    // Default OS cursor mode: unmount custom cursor and restore standard browser arrow
+    if (activeCursorStyle === 'default') {
+      setIsEnabled(false);
+      document.documentElement.classList.remove('cyber-cursor-active');
+      return;
+    }
+
+    // Touch only guard
     const hasCoarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
     const hasFine = window.matchMedia && (window.matchMedia('(pointer: fine)').matches || window.matchMedia('(any-pointer: fine)').matches);
     const isTouchOnly = hasCoarse && !hasFine;
@@ -51,7 +63,7 @@ export function CyberCursor() {
       return;
     }
 
-    // Enable custom cyber cursor and activate global cursor:none class
+    // Custom cyber cursor active: hide OS pointer
     setIsEnabled(true);
     document.documentElement.classList.add('cyber-cursor-active');
     document.documentElement.classList.remove('touch-device');
@@ -59,10 +71,10 @@ export function CyberCursor() {
     return () => {
       document.documentElement.classList.remove('cyber-cursor-active');
     };
-  }, []);
+  }, [activeCursorStyle]);
 
   useEffect(() => {
-    if (!isEnabled) return;
+    if (!isEnabled || activeCursorStyle === 'default') return;
 
     const INTERACTIVE_SELECTOR = [
       'a',
@@ -87,34 +99,34 @@ export function CyberCursor() {
 
     const TEXT_SELECTOR = 'input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"]), textarea, [contenteditable="true"]';
 
-    const updateCoordinates = (clientX, clientY) => {
-      mousePos.current.x = clientX;
-      mousePos.current.y = clientY;
-
-      if (!hasInitialized.current) {
-        followerPos.current.x = clientX;
-        followerPos.current.y = clientY;
-        hasInitialized.current = true;
+    const updatePosition = () => {
+      if (cursorRef.current) {
+        if (activeCursorStyle === 'futuristic-arrow') {
+          // Arrow hotspot is at the tip: (0, 0)
+          cursorRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0)`;
+        } else {
+          // Center hotspot
+          cursorRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) translate(-50%, -50%)`;
+        }
       }
     };
 
     const handlePointerMove = (e) => {
-      // Touch guard: if pointer event is from a touch screen tap, ignore custom cursor
       if (e.pointerType === 'touch') {
         setIsVisible(false);
         return;
       }
 
-      // Restore active classes if on hybrid screen
       if (!document.documentElement.classList.contains('cyber-cursor-active')) {
         document.documentElement.classList.add('cyber-cursor-active');
         document.documentElement.classList.remove('touch-device');
       }
 
-      updateCoordinates(e.clientX, e.clientY);
+      mousePos.current.x = e.clientX;
+      mousePos.current.y = e.clientY;
+      updatePosition();
       setIsVisible(true);
 
-      // Check hovered element
       const target = e.target;
       if (target && target.closest) {
         const textEl = target.closest(TEXT_SELECTOR);
@@ -134,12 +146,13 @@ export function CyberCursor() {
 
     const handlePointerDown = (e) => {
       if (e.pointerType === 'touch') return;
-
-      updateCoordinates(e.clientX, e.clientY);
+      mousePos.current.x = e.clientX;
+      mousePos.current.y = e.clientY;
+      updatePosition();
       setIsVisible(true);
       setIsClicking(true);
 
-      // Spawn Sonar Ripple Ping at exact click coordinate
+      // Emit sonar ripple ping
       const rippleId = Date.now() + Math.random();
       const newRipple = {
         id: rippleId,
@@ -147,11 +160,11 @@ export function CyberCursor() {
         y: e.clientY,
       };
 
-      setRipples((prev) => [...prev.slice(-4), newRipple]);
+      setRipples((prev) => [...prev.slice(-3), newRipple]);
 
       setTimeout(() => {
         setRipples((prev) => prev.filter((r) => r.id !== rippleId));
-      }, 550);
+      }, 500);
     };
 
     const handlePointerUp = () => {
@@ -164,7 +177,9 @@ export function CyberCursor() {
 
     const handleMouseEnter = (e) => {
       if (e && e.clientX !== undefined) {
-        updateCoordinates(e.clientX, e.clientY);
+        mousePos.current.x = e.clientX;
+        mousePos.current.y = e.clientY;
+        updatePosition();
       }
       setIsVisible(true);
     };
@@ -183,25 +198,6 @@ export function CyberCursor() {
       setIsVisible(true);
     };
 
-    // Physics Animation Loop: Direct GPU transform updates with subpixel center alignment
-    const LERP_FACTOR = 0.18;
-    const renderLoop = () => {
-      // Lerp follower ring coordinates towards mouse
-      followerPos.current.x += (mousePos.current.x - followerPos.current.x) * LERP_FACTOR;
-      followerPos.current.y += (mousePos.current.y - followerPos.current.y) * LERP_FACTOR;
-
-      // translate(-50%, -50%) ensures the dot and ring centers match coordinates exactly
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) translate(-50%, -50%)`;
-      }
-
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${followerPos.current.x}px, ${followerPos.current.y}px, 0) translate(-50%, -50%)`;
-      }
-
-      animFrameId.current = requestAnimationFrame(renderLoop);
-    };
-
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
     window.addEventListener('pointerdown', handlePointerDown, { passive: true });
     window.addEventListener('pointerup', handlePointerUp, { passive: true });
@@ -210,8 +206,6 @@ export function CyberCursor() {
     document.addEventListener('mouseenter', handleMouseEnter);
     window.addEventListener('blur', handleWindowBlur);
     window.addEventListener('focus', handleWindowFocus);
-
-    animFrameId.current = requestAnimationFrame(renderLoop);
 
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
@@ -222,137 +216,244 @@ export function CyberCursor() {
       document.removeEventListener('mouseenter', handleMouseEnter);
       window.removeEventListener('blur', handleWindowBlur);
       window.removeEventListener('focus', handleWindowFocus);
-      if (animFrameId.current) {
-        cancelAnimationFrame(animFrameId.current);
-      }
     };
-  }, [isEnabled]);
+  }, [isEnabled, activeCursorStyle]);
 
-  if (!isEnabled) return null;
+  if (!isEnabled || activeCursorStyle === 'default') {
+    return null;
+  }
 
   return (
     <div
       data-testid="cyber-cursor-root"
-      className={`cyber-cursor-container fixed inset-0 pointer-events-none z-[999999] overflow-hidden transition-opacity duration-200 ${
+      className={`cyber-cursor-container fixed inset-0 pointer-events-none z-[999999] overflow-hidden transition-opacity duration-150 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       aria-hidden="true"
     >
-      {/* ========================================================
-          1. SONAR RIPPLE PINGS (Click pulse waves)
-          ======================================================== */}
+      {/* 1. Sonar Ripple Waves */}
       {ripples.map((ripple) => (
         <div
           key={ripple.id}
-          className="absolute pointer-events-none rounded-full border border-[#00F0FF] animate-sonar-ping"
+          className="absolute pointer-events-none rounded-full animate-sonar-ping"
           style={{
             left: `${ripple.x}px`,
             top: `${ripple.y}px`,
-            width: '40px',
-            height: '40px',
+            width: '36px',
+            height: '36px',
+            border: `1.5px solid ${themeHex}`,
+            boxShadow: `0 0 10px ${themeGlow}`,
           }}
         />
       ))}
 
-      {/* ========================================================
-          2. SMOOTH LERP FOLLOWER RETICLE RING
-          ======================================================== */}
+      {/* 2. Direct-Pinned Cyber Cursor (Zero Trailing Lag) */}
       <div
-        ref={ringRef}
-        data-testid="cyber-cursor-follower"
+        ref={cursorRef}
+        data-testid="cyber-cursor-active-node"
         className="absolute top-0 left-0 pointer-events-none will-change-transform flex items-center justify-center"
       >
-        <div
-          className={`relative flex items-center justify-center transition-all duration-200 ease-out ${
-            isText
-              ? 'w-2.5 h-7 rounded-sm border-x border-[#00F0FF] bg-[#00F0FF]/15 shadow-[0_0_12px_rgba(0,240,255,0.6)]'
-              : isHovered
-              ? 'w-14 h-14 rounded-full border-[1.5px] border-[#00F0FF] bg-[#00F0FF]/[0.08] shadow-[0_0_22px_rgba(0,240,255,0.5),inset_0_0_12px_rgba(0,240,255,0.2)] scale-100'
-              : isClicking
-              ? 'w-8 h-8 rounded-full border-[1.5px] border-[#00F0FF] bg-[#00F0FF]/25 shadow-[0_0_15px_rgba(0,240,255,0.7)] scale-90'
-              : 'w-10 h-10 rounded-full border-[1.2px] border-[#00F0FF]/50 bg-transparent shadow-[0_0_8px_rgba(0,240,255,0.25)]'
-          }`}
-        >
-          {/* Text Mode Caps */}
-          {isText && (
-            <>
-              <span className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-2 h-0.5 bg-[#00F0FF] shadow-[0_0_4px_#00F0FF]" />
-              <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-2 h-0.5 bg-[#00F0FF] shadow-[0_0_4px_#00F0FF]" />
-            </>
-          )}
-
-          {/* Futuristic HUD Targeting Crosshairs & Rotating Radar Ring (Shown when not in text mode) */}
-          {!isText && (
-            <>
-              {/* Inner Rotating Dashed Radar Ring when Target Locked / Hovered */}
+        {/* Text Mode: Precision Cyber I-Beam */}
+        {isText ? (
+          <div className="relative flex flex-col items-center justify-center">
+            <span
+              className="w-2 h-0.5 rounded-full"
+              style={{ backgroundColor: themeHex, boxShadow: `0 0 6px ${themeHex}` }}
+            />
+            <span
+              className="w-0.5 h-4 my-0.5 rounded-full"
+              style={{ backgroundColor: '#FFFFFF', boxShadow: `0 0 6px ${themeHex}` }}
+            />
+            <span
+              className="w-2 h-0.5 rounded-full"
+              style={{ backgroundColor: themeHex, boxShadow: `0 0 6px ${themeHex}` }}
+            />
+          </div>
+        ) : (
+          <>
+            {/* Style 1: Minimal Cyber Dot */}
+            {activeCursorStyle === 'cyber-dot' && (
               <div
-                className={`absolute inset-1 rounded-full border border-dashed border-[#00F0FF]/40 animate-spin transition-opacity duration-300 pointer-events-none ${
-                  isHovered ? 'opacity-100' : 'opacity-0'
-                }`}
-                style={{ animationDuration: '6s' }}
-              />
-
-              {/* 4 Precision Crosshair Ticks */}
-              {/* Top Tick */}
-              <span
-                className={`absolute -top-1 left-1/2 -translate-x-1/2 w-0.5 h-1.5 transition-colors duration-200 ${
-                  isHovered ? 'bg-[#00F0FF] shadow-[0_0_6px_#00F0FF]' : 'bg-[#00F0FF]/60'
-                }`}
-              />
-              {/* Bottom Tick */}
-              <span
-                className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-0.5 h-1.5 transition-colors duration-200 ${
-                  isHovered ? 'bg-[#00F0FF] shadow-[0_0_6px_#00F0FF]' : 'bg-[#00F0FF]/60'
-                }`}
-              />
-              {/* Left Tick */}
-              <span
-                className={`absolute top-1/2 -left-1 -translate-y-1/2 w-1.5 h-0.5 transition-colors duration-200 ${
-                  isHovered ? 'bg-[#00F0FF] shadow-[0_0_6px_#00F0FF]' : 'bg-[#00F0FF]/60'
-                }`}
-              />
-              {/* Right Tick */}
-              <span
-                className={`absolute top-1/2 -right-1 -translate-y-1/2 w-1.5 h-0.5 transition-colors duration-200 ${
-                  isHovered ? 'bg-[#00F0FF] shadow-[0_0_6px_#00F0FF]' : 'bg-[#00F0FF]/60'
-                }`}
-              />
-
-              {/* 4 Diagonal Sci-Fi Corner Brackets with fluid micro-scale lock-on */}
-              <div
-                className={`absolute inset-0 pointer-events-none transition-all duration-200 ease-out ${
-                  isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-                }`}
+                className="relative flex items-center justify-center transition-transform duration-150 ease-out"
+                style={{
+                  transform: isClicking ? 'scale(0.7)' : isHovered ? 'scale(1.7)' : 'scale(1)',
+                }}
               >
-                <span className="absolute -top-1.5 -left-1.5 w-2 h-2 border-t-2 border-l-2 border-[#00F0FF] shadow-[0_0_6px_#00F0FF]" />
-                <span className="absolute -top-1.5 -right-1.5 w-2 h-2 border-t-2 border-r-2 border-[#00F0FF] shadow-[0_0_6px_#00F0FF]" />
-                <span className="absolute -bottom-1.5 -left-1.5 w-2 h-2 border-b-2 border-l-2 border-[#00F0FF] shadow-[0_0_6px_#00F0FF]" />
-                <span className="absolute -bottom-1.5 -right-1.5 w-2 h-2 border-b-2 border-r-2 border-[#00F0FF] shadow-[0_0_6px_#00F0FF]" />
+                <div
+                  className="absolute rounded-full transition-opacity duration-200"
+                  style={{
+                    width: isHovered ? '24px' : '14px',
+                    height: isHovered ? '24px' : '14px',
+                    backgroundColor: themeHex,
+                    opacity: isHovered ? 0.35 : 0.18,
+                    filter: 'blur(3px)',
+                  }}
+                />
+                <div
+                  className="rounded-full transition-all duration-150"
+                  style={{
+                    width: isHovered ? '10px' : '7px',
+                    height: isHovered ? '10px' : '7px',
+                    backgroundColor: isHovered ? '#FFFFFF' : themeHex,
+                    boxShadow: `0 0 10px ${themeHex}, 0 0 20px ${themeGlow}`,
+                  }}
+                />
               </div>
-            </>
-          )}
-        </div>
-      </div>
+            )}
 
-      {/* ========================================================
-          3. IMMEDIATE CENTRAL GLOWING CYBER DOT (Zero latency)
-          ======================================================== */}
-      <div
-        ref={dotRef}
-        data-testid="cyber-cursor-dot"
-        className="absolute top-0 left-0 pointer-events-none will-change-transform flex items-center justify-center"
-      >
-        <div
-          className={`transition-all duration-150 ease-out ${
-            isText
-              ? 'w-0.5 h-3.5 bg-white shadow-[0_0_6px_#00F0FF]'
-              : isClicking
-              ? 'w-1.5 h-1.5 rounded-full bg-white scale-75 shadow-[0_0_12px_#00F0FF,0_0_24px_#00F0FF]'
-              : isHovered
-              ? 'w-2.5 h-2.5 rounded-full bg-[#00F0FF] scale-125 shadow-[0_0_12px_#00F0FF,0_0_24px_rgba(0,240,255,0.9)]'
-              : 'w-2 h-2 rounded-full bg-[#00F0FF] scale-100 shadow-[0_0_8px_#00F0FF,0_0_16px_rgba(0,240,255,0.7)]'
-          }`}
-        />
+            {/* Style 2: Precision Crosshair / Reticle */}
+            {activeCursorStyle === 'crosshair' && (
+              <div
+                className="relative flex items-center justify-center transition-all duration-200 ease-out"
+                style={{
+                  transform: isClicking
+                    ? 'scale(0.8) rotate(45deg)'
+                    : isHovered
+                    ? 'scale(1.3) rotate(45deg)'
+                    : 'scale(1) rotate(0deg)',
+                }}
+              >
+                <div
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{
+                    backgroundColor: isHovered ? '#FFFFFF' : themeHex,
+                    boxShadow: `0 0 8px ${themeHex}`,
+                  }}
+                />
+                <span
+                  className="absolute -top-3 w-0.5 h-2 rounded-full transition-colors duration-200"
+                  style={{
+                    backgroundColor: themeHex,
+                    boxShadow: isHovered ? `0 0 6px ${themeHex}` : 'none',
+                  }}
+                />
+                <span
+                  className="absolute -bottom-3 w-0.5 h-2 rounded-full transition-colors duration-200"
+                  style={{
+                    backgroundColor: themeHex,
+                    boxShadow: isHovered ? `0 0 6px ${themeHex}` : 'none',
+                  }}
+                />
+                <span
+                  className="absolute -left-3 h-0.5 w-2 rounded-full transition-colors duration-200"
+                  style={{
+                    backgroundColor: themeHex,
+                    boxShadow: isHovered ? `0 0 6px ${themeHex}` : 'none',
+                  }}
+                />
+                <span
+                  className="absolute -right-3 h-0.5 w-2 rounded-full transition-colors duration-200"
+                  style={{
+                    backgroundColor: themeHex,
+                    boxShadow: isHovered ? `0 0 6px ${themeHex}` : 'none',
+                  }}
+                />
+              </div>
+            )}
+
+            {/* Style 3: Sleek Cyber Stealth Arrow */}
+            {activeCursorStyle === 'futuristic-arrow' && (
+              <div
+                className="relative transition-all duration-150 ease-out"
+                style={{
+                  transformOrigin: '0 0',
+                  transform: isClicking ? 'scale(0.9)' : isHovered ? 'scale(1.18)' : 'scale(1)',
+                  filter: isHovered
+                    ? `drop-shadow(0 0 8px ${themeHex}) drop-shadow(0 0 16px ${themeGlow})`
+                    : `drop-shadow(0 0 5px ${themeGlow})`,
+                }}
+              >
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="block"
+                >
+                  <polygon
+                    points="2,2 21,9.5 13.5,13.5 9.5,21"
+                    fill="rgba(5, 7, 12, 0.92)"
+                    stroke={themeHex}
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                  />
+                  <line
+                    x1="2.5"
+                    y1="2.5"
+                    x2="13"
+                    y2="13"
+                    stroke={isHovered ? '#FFFFFF' : themeHex}
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="2" cy="2" r="1.5" fill="#FFFFFF" />
+                </svg>
+              </div>
+            )}
+
+            {/* Style 4: Diamond Prism */}
+            {activeCursorStyle === 'diamond' && (
+              <div
+                className="relative flex items-center justify-center transition-all duration-200 ease-out"
+                style={{
+                  transform: isClicking
+                    ? 'scale(0.8) rotate(45deg)'
+                    : isHovered
+                    ? 'scale(1.3) rotate(90deg)'
+                    : 'scale(1) rotate(45deg)',
+                }}
+              >
+                <div
+                  className="w-3.5 h-3.5 border-[1.5px] transition-colors duration-200"
+                  style={{
+                    borderColor: themeHex,
+                    backgroundColor: isHovered ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.5)',
+                    boxShadow: isHovered
+                      ? `0 0 12px ${themeHex}, inset 0 0 6px ${themeGlow}`
+                      : `0 0 6px ${themeGlow}`,
+                  }}
+                />
+                <div
+                  className="absolute w-1.5 h-1.5 rounded-full"
+                  style={{
+                    backgroundColor: isHovered ? '#FFFFFF' : themeHex,
+                    boxShadow: `0 0 6px ${themeHex}`,
+                  }}
+                />
+              </div>
+            )}
+
+            {/* Style 5: Precision Micro Ring */}
+            {activeCursorStyle === 'hollow-circle' && (
+              <div
+                className="relative flex items-center justify-center transition-all duration-150 ease-out"
+                style={{
+                  transform: isClicking ? 'scale(0.75)' : isHovered ? 'scale(1.35)' : 'scale(1)',
+                }}
+              >
+                <div
+                  className="w-3.5 h-3.5 rounded-full border-[1.5px] transition-all duration-150"
+                  style={{
+                    borderColor: themeHex,
+                    backgroundColor: isHovered ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                    boxShadow: isHovered
+                      ? `0 0 12px ${themeHex}, inset 0 0 6px ${themeGlow}`
+                      : `0 0 6px ${themeGlow}`,
+                  }}
+                />
+                <div
+                  className="absolute w-1 h-1 rounded-full"
+                  style={{
+                    backgroundColor: isHovered ? '#FFFFFF' : themeHex,
+                    boxShadow: `0 0 4px ${themeHex}`,
+                  }}
+                />
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

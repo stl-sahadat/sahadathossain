@@ -246,22 +246,23 @@ html.lenis, html.lenis body {
 
 /* ========================================================
    CUSTOM CYBER CURSOR & OS POINTER ELIMINATION (DESKTOP)
-   Completely hides OS mouse pointer on fine pointer / desktop devices
+   Only hides OS mouse pointer when custom cyber cursor is active
    ======================================================== */
-.cyber-cursor-active,
-.cyber-cursor-active *,
-.cyber-cursor-active *::before,
-.cyber-cursor-active *::after {
+html.cyber-cursor-active,
+html.cyber-cursor-active *,
+html.cyber-cursor-active *::before,
+html.cyber-cursor-active *::after {
   cursor: none !important;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  html:not(.touch-device),
-  html:not(.touch-device) *,
-  html:not(.touch-device) *::before,
-  html:not(.touch-device) *::after {
-    cursor: none !important;
-  }
+.force-os-cursor,
+.force-os-cursor * {
+  cursor: default !important;
+}
+
+.force-os-cursor-pointer,
+.force-os-cursor-pointer * {
+  cursor: pointer !important;
 }
 
 /* Sonar Ripple Ping Animation */

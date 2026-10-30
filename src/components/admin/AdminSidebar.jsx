@@ -33,7 +33,7 @@ export const ADMIN_TABS = [
   { id: 'faqs', label: 'FAQ Management', icon: HelpCircle },
   { id: 'timeline', label: 'Experience & Timeline', icon: Milestone, badge: '2024+' },
   { id: 'contact', label: 'Contact & Socials', icon: Send },
-  { id: 'theme', label: 'Theme & Color Studio', icon: Palette, badge: '5 COLORS' },
+  { id: 'theme', label: 'Theme & Cursor Studio', icon: Palette, badge: 'PRESETS & CURSORS' },
   { id: 'security', label: 'Security & Auth', icon: ShieldCheck, badge: 'SECURE' },
 ];
 

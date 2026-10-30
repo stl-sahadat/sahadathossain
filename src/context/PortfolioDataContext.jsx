@@ -61,6 +61,57 @@ export const THEME_PRESETS = [
   },
 ];
 
+export const CURSOR_STYLES = [
+  {
+    id: 'default',
+    name: 'Default OS Pointer',
+    bengaliName: 'স্বাভাবিক সিস্টেম মাউস',
+    description: 'পূর্বের স্বাভাবিক মাউসের তীর। কোনো কাস্টম সাইবার ইফেক্ট ছাড়াই সাধারণ ব্রাউজার কার্সর শো করবে।',
+    iconType: 'os-pointer',
+    badge: 'DEFAULT OS',
+  },
+  {
+    id: 'cyber-dot',
+    name: 'Minimal Cyber Dot',
+    bengaliName: 'নিয়ন সাইবার ডট',
+    description: 'সূক্ষ্ম উজ্জ্বল নিয়ন কেন্দ্রবিন্দু। জাস্ট মাউস বরাবর নিখুঁত পিনপয়েন্ট প্রেসিশন।',
+    iconType: 'dot',
+    badge: 'RECOMMENDED',
+  },
+  {
+    id: 'crosshair',
+    name: 'Precision Reticle',
+    bengaliName: 'সাইবার ক্রসহেয়ার টার্গেট',
+    description: 'ট্যাকটিকাল সায়েন্স-ফিকশন টার্গেটিং ক্রসহেয়ার (+)। নির্ভুল সাইবার টেকনিক্যাল ফোকাস।',
+    iconType: 'crosshair',
+    badge: 'SCI-FI HUD',
+  },
+  {
+    id: 'futuristic-arrow',
+    name: 'Cyber Stealth Arrow',
+    bengaliName: 'ফিউচারিস্টিক সাইবার অ্যারো',
+    description: 'শার্প ভবিষ্যতমুখী সাইবার পলিগন অ্যারো পয়েন্টার এবং নিয়ন বর্ডার।',
+    iconType: 'arrow',
+    badge: 'STEALTH',
+  },
+  {
+    id: 'diamond',
+    name: 'Diamond Prism',
+    bengaliName: 'সাইবার ডায়মন্ড প্রিজম',
+    description: 'উজ্জ্বল রোটেটেড ডায়মন্ড ক্রিস্টাল ও জ্যামিতিক নিয়ন রিফ্লেকশন।',
+    iconType: 'diamond',
+    badge: 'PRISM',
+  },
+  {
+    id: 'hollow-circle',
+    name: 'Precision Micro Ring',
+    bengaliName: 'মাইক্রো নিয়ন রিং',
+    description: 'হালকা মসৃণ মাইক্রো রিং ও কেন্দ্রবিন্দু। কোনো ট্রেইলিং ল্যাগ নেই।',
+    iconType: 'ring',
+    badge: 'PRECISION',
+  },
+];
+
 const STORAGE_KEY = 'sahadat_portfolio_master_v3';
 const AUTH_KEY = 'sahadat_portfolio_auth_config_v3';
 
@@ -137,6 +188,7 @@ const getDefaultData = () => deepNormalizeAssets({
   trustBadges: defaultPortfolioData.trustBadges || [],
   faqs: defaultPortfolioData.faqs || [],
   activeThemeId: 'cyber-cyan',
+  activeCursorStyle: defaultPortfolioData.activeCursorStyle || 'cyber-dot',
 });
 
 const defaultAuthConfig = {
@@ -357,6 +409,11 @@ export function PortfolioDataProvider({ children }) {
     }
   }, [updateSection]);
 
+  // Update cursor style
+  const setCursorStyle = useCallback((cursorStyleId) => {
+    updateSection('activeCursorStyle', cursorStyleId);
+  }, [updateSection]);
+
   // Update Auth Config
   const updateAuthConfig = useCallback((newAuthConfig) => {
     setAuthConfig((prev) => {
@@ -425,6 +482,9 @@ export function PortfolioDataProvider({ children }) {
     faqs: data.faqs,
     currentTheme,
     THEME_PRESETS,
+    activeCursorStyle: data.activeCursorStyle || 'cyber-dot',
+    setCursorStyle,
+    CURSOR_STYLES,
     authConfig,
     updateSection,
     updateMultipleSections,

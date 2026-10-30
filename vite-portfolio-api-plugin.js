@@ -273,7 +273,14 @@ export function portfolioApiPlugin() {
       });
       req.on('end', () => {
         try {
+          const existing = readStoreData();
           const parsed = JSON.parse(body);
+          if (existing && existing.authConfig && existing.authConfig.passwordHash) {
+            if (!parsed.authConfig) parsed.authConfig = {};
+            if (!parsed.authConfig.passwordHash) {
+              parsed.authConfig.passwordHash = existing.authConfig.passwordHash;
+            }
+          }
           fs.writeFileSync(storeFilePath, JSON.stringify(parsed, null, 2), 'utf-8');
           return sendJson(200, { success: true, timestamp: new Date().toISOString() });
         } catch (err) {

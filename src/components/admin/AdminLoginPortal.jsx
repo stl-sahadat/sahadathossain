@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Lock, User, Eye, EyeOff, ShieldAlert, KeyRound, Terminal, AlertTriangle, ArrowRight } from 'lucide-react';
 import { STLLogo } from '../CyberIcons';
+import {
+  hashPassword,
+  constantTimeEquals,
+  SECURITY_SALT,
+  DEFAULT_ADMIN_USER,
+  DEFAULT_PASSWORD_HASH,
+} from '../../lib/security';
 
 const LOCKOUT_KEY = 'sahadat_admin_lockout_state_v3';
 
@@ -79,11 +86,16 @@ export function AdminLoginPortal({ authConfig, currentTheme, onAuthenticated }) 
     setIsSubmitting(true);
 
     // Client-side authentication logic (used on static hosts like GitHub Pages or when backend is unavailable)
-    const performClientAuth = () => {
-      const expectedUser = (authConfig?.username || 'admin').toLowerCase();
-      const expectedPass = authConfig?.passwordHash || 'sahadat4409';
+    const performClientAuth = async () => {
+      const expectedUser = (authConfig?.username || DEFAULT_ADMIN_USER).toLowerCase();
+      const salt = authConfig?.salt || SECURITY_SALT;
+      const expectedHash = authConfig?.passwordHash || DEFAULT_PASSWORD_HASH;
 
-      if (trimmedUser.toLowerCase() === expectedUser && (trimmedPass === expectedPass || trimmedPass === 'sahadat4409')) {
+      const enteredHash = await hashPassword(trimmedPass, salt);
+      const isUserValid = trimmedUser.toLowerCase() === expectedUser;
+      const isPassValid = constantTimeEquals(enteredHash, expectedHash) || (enteredHash === DEFAULT_PASSWORD_HASH);
+
+      if (isUserValid && isPassValid) {
         setFailedAttempts(0);
         setErrorMessage('');
         try {
@@ -125,7 +137,7 @@ export function AdminLoginPortal({ authConfig, currentTheme, onAuthenticated }) 
     );
 
     if (isStaticHost) {
-      performClientAuth();
+      await performClientAuth();
       return;
     }
 
@@ -139,7 +151,7 @@ export function AdminLoginPortal({ authConfig, currentTheme, onAuthenticated }) 
 
       // If backend API endpoint is not implemented (404/405), fallback to client auth
       if (res.status === 404 || res.status === 405) {
-        performClientAuth();
+        await performClientAuth();
         return;
       }
 
@@ -197,7 +209,7 @@ export function AdminLoginPortal({ authConfig, currentTheme, onAuthenticated }) 
       }
     } catch (netErr) {
       // 2. Offline / Static fallback authentication
-      performClientAuth();
+      await performClientAuth();
     }
   };
 

@@ -82,7 +82,8 @@ model Faq {
 model AdminAuth {
   id              String   @id @default("default-admin")
   username        String   @unique @default("admin")
-  passwordHash    String   @default("sahadat4409")
+  salt            String   @default("stl_matrix_secure_salt_2026_bd")
+  passwordHash    String   @default("80322ecae2ffabeb41c194961487777e56694e15fcd41e632a7c356ade5b56db")
   maxAttempts     Int      @default(3)
   lockoutSeconds  Int      @default(15)
   updatedAt       DateTime @updatedAt

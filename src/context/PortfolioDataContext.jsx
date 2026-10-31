@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import * as defaultPortfolioData from '../data/portfolioData';
 import { resolveAssetUrl, deepNormalizeAssets } from '../lib/assetHelper';
+import { DEFAULT_ADMIN_USER, DEFAULT_PASSWORD_HASH, SECURITY_SALT } from '../lib/security';
 
 export const THEME_PRESETS = [
   {
@@ -200,8 +201,9 @@ const getDefaultData = () => deepNormalizeAssets({
 });
 
 const defaultAuthConfig = {
-  username: 'admin',
-  passwordHash: 'sahadat4409', // Can be changed in Admin Security tab
+  username: DEFAULT_ADMIN_USER,
+  salt: SECURITY_SALT,
+  passwordHash: DEFAULT_PASSWORD_HASH,
   maxAttempts: 3,
   lockoutSeconds: 15,
 };

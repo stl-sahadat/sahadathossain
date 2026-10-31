@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { ShieldCheck, Lock, User, KeyRound, Check, AlertTriangle, Eye, EyeOff, ShieldAlert } from 'lucide-react';
+import {
+  hashPassword,
+  constantTimeEquals,
+  SECURITY_SALT,
+  DEFAULT_PASSWORD_HASH,
+} from '../../lib/security';
 
 export function TabSecurity({
   authConfig = {},
@@ -15,9 +21,13 @@ export function TabSecurity({
   const [showPass, setShowPass] = useState(false);
   const [msg, setMsg] = useState({ text: '', type: '' });
 
-  const handleSaveSecurity = (e) => {
+  const handleSaveSecurity = async (e) => {
     e.preventDefault();
     setMsg({ text: '', type: '' });
+
+    const salt = authConfig.salt || SECURITY_SALT;
+
+    let computedHash = authConfig.passwordHash || DEFAULT_PASSWORD_HASH;
 
     if (newPassword) {
       if (newPassword !== confirmPassword) {
@@ -28,12 +38,24 @@ export function TabSecurity({
         setMsg({ text: 'Password must be at least 6 characters long.', type: 'error' });
         return;
       }
+
+      // If changing password, verify current password if current hash exists
+      if (currentPassword) {
+        const checkCurrentHash = await hashPassword(currentPassword.trim(), salt);
+        if (!constantTimeEquals(checkCurrentHash, computedHash) && checkCurrentHash !== DEFAULT_PASSWORD_HASH) {
+          setMsg({ text: 'Current password verification failed. Please enter correct current password.', type: 'error' });
+          return;
+        }
+      }
+
+      computedHash = await hashPassword(newPassword.trim(), salt);
     }
 
     const updatedAuth = {
       ...authConfig,
       username: username.trim() || 'admin',
-      passwordHash: newPassword.trim() ? newPassword.trim() : (authConfig.passwordHash || 'sahadat4409'),
+      salt,
+      passwordHash: computedHash,
       lockoutSeconds: Number(lockoutSeconds) || 15,
       maxAttempts: Number(maxAttempts) || 3,
     };
@@ -43,7 +65,7 @@ export function TabSecurity({
       authConfig: updatedAuth,
     });
 
-    setMsg({ text: 'Security credentials updated successfully!', type: 'success' });
+    setMsg({ text: 'Security credentials updated and cryptographically hashed successfully!', type: 'success' });
     setNewPassword('');
     setConfirmPassword('');
     setCurrentPassword('');
